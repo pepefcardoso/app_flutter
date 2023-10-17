@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/screens/onboarding_page.dart';
-import 'package:my_app/screens/pagina_inicial.dart';
+import 'package:my_app/utils/rotas.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,15 +12,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      navigatorKey: navigatorKey,
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Healthy Food App',
-      initialRoute: '/home',
-      routes: {
-        '/onboarding': (context) => const OnboardingPage(),
-        '/home': (context) => const PaginaInicial(),
-      },
+      routerConfig: Rotas.router,
     );
   }
 }

@@ -29,7 +29,7 @@ class ConteudoIntroducao extends StatelessWidget {
           Expanded(
             child: Image.asset(
               caminhoImagem!,
-              fit: BoxFit.contain,
+              fit: BoxFit.fitWidth,
             ),
           ),
         ],
