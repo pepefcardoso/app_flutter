@@ -15,7 +15,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Cores.amareloFundo,
+      backgroundColor: Cores.claro,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -36,7 +36,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
                 child: ListView.builder(
                   itemCount: 6,
                   itemBuilder: (context, index) {
-                    return const CardPaginaInicial();
+                    return const CardEstabelecimento();
                   },
                 ),
               ),

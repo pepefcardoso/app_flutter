@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/utils/cores.dart';
 
-class CardPaginaInicial extends StatefulWidget {
-  const CardPaginaInicial({super.key});
+class CardEstabelecimento extends StatefulWidget {
+  const CardEstabelecimento({super.key});
 
   @override
-  State<CardPaginaInicial> createState() => _CardPaginaInicialState();
+  State<CardEstabelecimento> createState() => _CardEstabelecimentoState();
 }
 
-class _CardPaginaInicialState extends State<CardPaginaInicial> {
+class _CardEstabelecimentoState extends State<CardEstabelecimento> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -16,15 +17,31 @@ class _CardPaginaInicialState extends State<CardPaginaInicial> {
         borderRadius: BorderRadius.circular(8.0),
       ),
       elevation: 6.0,
-      child: SizedBox(
-        height: 150.0,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(8.0),
-          child: Image.network(
-            'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
-            fit: BoxFit.cover,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ClipRRect(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(8.0),
+              topRight: Radius.circular(8.0),
+            ),
+            child: Image.network(
+              height: 200.0,
+              'https://lh3.googleusercontent.com/p/AF1QipMgdKGbBz3jQdQ8APUzkeac-OZbsvlF3Re4nuSr=s680-w680-h510',
+              fit: BoxFit.fill,
+            ),
           ),
-        ),
+          Container(
+            height: 80.0,
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(8.0),
+                bottomRight: Radius.circular(8.0),
+              ),
+              color: Cores.areia1,
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -7,13 +7,11 @@ class Rotas {
     routes: [
       GoRoute(
         path: '/',
+        builder: (context, state) => const PaginaInicial(),
+      ),
+      GoRoute(
+        path: '/home',
         builder: (context, state) => const OnboardingPage(),
-        routes: [
-          GoRoute(
-            path: '/home',
-            builder: (context, state) => const PaginaInicial(),
-          ),
-        ],
       ),
     ],
   );
