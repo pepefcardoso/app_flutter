@@ -14,9 +14,9 @@ class Telefone {
   });
 
   Telefone.fromJson(Map<String, dynamic> json)
-      : id = json['id'] as String,
-        ddd = json['ddd'] as String?,
-        numero = json['numero'] as String?,
-        whatsapp = json['whatsapp'] as bool?,
-        principal = json['principal'] as bool?;
+      : id = json['id'],
+        ddd = json['ddd'],
+        numero = json['numero'],
+        whatsapp = json['whatsapp'],
+        principal = json['principal'];
 }

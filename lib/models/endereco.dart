@@ -24,14 +24,14 @@ class Endereco {
   });
 
   Endereco.fromJson(Map<String, dynamic> json)
-      : id = json['id'] as String,
-        logradouro = json['logradouro'] as String?,
-        numero = json['numero'] as String?,
-        complemento = json['complemento'] as String?,
-        bairro = json['bairro'] as String?,
-        cidade = json['cidade'] as String?,
-        estado = json['estado'] as String?,
-        cep = json['cep'] as String?,
-        latitude = json['latitude'] as double?,
-        longitude = json['longitude'] as double?;
+      : id = json['id'],
+        logradouro = json['logradouro'],
+        numero = json['numero'],
+        complemento = json['complemento'],
+        bairro = json['bairro'],
+        cidade = json['cidade'],
+        estado = json['estado'],
+        cep = json['cep'],
+        latitude = json['latitude'],
+        longitude = json['longitude'];
 }

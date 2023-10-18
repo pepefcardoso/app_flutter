@@ -16,10 +16,10 @@ class Produto {
   });
 
   Produto.fromJson(Map<String, dynamic> json)
-      : id = json['id'] as String,
-        nome = json['nome'] as String?,
-        descricao = json['descricao'] as String?,
-        preco = json['preco'] as double?,
-        unidadeDeMedida = json['unidadeDeMedida'] as String?,
-        urlImagem = json['urlImagem'] as String?;
+      : id = json['id'],
+        nome = json['nome'],
+        descricao = json['descricao'],
+        preco = json['preco'],
+        unidadeDeMedida = json['unidadeDeMedida'],
+        urlImagem = json['urlImagem'];
 }

@@ -20,11 +20,11 @@ class Contatos {
   });
 
   Contatos.fromJson(Map<String, dynamic> json)
-      : id = json['id'] as String,
-        telefones = json['telefones'] as List<Telefone>?,
-        email = json['email'] as String?,
-        site = json['site'] as String?,
-        facebook = json['facebook'] as String?,
-        instagram = json['instagram'] as String?,
-        ifood = json['ifood'] as String?;
+      : id = json['id'],
+        telefones = json['telefones'],
+        email = json['email'],
+        site = json['site'],
+        facebook = json['facebook'],
+        instagram = json['instagram'],
+        ifood = json['ifood'];
 }

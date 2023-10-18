@@ -12,8 +12,8 @@ class ImagensEstabelecimento {
   });
 
   ImagensEstabelecimento.fromJson(Map<String, dynamic> json)
-      : id = json['id'] as String,
-        logoUrl = json['logoUrl'] as String?,
-        capaUrl = json['capaUrl'] as String?,
-        fotosUrl = json['fotosUrl'] as List<String?>?;
+      : id = json['id'],
+        logoUrl = json['logoUrl'],
+        capaUrl = json['capaUrl'],
+        fotosUrl = json['fotosUrl'];
 }
