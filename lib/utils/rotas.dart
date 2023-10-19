@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:my_app/screens/onboarding_page.dart';
 import 'package:my_app/screens/pagina_inicial.dart';
+import 'package:my_app/screens/visualizar_estabelecimento.dart';
 
 class Rotas {
   static final router = GoRouter(
@@ -8,10 +9,12 @@ class Rotas {
       GoRoute(
         path: '/',
         builder: (context, state) => const PaginaInicial(),
-      ),
-      GoRoute(
-        path: '/home',
-        builder: (context, state) => const OnboardingPage(),
+        routes: [
+          GoRoute(
+            path: 'estabelecimento',
+            builder: (context, state) => const VisualizarEstabelecimento(),
+          ),
+        ],
       ),
     ],
   );

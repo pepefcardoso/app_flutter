@@ -11,7 +11,7 @@ class Tipografia {
 
   static const TextStyle titulo2 = TextStyle(
     fontFamily: fontName,
-    fontSize: 48,
+    fontSize: 36.0,
     fontWeight: FontWeight.w800,
   );
 

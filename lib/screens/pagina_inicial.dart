@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:my_app/components/card_pagina_inicial.dart';
 import 'package:my_app/components/input_pesquisa.dart';
 import 'package:my_app/utils/constantes.dart';
@@ -36,10 +38,30 @@ class _PaginaInicialState extends State<PaginaInicial> {
                   ),
                 ],
               ),
-              child: const Column(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  InputPesquisa(),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0, right: 12.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'LeveSabor',
+                          style: Tipografia.titulo2.copyWith(
+                            color: Colors.white,
+                          ),
+                        ),
+                        SvgPicture.asset(
+                          'assets/svg/logo_icone.svg',
+                          height: 38.0,
+                          color: Colors.white,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 18.0),
+                  const InputPesquisa(),
                 ],
               ),
             ),
@@ -51,11 +73,13 @@ class _PaginaInicialState extends State<PaginaInicial> {
                   top: 16.0,
                 ),
                 child: ListView.builder(
-                  itemCount: 5,
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: 12,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 6.0),
                       child: CardEstabelecimento(
+                        onTap: () => context.push('/estabelecimento'),
                         nome: Constantes.nomesTeste[index],
                         dieta: Constantes.dietasTeste[index],
                         estilo: Constantes.estilosTeste[index],

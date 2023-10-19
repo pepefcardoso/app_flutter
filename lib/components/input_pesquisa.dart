@@ -14,15 +14,25 @@ class _InputPesquisaState extends State<InputPesquisa> {
   Widget build(BuildContext context) {
     return TextField(
       decoration: InputDecoration(
+        isDense: true,
         filled: true,
         fillColor: Colors.white,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.0),
+          borderSide: const BorderSide(
+            color: Cores.claro,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.0),
+          borderSide: const BorderSide(
+            color: Cores.claro,
+          ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.0),
           borderSide: const BorderSide(
-            color: Cores.verde1,
+            color: Cores.claro,
           ),
         ),
         hintText: 'Encontre sua proxima refeição',
