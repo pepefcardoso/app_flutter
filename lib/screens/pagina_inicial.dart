@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/components/card_pagina_inicial.dart';
 import 'package:my_app/components/input_pesquisa.dart';
+import 'package:my_app/utils/constantes.dart';
 import 'package:my_app/utils/cores.dart';
 import 'package:my_app/utils/tipografia.dart';
 
@@ -19,32 +20,40 @@ class _PaginaInicialState extends State<PaginaInicial> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(
-            vertical: 24.0,
             horizontal: 16.0,
           ),
           child: Column(
             children: [
-              const Align(
+              const SizedBox(height: 24.0),
+              Align(
                 alignment: Alignment.topLeft,
-                child: Text('Bem vindo!', style: Tipografia.titulo2),
+                child: Text(
+                  'Bem vindo!',
+                  style: Tipografia.titulo1.copyWith(color: Cores.escuro),
+                ),
               ),
               const Padding(
-                padding: EdgeInsets.symmetric(vertical: 24.0),
+                padding: EdgeInsets.only(top: 24.0, bottom: 18.0),
                 child: InputPesquisa(),
               ),
               Expanded(
                 child: ListView.builder(
-                  itemCount: 6,
+                  itemCount: 5,
                   itemBuilder: (context, index) {
-                    return const CardEstabelecimento();
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 6.0),
+                      child: CardEstabelecimento(
+                        nome: Constantes.nomesTeste[index],
+                        dieta: Constantes.dietasTeste[index],
+                        estilo: Constantes.estilosTeste[index],
+                        urlImagem: Constantes.imagensTeste[index],
+                        avaliacao: '${index + 1}.0',
+                        nAvaliacoes: ((index + 1) * 110),
+                        distancia: '${(index + 1) * 100} m',
+                      ),
+                    );
                   },
                 ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/onboarding');
-                },
-                child: const Text('Ir para Onboarding'),
               ),
             ],
           ),

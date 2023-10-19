@@ -1,47 +1,110 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/utils/cores.dart';
+import 'package:my_app/utils/tipografia.dart';
 
-class CardEstabelecimento extends StatefulWidget {
-  const CardEstabelecimento({super.key});
+class CardEstabelecimento extends StatelessWidget {
+  final String urlImagem;
+  final String nome;
+  final String avaliacao;
+  final String distancia;
+  final int nAvaliacoes;
+  final String dieta;
+  final String estilo;
 
-  @override
-  State<CardEstabelecimento> createState() => _CardEstabelecimentoState();
-}
+  const CardEstabelecimento({
+    super.key,
+    required this.urlImagem,
+    required this.nome,
+    required this.avaliacao,
+    required this.distancia,
+    required this.nAvaliacoes,
+    required this.dieta,
+    required this.estilo,
+  });
 
-class _CardEstabelecimentoState extends State<CardEstabelecimento> {
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      elevation: 6.0,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(8.0),
-              topRight: Radius.circular(8.0),
-            ),
-            child: Image.network(
-              height: 200.0,
-              'https://lh3.googleusercontent.com/p/AF1QipMgdKGbBz3jQdQ8APUzkeac-OZbsvlF3Re4nuSr=s680-w680-h510',
-              fit: BoxFit.fill,
-            ),
-          ),
-          Container(
-            height: 80.0,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(8.0),
-                bottomRight: Radius.circular(8.0),
+    return SizedBox(
+      height: 140.0,
+      child: Card(
+        color: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        elevation: 6.0,
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Row(
+            children: [
+              Container(
+                width: 110.0,
+                height: 110.0,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 2.0,
+                      blurRadius: 8.0,
+                    ),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Image.network(
+                    urlImagem,
+                    fit: BoxFit.fill,
+                  ),
+                ),
               ),
-              color: Cores.areia1,
-            ),
+              const SizedBox(width: 12.0),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      nome,
+                      style: Tipografia.corpo1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Text(
+                      dieta,
+                      style: Tipografia.subtitulo1,
+                    ),
+                    Text(
+                      estilo,
+                      style: Tipografia.subtitulo1,
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(
+                          Icons.star,
+                          color: Cores.verde1,
+                          size: 16.0,
+                        ),
+                        const SizedBox(width: 4.0),
+                        Text(
+                          avaliacao,
+                          style: Tipografia.subtitulo1,
+                        ),
+                        const SizedBox(width: 4.0),
+                        Text(
+                          '($nAvaliacoes avaliações)',
+                          style: Tipografia.subtitulo1,
+                        ),
+                      ],
+                    ),
+                    Text(
+                      distancia,
+                      style: Tipografia.subtitulo1,
+                    ),
+                  ],
+                ),
+              )
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
