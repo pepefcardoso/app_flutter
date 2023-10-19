@@ -16,27 +16,40 @@ class _PaginaInicialState extends State<PaginaInicial> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Cores.claro,
+      backgroundColor: Cores.verde2,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16.0,
-          ),
-          child: Column(
-            children: [
-              const SizedBox(height: 24.0),
-              Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  'Bem vindo!',
-                  style: Tipografia.titulo1.copyWith(color: Cores.escuro),
+        child: Column(
+          children: [
+            Container(
+              height: 160.0,
+              padding: const EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                color: Cores.verde1,
+                borderRadius: const BorderRadius.vertical(
+                  bottom: Radius.circular(24.0),
                 ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 4.0,
+                    blurRadius: 8.0,
+                  ),
+                ],
               ),
-              const Padding(
-                padding: EdgeInsets.only(top: 24.0, bottom: 18.0),
-                child: InputPesquisa(),
+              child: const Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  InputPesquisa(),
+                ],
               ),
-              Expanded(
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  left: 16.0,
+                  right: 16.0,
+                  top: 16.0,
+                ),
                 child: ListView.builder(
                   itemCount: 5,
                   itemBuilder: (context, index) {
@@ -55,8 +68,8 @@ class _PaginaInicialState extends State<PaginaInicial> {
                   },
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

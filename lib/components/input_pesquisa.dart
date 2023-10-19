@@ -17,10 +17,10 @@ class _InputPesquisaState extends State<InputPesquisa> {
         filled: true,
         fillColor: Colors.white,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.0),
+          borderRadius: BorderRadius.circular(12.0),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.0),
+          borderRadius: BorderRadius.circular(12.0),
           borderSide: const BorderSide(
             color: Cores.verde1,
           ),

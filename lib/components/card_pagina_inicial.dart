@@ -80,7 +80,7 @@ class CardEstabelecimento extends StatelessWidget {
                       children: [
                         const Icon(
                           Icons.star,
-                          color: Cores.verde1,
+                          color: Cores.verde3,
                           size: 16.0,
                         ),
                         const SizedBox(width: 4.0),
