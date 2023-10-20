@@ -15,7 +15,7 @@ class Cores {
 
   static const Color verde2 = Color.fromRGBO(232, 237, 230, 1);
 
-  static const Color verde3 = Color.fromRGBO(54, 133, 17, 1);
+  static const Color verde3 = Color.fromRGBO(34, 97, 3, 1);
 
   static const Color verde4 = Color.fromRGBO(58, 145, 18, 0.4);
 

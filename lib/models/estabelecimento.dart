@@ -9,7 +9,7 @@ import 'package:my_app/models/tipo_de_dieta.dart';
 import 'package:my_app/models/tipo_de_entrega.dart';
 
 class Estabelecimento {
-  final String id;
+  final int id;
   final String? proprietarioId;
   final String? nome;
   final Categoria? categoria;
@@ -19,9 +19,14 @@ class Estabelecimento {
   final List<HorarioFuncionamento>? horarioFuncionamento;
   final TipoDeEntrega? tipoDeEntrega;
   final String? descricao;
-  final List<EstiloCulinario>? estilosCulinarios;
-  final ImagensEstabelecimento? imagens;
+  final EstiloCulinario? estiloCulinario;
+  final List<ImagemDoEstabelecimento>? imagens;
   final List<Produto?>? produtos;
+  final bool? aberto;
+  final bool? favorito;
+  final String? nota;
+  final int? quantidadeDeAvaliacoes;
+  final String? distancia;
 
   const Estabelecimento({
     required this.id,
@@ -34,13 +39,18 @@ class Estabelecimento {
     this.horarioFuncionamento,
     this.tipoDeEntrega,
     this.descricao,
-    this.estilosCulinarios,
+    this.estiloCulinario,
     this.imagens,
     this.produtos,
+    this.aberto,
+    this.favorito,
+    this.quantidadeDeAvaliacoes,
+    this.distancia,
+    this.nota,
   });
 
   Estabelecimento.fromJson(Map<String, dynamic> json)
-      : id = json['id'] as String,
+      : id = json['id'],
         proprietarioId = json['proprietarioId'],
         nome = json['nome'],
         categoria = json['categoria'] != null
@@ -66,17 +76,18 @@ class Estabelecimento {
             ? TipoDeEntrega.fromJson(json['tipoDeEntrega'])
             : null,
         descricao = json['descricao'],
-        estilosCulinarios = json['estilosCulinarios'] != null
-            ? (json['estilosCulinarios'] as List<dynamic>)
-                .map((e) => EstiloCulinario.fromJson(e))
-                .toList()
-            : null,
+        estiloCulinario = json['estilo_culinario'],
         imagens = json['imagens'] != null
-            ? ImagensEstabelecimento.fromJson(json['imagens'])
+            ? (json['imagens'] as List).map((json) => ImagemDoEstabelecimento.fromJson(json)).toList()
             : null,
         produtos = json['produtos'] != null
             ? (json['produtos'] as List<dynamic>)
                 .map((e) => Produto.fromJson(e))
                 .toList()
-            : null;
+            : null,
+        aberto = json['aberto'],
+        favorito = json['favorito'],
+        quantidadeDeAvaliacoes = json['quantidade_de_avaliacoes'],
+        distancia = json['distancia'],
+        nota = json['nota'];
 }

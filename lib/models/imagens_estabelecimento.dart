@@ -1,17 +1,17 @@
-class ImagensEstabelecimento {
-  final String id;
+class ImagemDoEstabelecimento {
+  final int id;
   final String? logoUrl;
   final String? capaUrl;
   final List<String?>? fotosUrl;
 
-  const ImagensEstabelecimento({
+  const ImagemDoEstabelecimento({
     required this.id,
     this.logoUrl,
     this.capaUrl,
     this.fotosUrl,
   });
 
-  ImagensEstabelecimento.fromJson(Map<String, dynamic> json)
+  ImagemDoEstabelecimento.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         logoUrl = json['logoUrl'],
         capaUrl = json['capaUrl'],

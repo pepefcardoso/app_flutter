@@ -39,6 +39,7 @@ dependencies:
   go_router: ^11.1.4
   flutter_svg: ^2.0.7
   flutter_native_splash: ^2.3.4
+  colorful_safe_area: ^1.0.0
 
 dev_dependencies:
   flutter_test:

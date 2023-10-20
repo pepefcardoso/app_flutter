@@ -12,7 +12,7 @@ class Rotas {
         routes: [
           GoRoute(
             path: 'estabelecimento',
-            builder: (context, state) => const VisualizarEstabelecimento(),
+            builder: (context, state) => VisualizarEstabelecimento(),
           ),
         ],
       ),

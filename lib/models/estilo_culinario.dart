@@ -1,5 +1,5 @@
 class EstiloCulinario {
-  final String id;
+  final int id;
   final String? nome;
 
   const EstiloCulinario({

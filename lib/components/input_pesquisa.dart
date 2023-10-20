@@ -20,19 +20,19 @@ class _InputPesquisaState extends State<InputPesquisa> {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.0),
           borderSide: const BorderSide(
-            color: Cores.claro,
+            color: Cores.verde3,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.0),
           borderSide: const BorderSide(
-            color: Cores.claro,
+            color: Cores.verde1,
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.0),
           borderSide: const BorderSide(
-            color: Cores.claro,
+            color: Cores.verde3,
           ),
         ),
         hintText: 'Encontre sua proxima refeição',

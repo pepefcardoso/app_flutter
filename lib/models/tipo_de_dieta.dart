@@ -1,5 +1,5 @@
 class TipoDeDieta {
-  final String id;
+  final int id;
   final String? nome;
 
   const TipoDeDieta({

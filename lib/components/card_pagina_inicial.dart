@@ -1,33 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/models/estabelecimento.dart';
 import 'package:my_app/utils/cores.dart';
 import 'package:my_app/utils/tipografia.dart';
 
 class CardEstabelecimento extends StatelessWidget {
-  final String urlImagem;
-  final String nome;
-  final String avaliacao;
-  final String distancia;
-  final int nAvaliacoes;
-  final String dieta;
-  final String estilo;
-  final VoidCallback? onTap;
+  final Estabelecimento estabelecimento;
+  final VoidCallback onTap;
 
   const CardEstabelecimento({
     super.key,
-    required this.urlImagem,
-    required this.nome,
-    required this.avaliacao,
-    required this.distancia,
-    required this.nAvaliacoes,
-    required this.dieta,
-    required this.estilo,
-    this.onTap,
+    required this.estabelecimento,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 140.0,
+      height: 100.0,
       child: InkWell(
         onTap: onTap,
         child: Card(
@@ -35,14 +24,14 @@ class CardEstabelecimento extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0),
           ),
-          elevation: 6.0,
+          elevation: 2.0,
           child: Padding(
             padding: const EdgeInsets.all(12.0),
             child: Row(
               children: [
                 Container(
-                  width: 110.0,
-                  height: 110.0,
+                  width: 80.0,
+                  height: 80.0,
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
@@ -55,7 +44,9 @@ class CardEstabelecimento extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: Image.network(
-                      urlImagem,
+                      (estabelecimento.imagens?.isNotEmpty ?? false)
+                          ? estabelecimento.imagens![0].fotosUrl![0]!
+                          : '',
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -66,42 +57,84 @@ class CardEstabelecimento extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        nome,
-                        style: Tipografia.corpo1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      Text(
-                        dieta,
-                        style: Tipografia.subtitulo1,
-                      ),
-                      Text(
-                        estilo,
-                        style: Tipografia.subtitulo1,
-                      ),
                       Row(
-                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Icon(
-                            Icons.star,
+                          Text(
+                            (estabelecimento.nome ?? ''),
+                            style: Tipografia.corpo1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          Icon(
+                            (estabelecimento.favorito ?? false)
+                                ? Icons.favorite
+                                : Icons.favorite_border_outlined,
+                            size: 18.0,
                             color: Cores.verde3,
-                            size: 16.0,
-                          ),
-                          const SizedBox(width: 4.0),
-                          Text(
-                            avaliacao,
-                            style: Tipografia.subtitulo1,
-                          ),
-                          const SizedBox(width: 4.0),
-                          Text(
-                            '($nAvaliacoes avaliações)',
-                            style: Tipografia.subtitulo1,
                           ),
                         ],
                       ),
-                      Text(
-                        distancia,
-                        style: Tipografia.subtitulo1,
+                      for (final dieta in estabelecimento.tiposDeDietas ?? [])
+                        Text(
+                          dieta.nome,
+                          style: Tipografia.subtitulo1,
+                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                estabelecimento.estiloCulinario?.nome ?? '',
+                                style: Tipografia.subtitulo1,
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 4.0),
+                                child: Icon(
+                                  Icons.circle,
+                                  size: 4.0,
+                                  color: Cores.verde3,
+                                ),
+                              ),
+                              Text(
+                                (estabelecimento.aberto ?? false)
+                                    ? 'Aberto'
+                                    : 'Fechado',
+                                style: Tipografia.subtitulo1,
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 4.0),
+                                child: Icon(
+                                  Icons.circle,
+                                  size: 4.0,
+                                  color: Cores.verde3,
+                                ),
+                              ),
+                              Text(
+                                estabelecimento.distancia ?? '',
+                                style: Tipografia.subtitulo1,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(
+                                Icons.star,
+                                color: Cores.verde3,
+                                size: 16.0,
+                              ),
+                              const SizedBox(width: 4.0),
+                              Text(
+                                estabelecimento.nota
+                                        ?.toString() ??
+                                    '',
+                                style: Tipografia.subtitulo1,
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ],
                   ),

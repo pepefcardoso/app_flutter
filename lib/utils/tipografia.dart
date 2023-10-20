@@ -41,7 +41,7 @@ class Tipografia {
 
   static const TextStyle subtitulo1 = TextStyle(
     fontFamily: fontName,
-    fontSize: 12.0,
+    fontSize: 10.0,
     fontWeight: FontWeight.w500,
   );
 
