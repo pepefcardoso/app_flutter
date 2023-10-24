@@ -28,6 +28,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
       body: ColorfulSafeArea(
         color: Cores.verde2,
         child: Padding(
+
           padding: const EdgeInsets.only(
             top: 16.0,
             right: 12.0,

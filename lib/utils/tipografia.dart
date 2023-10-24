@@ -17,8 +17,8 @@ class Tipografia {
 
   static const TextStyle titulo3 = TextStyle(
     fontFamily: fontName,
-    fontSize: 24,
-    fontWeight: FontWeight.w800,
+    fontSize: 24.0,
+    fontWeight: FontWeight.w900,
   );
 
   static const TextStyle corpo1 = TextStyle(
@@ -47,7 +47,7 @@ class Tipografia {
 
   static const TextStyle subtitulo2 = TextStyle(
     fontFamily: fontName,
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: FontWeight.w400,
   );
 

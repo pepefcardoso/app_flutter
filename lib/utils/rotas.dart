@@ -1,5 +1,4 @@
 import 'package:go_router/go_router.dart';
-import 'package:my_app/screens/onboarding_page.dart';
 import 'package:my_app/screens/pagina_inicial.dart';
 import 'package:my_app/screens/visualizar_estabelecimento.dart';
 

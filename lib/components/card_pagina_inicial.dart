@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/components/logo_estilizado.dart';
+import 'package:my_app/components/nota_com_avaliacoes.dart';
 import 'package:my_app/models/estabelecimento.dart';
 import 'package:my_app/utils/cores.dart';
 import 'package:my_app/utils/tipografia.dart';
@@ -29,27 +31,11 @@ class CardEstabelecimento extends StatelessWidget {
             padding: const EdgeInsets.all(12.0),
             child: Row(
               children: [
-                Container(
-                  width: 80.0,
-                  height: 80.0,
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 2.0,
-                        blurRadius: 8.0,
-                      ),
-                    ],
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8.0),
-                    child: Image.network(
-                      (estabelecimento.imagens?.isNotEmpty ?? false)
-                          ? estabelecimento.imagens![0].fotosUrl![0]!
-                          : '',
-                      fit: BoxFit.fill,
-                    ),
-                  ),
+                LogoEstilizado(
+                  largura: 80.0,
+                  url: (estabelecimento.imagens?.isNotEmpty ?? false)
+                      ? estabelecimento.imagens![0].fotosUrl![0]!
+                      : '',
                 ),
                 const SizedBox(width: 12.0),
                 Expanded(
@@ -117,22 +103,8 @@ class CardEstabelecimento extends StatelessWidget {
                               ),
                             ],
                           ),
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              const Icon(
-                                Icons.star,
-                                color: Cores.verde3,
-                                size: 16.0,
-                              ),
-                              const SizedBox(width: 4.0),
-                              Text(
-                                estabelecimento.nota
-                                        ?.toString() ??
-                                    '',
-                                style: Tipografia.subtitulo1,
-                              ),
-                            ],
+                          NotaComAvaliacoes(
+                            nota: estabelecimento.nota?.toString(),
                           ),
                         ],
                       ),
