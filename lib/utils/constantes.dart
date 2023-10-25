@@ -1,3 +1,7 @@
+import 'package:my_app/models/contatos.dart';
+import 'package:my_app/models/endereco.dart';
+import 'package:my_app/models/telefone.dart';
+
 class Constantes {
   static const List<String> imagensTeste = [
     'https://lh3.googleusercontent.com/p/AF1QipPwKunNgnfzXS3M2MGHycVBx8mo6BHiLvrWHm-h=s680-w680-h510',
@@ -58,4 +62,43 @@ class Constantes {
     'Fast Food',
     'Sorveteria'
   ];
+
+  static final Endereco enderecoTeste = Endereco(
+    id: '1',
+    logradouro: 'Rua dos Bobos',
+    complemento: 'Salas 101',
+    numero: '0',
+    bairro: 'Centro',
+    cidade: 'São Paulo',
+    estado: 'SP',
+    cep: '00000-000',
+    latitude: -23.550520,
+    longitude: -46.633308,
+  );
+
+  static final Contatos contatosTeste = Contatos(
+    id: '1',
+    email: 'teste@teste.com',
+    facebook: 'https://www.facebook.com/francisbelsemgluten/',
+    ifood:
+        'https://www.ifood.com.br/delivery/florianopolis-sc/padaria--cafe-franchis-cachoeira-do-bom-jesus/49e2b2b6-f42b-4e64-b2f1-f8e808a22291?prato=77acaa55-ad0d-4a9f-835a-023a5d8346ec',
+    instagram: 'https://www.instagram.com/francisbelcozinhainclusiva/',
+    site: 'https://francisbel.com.br/francisbel/pedidos',
+    telefones: const [
+      Telefone(
+        id: '1',
+        numero: '3266-1111',
+        ddd: '48',
+        principal: true,
+        whatsapp: false,
+      ),
+      Telefone(
+        id: '2',
+        numero: '99999-9999',
+        ddd: '48',
+        principal: false,
+        whatsapp: true,
+      ),
+    ],
+  );
 }
