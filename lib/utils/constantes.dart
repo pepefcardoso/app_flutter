@@ -79,11 +79,11 @@ class Constantes {
   static final Contatos contatosTeste = Contatos(
     id: '1',
     email: 'teste@teste.com',
-    facebook: 'https://www.facebook.com/francisbelsemgluten/',
+    facebook: 'francisbelsemgluten',
     ifood:
-        'https://www.ifood.com.br/delivery/florianopolis-sc/padaria--cafe-franchis-cachoeira-do-bom-jesus/49e2b2b6-f42b-4e64-b2f1-f8e808a22291?prato=77acaa55-ad0d-4a9f-835a-023a5d8346ec',
-    instagram: 'https://www.instagram.com/francisbelcozinhainclusiva/',
-    site: 'https://francisbel.com.br/francisbel/pedidos',
+        'https://www.ifood.com.br/delivery/florianopolis-sc/padaria--cafe-franchis-cachoeira-do-bom-jesus',
+    instagram: 'francisbelcozinhainclusiva',
+    site: 'francisbel.com.br',
     telefones: const [
       Telefone(
         id: '1',
