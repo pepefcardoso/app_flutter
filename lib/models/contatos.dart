@@ -2,7 +2,8 @@ import 'package:my_app/models/telefone.dart';
 
 class Contatos {
   final String id;
-  final List<Telefone>? telefones;
+  final Telefone? telefoneFixo;
+  final Telefone? telefoneCelular;
   final String? email;
   final String? site;
   final String? facebook;
@@ -11,7 +12,8 @@ class Contatos {
 
   Contatos({
     required this.id,
-    this.telefones,
+    this.telefoneFixo,
+    this.telefoneCelular,
     this.email,
     this.site,
     this.facebook,
@@ -21,7 +23,12 @@ class Contatos {
 
   Contatos.fromJson(Map<String, dynamic> json)
       : id = json['id'],
-        telefones = json['telefones'],
+        telefoneFixo = json['telefoneFixo'] != null
+            ? Telefone.fromJson(json['telefoneFixo'])
+            : null,
+        telefoneCelular = json['telefoneCelular'] != null
+            ? Telefone.fromJson(json['telefoneCelular'])
+            : null,
         email = json['email'],
         site = json['site'],
         facebook = json['facebook'],

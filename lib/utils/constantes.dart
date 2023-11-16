@@ -84,21 +84,17 @@ class Constantes {
         'https://www.ifood.com.br/delivery/florianopolis-sc/padaria--cafe-franchis-cachoeira-do-bom-jesus',
     instagram: 'francisbelcozinhainclusiva',
     site: 'francisbel.com.br',
-    telefones: const [
-      Telefone(
-        id: '1',
-        numero: '3266-1111',
-        ddd: '48',
-        principal: true,
-        whatsapp: false,
-      ),
-      Telefone(
-        id: '2',
-        numero: '99999-9999',
-        ddd: '48',
-        principal: false,
-        whatsapp: true,
-      ),
-    ],
+    telefoneFixo: const Telefone(
+      id: '1',
+      numero: '4832661111',
+      principal: true,
+      whatsapp: false,
+    ),
+    telefoneCelular: const Telefone(
+      id: '2',
+      numero: '48999999999',
+      principal: false,
+      whatsapp: true,
+    ),
   );
 }

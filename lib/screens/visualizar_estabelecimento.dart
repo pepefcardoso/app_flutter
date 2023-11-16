@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/components/card_contatos_estabelecimento.dart';
+import 'package:my_app/components/card_prato_lista_principais.dart';
 import 'package:my_app/components/item_lista_horizontal.dart';
 import 'package:my_app/components/logo_estilizado.dart';
 import 'package:my_app/models/estabelecimento.dart';
@@ -171,126 +171,79 @@ class VisualizarEstabelecimento extends StatelessWidget {
                         children: [
                           Expanded(
                             child: ItemListaHorizontal(
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      const Icon(
-                                        Icons.star,
-                                        size: 16.0,
-                                        color: Cores.claro,
-                                      ),
-                                      const SizedBox(width: 4.0),
-                                      Text(
-                                        '${_estabelecimentoLocal.nota} (${_estabelecimentoLocal.quantidadeDeAvaliacoes})',
-                                        style: Tipografia.subtitulo2
-                                            .copyWith(color: Cores.claro),
-                                      ),
-                                    ],
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    padding: EdgeInsets.zero,
-                                    constraints: const BoxConstraints(),
-                                    icon: const Icon(
-                                      Icons.arrow_forward_ios,
-                                      size: 16.0,
-                                      color: Cores.claro,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 6.0),
-                          ItemListaHorizontal(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    const Icon(
-                                      Icons.pin_drop,
-                                      size: 16.0,
-                                      color: Cores.claro,
-                                    ),
-                                    const SizedBox(width: 4.0),
-                                    Text(
-                                      _estabelecimentoLocal.distancia ?? '',
-                                      style: Tipografia.subtitulo2
-                                          .copyWith(color: Cores.claro),
-                                    ),
-                                  ],
-                                ),
-                                IconButton(
-                                  onPressed: () {},
-                                  padding: EdgeInsets.zero,
-                                  constraints: const BoxConstraints(),
-                                  icon: const Icon(
-                                    Icons.arrow_forward_ios,
-                                    size: 16.0,
-                                    color: Cores.claro,
-                                  ),
-                                ),
-                              ],
+                              iconePrefixo: Icons.star,
+                              texto:
+                                  '${_estabelecimentoLocal.nota} (${_estabelecimentoLocal.quantidadeDeAvaliacoes})',
+                              onTap: () {},
                             ),
                           ),
                           const SizedBox(width: 6.0),
                           Expanded(
                             child: ItemListaHorizontal(
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      const Icon(
-                                        Icons.watch_later_outlined,
-                                        size: 16.0,
-                                        color: Cores.claro,
-                                      ),
-                                      const SizedBox(width: 4.0),
-                                      Text(
-                                        _estabelecimentoLocal.aberto!
-                                            ? 'Aberto'
-                                            : 'Fechado',
-                                        style: Tipografia.subtitulo2
-                                            .copyWith(color: Cores.claro),
-                                      ),
-                                    ],
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    padding: EdgeInsets.zero,
-                                    constraints: const BoxConstraints(),
-                                    icon: const Icon(
-                                      Icons.arrow_forward_ios,
-                                      size: 16.0,
-                                      color: Cores.claro,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                              iconePrefixo: Icons.pin_drop,
+                              texto: _estabelecimentoLocal.distancia ?? '',
+                              onTap: () {},
+                            ),
+                          ),
+                          const SizedBox(width: 6.0),
+                          Expanded(
+                            child: ItemListaHorizontal(
+                              iconePrefixo: Icons.watch_later_outlined,
+                              texto: _estabelecimentoLocal.aberto!
+                                  ? 'Aberto'
+                                  : 'Fechado',
+                              onTap: () {},
                             ),
                           ),
                         ],
                       ),
                     ),
                     const SizedBox(height: 24.0),
-                    const Text(
-                      'Contatos',
-                      style: Tipografia.titulo3,
-                      overflow: TextOverflow.ellipsis,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SizedBox(width: 8.0),
+                            Text(
+                              'Pratos principais',
+                              style: Tipografia.titulo3,
+                            ),
+                          ],
+                        ),
+                        TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Ver todos',
+                            style: Tipografia.subtitulo2
+                                .copyWith(color: Cores.verde4),
+                          ),
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 4.0),
-                    CardContatosEstabelecimento(
-                      contatos: _estabelecimentoLocal.contatos!,
-                      onTap: () {},
+                    SizedBox(
+                      height: 250.0,
+                      child: ListView.builder(
+                        itemCount: Constantes.imagensTeste.length,
+                        scrollDirection: Axis.horizontal,
+                        physics: const BouncingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              CardPratoListaPrincipais(
+                                url: Constantes.imagensTeste[index],
+                                nome: Constantes.nomesTeste[index],
+                                descricao: Constantes.dietasTeste[index],
+                              ),
+                              if (index < Constantes.imagensTeste.length - 1)
+                                const SizedBox(width: 12.0)
+                            ],
+                          );
+                        },
+                      ),
                     ),
                   ],
                 ),

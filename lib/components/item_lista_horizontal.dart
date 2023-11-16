@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/utils/cores.dart';
+import 'package:my_app/utils/tipografia.dart';
 
 class ItemListaHorizontal extends StatelessWidget {
   final Color? corBackground;
   final EdgeInsets? padding;
   final BorderRadius? borderRadius;
   final BoxBorder? boxBorder;
-  final Widget child;
+  final IconData iconePrefixo;
+  final String texto;
   final VoidCallback? onTap;
 
   const ItemListaHorizontal({
@@ -15,7 +17,8 @@ class ItemListaHorizontal extends StatelessWidget {
     this.padding,
     this.borderRadius,
     this.boxBorder,
-    required this.child,
+    required this.iconePrefixo,
+    required this.texto,
     this.onTap,
   });
 
@@ -31,7 +34,31 @@ class ItemListaHorizontal extends StatelessWidget {
           borderRadius: borderRadius ?? BorderRadius.circular(8.0),
           border: boxBorder,
         ),
-        child: child,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  iconePrefixo,
+                  size: 16.0,
+                  color: Cores.claro,
+                ),
+                const SizedBox(width: 4.0),
+                Text(
+                  texto,
+                  style: Tipografia.subtitulo2.copyWith(color: Cores.claro),
+                ),
+              ],
+            ),
+            const Icon(
+              Icons.arrow_forward_ios,
+              size: 16.0,
+              color: Cores.claro,
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -45,8 +45,7 @@ class CardContatosEstabelecimento extends StatelessWidget {
                       ),
                       const SizedBox(width: 8.0),
                       Text(
-                        '(${contatos.telefones?[0].ddd}) ${contatos
-                            .telefones?[0].numero}',
+                        '${contatos.telefoneFixo?.telefoneFormatado}',
                         style: Tipografia.corpo1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -62,8 +61,7 @@ class CardContatosEstabelecimento extends StatelessWidget {
                       ),
                       const SizedBox(width: 8.0),
                       Text(
-                        '(${contatos.telefones?[1].ddd}) ${contatos
-                            .telefones?[1].numero}',
+                        '${contatos.telefoneCelular?.telefoneFormatado}',
                         style: Tipografia.corpo1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -77,7 +75,8 @@ class CardContatosEstabelecimento extends StatelessWidget {
                 children: [
                   Expanded(
                     child: InkWell(
-                      onTap: () => _abreLink('https://www.instagram.com/${contatos.instagram}/'),
+                      onTap: () => _abreLink(
+                          'https://www.instagram.com/${contatos.instagram}/'),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -101,7 +100,8 @@ class CardContatosEstabelecimento extends StatelessWidget {
                   const SizedBox(width: 12.0),
                   Expanded(
                     child: InkWell(
-                      onTap: () => _abreLink('https://www.facebook.com/${contatos.facebook}/'),
+                      onTap: () => _abreLink(
+                          'https://www.facebook.com/${contatos.facebook}/'),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [

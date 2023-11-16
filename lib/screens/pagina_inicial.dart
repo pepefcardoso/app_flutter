@@ -23,12 +23,10 @@ class _PaginaInicialState extends State<PaginaInicial> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       backgroundColor: Cores.verde2,
       body: ColorfulSafeArea(
         color: Cores.verde2,
         child: Padding(
-
           padding: const EdgeInsets.only(
             top: 16.0,
             right: 12.0,
