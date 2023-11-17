@@ -19,7 +19,7 @@ class ConteudoIntroducao extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle t1 = tipografiaTitulo ?? Tipografia.titulo2;
+    final TextStyle t1 = tipografiaTitulo ?? Tipografia.titulo1;
     final TextStyle t2 = tipografiaSubtitulo ?? Tipografia.corpo2;
 
     return Column(

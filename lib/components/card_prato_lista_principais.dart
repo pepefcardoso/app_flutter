@@ -19,10 +19,12 @@ class CardPratoListaPrincipais extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      alignment: Alignment.center,
       children: [
-        LogoEstilizado(
+        CardDeImagem(
           url: url,
           largura: 250,
+          sombra: const [],
         ),
         Positioned.fill(
           child: Align(
@@ -33,28 +35,38 @@ class CardPratoListaPrincipais extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Container(
-                      height: 60,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8.0),
-                          boxShadow: Sombras.sombra1),
+                      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8.0), boxShadow: Sombras.sombra1),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
                               nome,
-                              style:
-                                  Tipografia.subtitulo2.copyWith(color: Cores.verde4),
+                              style: Tipografia.titulo3.copyWith(color: Cores.escuro),
                             ),
                             const SizedBox(
-                              height: 4.0,
+                              height: 8.0,
                             ),
-                            Text(
-                              descricao,
-                              style:
-                                  Tipografia.subtitulo2.copyWith(color: Cores.verde4),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  descricao,
+                                  style: Tipografia.subtitulo3.copyWith(
+                                    color: Cores.escuro.withOpacity(0.9),
+                                  ),
+                                ),
+                                IconButton(
+                                  padding: EdgeInsets.zero,
+                                  constraints: const BoxConstraints(),
+                                  onPressed: () {},
+                                  icon: const Icon(Icons.favorite_border_outlined),
+                                  color: Colors.red,
+                                  iconSize: 16.0,
+                                )
+                              ],
                             ),
                           ],
                         ),

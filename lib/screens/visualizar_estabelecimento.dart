@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_app/components/botao_de_circulo.dart';
 import 'package:my_app/components/card_prato_lista_principais.dart';
 import 'package:my_app/components/imagem_perfil_estabelecimento.dart';
-import 'package:my_app/components/item_lista_horizontal.dart';
-import 'package:my_app/components/logo_estilizado.dart';
+import 'package:my_app/components/botao_contornado.dart';
 import 'package:my_app/models/estabelecimento.dart';
 import 'package:my_app/models/estilo_culinario.dart';
 import 'package:my_app/models/tipo_de_dieta.dart';
@@ -21,7 +20,7 @@ class VisualizarEstabelecimento extends StatelessWidget {
     id: 0,
     aberto: 0 % 2 == 0,
     favorito: 0 % 2 == 0,
-    nome: Constantes.nomesTeste[0],
+    nome: Constantes.nomesRestaurantesTeste[0],
     tiposDeDietas: [
       TipoDeDieta(id: 0, nome: Constantes.dietasTeste[0]),
     ],
@@ -36,166 +35,67 @@ class VisualizarEstabelecimento extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        alignment: Alignment.topCenter,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        foregroundColor: Cores.verde4,
+      ),
+      backgroundColor: Colors.white,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.network(
-            Constantes.imagensTeste[1],
-            fit: BoxFit.fitWidth,
+          SizedBox(
+            height: 250,
+            width: MediaQuery.of(context).size.width,
+            child: Image.network(
+              Constantes.imagensPratosTeste[1],
+              fit: BoxFit.cover,
+            ),
           ),
-          const _BotoesDeAcaoTopo(),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.8,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Cores.verde2,
-                borderRadius:
-                    const BorderRadius.vertical(top: Radius.circular(24.0)),
-                boxShadow: Sombras.sombra2,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Column(
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 16.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 72.0),
                     Text(
                       _estabelecimentoLocal.nome ?? '',
-                      style: Tipografia.titulo3
-                          .copyWith(color: Cores.verde4),
+                      style: Tipografia.titulo2.copyWith(color: Cores.verde4),
                     ),
-                    const SizedBox(height: 16.0),
-                    SizedBox(
-                      height: 32.0,
+                    BotaoContornado(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8.0,
+                        vertical: 4.0,
+                      ),
                       child: Row(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          Expanded(
-                            child: ItemListaHorizontal(
-                              iconePrefixo: Icons.star,
-                              texto:
-                                  '${_estabelecimentoLocal.nota} (${_estabelecimentoLocal.quantidadeDeAvaliacoes})',
-                              onTap: () {},
-                            ),
+                          const Icon(
+                            Icons.star,
+                            size: 18.0,
+                            color: Cores.escuro,
                           ),
-                          const SizedBox(width: 6.0),
-                          Expanded(
-                            child: ItemListaHorizontal(
-                              iconePrefixo: Icons.pin_drop,
-                              texto: _estabelecimentoLocal.distancia ?? '',
-                              onTap: () {},
-                            ),
-                          ),
-                          const SizedBox(width: 6.0),
-                          Expanded(
-                            child: ItemListaHorizontal(
-                              iconePrefixo: Icons.watch_later_outlined,
-                              texto: _estabelecimentoLocal.aberto!
-                                  ? 'Aberto'
-                                  : 'Fechado',
-                              onTap: () {},
-                            ),
+                          const SizedBox(width: 4.0),
+                          Text(
+                            _estabelecimentoLocal.nota ?? '',
+                            style: Tipografia.subtitulo2,
                           ),
                         ],
                       ),
                     ),
-                    const SizedBox(height: 24.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            SizedBox(width: 8.0),
-                            Text(
-                              'Pratos principais',
-                              style: Tipografia.titulo3,
-                            ),
-                          ],
-                        ),
-                        TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            'Ver todos',
-                            style: Tipografia.subtitulo2
-                                .copyWith(color: Cores.verde4),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 4.0),
-                    SizedBox(
-                      height: 250.0,
-                      child: ListView.builder(
-                        itemCount: Constantes.imagensTeste.length,
-                        scrollDirection: Axis.horizontal,
-                        physics: const BouncingScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              CardPratoListaPrincipais(
-                                url: Constantes.imagensTeste[index],
-                                nome: Constantes.nomesTeste[index],
-                                descricao: Constantes.dietasTeste[index],
-                              ),
-                              if (index < Constantes.imagensTeste.length - 1)
-                                const SizedBox(width: 12.0)
-                            ],
-                          );
-                        },
-                      ),
-                    ),
                   ],
                 ),
-              ),
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Text(
+                    _estabelecimentoLocal.tiposDeDietas![0]!.nome ?? '',
+                  ),
+                ),
+              ],
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.105,
-            ),
-            child: ImagemPerfilEstabelecimento(
-              url: Constantes.imagensTeste[0],
-              radius: 72.0,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _BotoesDeAcaoTopo extends StatelessWidget {
-  const _BotoesDeAcaoTopo({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16.0,
-        vertical: 32.0,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          BotaoDeCirculo(
-            onPressed: () => Navigator.pop(context),
-            icone: Icons.arrow_back,
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              BotaoDeCirculo(
-                onPressed: () {},
-                icone: Icons.favorite,
-              ),
-              const SizedBox(width: 8.0),
-              BotaoDeCirculo(
-                onPressed: () {},
-                icone: Icons.share_rounded,
-              ),
-            ],
           ),
         ],
       ),

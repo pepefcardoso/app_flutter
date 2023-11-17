@@ -61,7 +61,7 @@ class OnboardingPageState extends State<OnboardingPage> {
               subtitulo:
                   'Lorem ipsum dolor sit amet, consect adipiscing elit, sed do eiusmod tempor incididunt ut labore et.',
               caminhoImagem: 'assets/images/onboarding0.png',
-              tipografiaTitulo: Tipografia.titulo3,
+              tipografiaTitulo: Tipografia.titulo2,
               tipografiaSubtitulo: Tipografia.corpo2,
             ),
             ConteudoIntroducao(
@@ -69,7 +69,7 @@ class OnboardingPageState extends State<OnboardingPage> {
               subtitulo:
                   'Lorem ipsum dolor sit amet, consect adipiscing elit, sed do eiusmod tempor incididunt ut labore et.',
               caminhoImagem: 'assets/images/onboarding0.png',
-              tipografiaTitulo: Tipografia.titulo3,
+              tipografiaTitulo: Tipografia.titulo2,
               tipografiaSubtitulo: Tipografia.corpo2,
             ),
             ConteudoIntroducao(
@@ -77,7 +77,7 @@ class OnboardingPageState extends State<OnboardingPage> {
               subtitulo:
                   'Lorem ipsum dolor sit amet, consect adipiscing elit, sed do eiusmod tempor incididunt ut labore et.',
               caminhoImagem: 'assets/images/onboarding0.png',
-              tipografiaTitulo: Tipografia.titulo3,
+              tipografiaTitulo: Tipografia.titulo2,
               tipografiaSubtitulo: Tipografia.corpo2,
             ),
           ],

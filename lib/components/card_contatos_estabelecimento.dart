@@ -75,8 +75,7 @@ class CardContatosEstabelecimento extends StatelessWidget {
                 children: [
                   Expanded(
                     child: InkWell(
-                      onTap: () => _abreLink(
-                          'https://www.instagram.com/${contatos.instagram}/'),
+                      onTap: () => _abreLink('https://www.instagram.com/${contatos.instagram}/'),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -100,8 +99,7 @@ class CardContatosEstabelecimento extends StatelessWidget {
                   const SizedBox(width: 12.0),
                   Expanded(
                     child: InkWell(
-                      onTap: () => _abreLink(
-                          'https://www.facebook.com/${contatos.facebook}/'),
+                      onTap: () => _abreLink('https://www.facebook.com/${contatos.facebook}/'),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -132,9 +130,9 @@ class CardContatosEstabelecimento extends StatelessWidget {
   }
 
   _abreLink(String url) async {
-    final Uri _url = Uri.parse(url);
-    if (!await launchUrl(_url)) {
-      throw Exception('Could not launch $_url');
+    final Uri urlFormatada = Uri.parse(url);
+    if (!await launchUrl(urlFormatada)) {
+      throw Exception('Could not launch $urlFormatada');
     }
   }
 }

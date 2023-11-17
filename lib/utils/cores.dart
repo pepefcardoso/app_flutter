@@ -38,4 +38,6 @@ class Cores {
   static const Color vermelho = Color.fromRGBO(223, 41, 53, 1);
 
   static const Color amareloFundo = Color.fromRGBO(255, 250, 160, 1);
+
+  static const Color cinza1 = Color.fromRGBO(211, 211, 211, 1);
 }

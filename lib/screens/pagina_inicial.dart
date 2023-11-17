@@ -23,7 +23,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Cores.verde2,
+      backgroundColor: Colors.white,
       body: ColorfulSafeArea(
         color: Cores.verde2,
         child: Padding(
@@ -42,14 +42,17 @@ class _PaginaInicialState extends State<PaginaInicial> {
                     children: [
                       Text(
                         'LeveSabor',
-                        style: Tipografia.titulo2.copyWith(
+                        style: Tipografia.titulo1.copyWith(
                           color: Cores.verde1,
                         ),
                       ),
                       SvgPicture.asset(
                         'assets/svg/logo_icone.svg',
                         height: 38.0,
-                        color: Cores.verde1,
+                        colorFilter: const ColorFilter.mode(
+                          Cores.verde1,
+                          BlendMode.srcIn,
+                        ),
                       ),
                     ],
                   ),
@@ -61,18 +64,18 @@ class _PaginaInicialState extends State<PaginaInicial> {
               Expanded(
                 child: ListView.builder(
                   physics: const BouncingScrollPhysics(),
-                  itemCount: 12,
+                  itemCount: Constantes.logosTeste.length,
                   itemBuilder: (context, index) {
                     final estabelecimento = Estabelecimento(
                       id: index,
                       aberto: index % 2 == 0,
                       favorito: index % 2 == 0,
-                      nome: Constantes.nomesTeste[index],
+                      nome: Constantes.nomesRestaurantesTeste[index],
                       tiposDeDietas: [
                         TipoDeDieta(id: 0, nome: Constantes.dietasTeste[index]),
                       ],
-                      estiloCulinario: EstiloCulinario(
-                          id: 0, nome: Constantes.estilosTeste[index]),
+                      endereco: Constantes.enderecoTeste,
+                      estiloCulinario: EstiloCulinario(id: 0, nome: Constantes.estilosTeste[index]),
                       nota: '${index + 1}.0',
                       quantidadeDeAvaliacoes: ((index + 1) * 110),
                       distancia: '${(index + 1) * 100} m',
@@ -80,15 +83,26 @@ class _PaginaInicialState extends State<PaginaInicial> {
                         ImagemDoEstabelecimento(
                           id: 0,
                           fotosUrl: [
-                            Constantes.imagensTeste[index],
+                            Constantes.logosTeste[index],
                           ],
                         ),
                       ],
                     );
 
-                    return CardEstabelecimento(
-                      estabelecimento: estabelecimento,
-                      onTap: () => context.push('/estabelecimento'),
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        CardEstabelecimento(
+                          estabelecimento: estabelecimento,
+                          onTap: () => context.push('/estabelecimento'),
+                        ),
+                        if (index < Constantes.logosTeste.length - 1)
+                          const Divider(
+                            height: 16.0,
+                            thickness: 1.0,
+                            color: Cores.cinza1,
+                          ),
+                      ],
                     );
                   },
                 ),

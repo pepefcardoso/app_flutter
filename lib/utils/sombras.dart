@@ -16,4 +16,12 @@ class Sombras {
       blurRadius: 16.0,
     ),
   ];
+
+  static final List<BoxShadow> sombra3 = [
+    BoxShadow(
+      color: Colors.grey.withOpacity(0.5),
+      spreadRadius: 0.5,
+      blurRadius: 4.0,
+    ),
+  ];
 }
