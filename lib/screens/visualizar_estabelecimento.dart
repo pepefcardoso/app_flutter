@@ -59,7 +59,7 @@ class VisualizarEstabelecimento extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
                   children: [
-                    const SizedBox(height: 64.0),
+                    const SizedBox(height: 72.0),
                     Text(
                       _estabelecimentoLocal.nome ?? '',
                       style: Tipografia.titulo3
@@ -153,11 +153,11 @@ class VisualizarEstabelecimento extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.11,
+              top: MediaQuery.of(context).size.height * 0.105,
             ),
             child: ImagemPerfilEstabelecimento(
               url: Constantes.imagensTeste[0],
-              radius: 64.0,
+              radius: 72.0,
             ),
           ),
         ],

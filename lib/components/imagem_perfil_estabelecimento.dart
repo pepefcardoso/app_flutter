@@ -17,7 +17,7 @@ class ImagemPerfilEstabelecimento extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircleAvatar(
       radius: radius,
-      backgroundColor: cor ?? Cores.verde4,
+      backgroundColor: cor ?? Cores.verde3,
       child: CircleAvatar(
         radius: radius! - 1.5,
         backgroundImage: NetworkImage(
