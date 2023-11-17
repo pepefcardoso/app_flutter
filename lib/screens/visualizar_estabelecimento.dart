@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/components/botao_de_circulo.dart';
 import 'package:my_app/components/card_prato_lista_principais.dart';
+import 'package:my_app/components/imagem_perfil_estabelecimento.dart';
 import 'package:my_app/components/item_lista_horizontal.dart';
 import 'package:my_app/components/logo_estilizado.dart';
 import 'package:my_app/models/estabelecimento.dart';
@@ -41,6 +43,7 @@ class VisualizarEstabelecimento extends StatelessWidget {
             Constantes.imagensTeste[1],
             fit: BoxFit.fitWidth,
           ),
+          const _BotoesDeAcaoTopo(),
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
@@ -55,114 +58,12 @@ class VisualizarEstabelecimento extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 16.0),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          IconButton(
-                            onPressed: () => Navigator.pop(context),
-                            padding: EdgeInsets.zero,
-                            constraints: const BoxConstraints(),
-                            icon: const Icon(
-                              Icons.arrow_back_ios,
-                              size: 24.0,
-                              color: Cores.verde4,
-                            ),
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              IconButton(
-                                onPressed: () {},
-                                padding: EdgeInsets.zero,
-                                constraints: const BoxConstraints(),
-                                icon: const Icon(
-                                  Icons.favorite_border_outlined,
-                                  size: 24.0,
-                                  color: Cores.verde4,
-                                ),
-                              ),
-                              const SizedBox(width: 8.0),
-                              IconButton(
-                                onPressed: () {},
-                                padding: EdgeInsets.zero,
-                                constraints: const BoxConstraints(),
-                                icon: const Icon(
-                                  Icons.share_rounded,
-                                  size: 24.0,
-                                  color: Cores.verde4,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 16.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        LogoEstilizado(url: Constantes.imagensTeste[0]),
-                        const SizedBox(width: 12.0),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              _estabelecimentoLocal.nome ?? '',
-                              style: Tipografia.titulo3
-                                  .copyWith(color: Cores.verde4),
-                            ),
-                            const SizedBox(height: 4.0),
-                            Row(
-                              children: [
-                                Text(
-                                  _estabelecimentoLocal
-                                          .tiposDeDietas?[0].nome ??
-                                      '',
-                                  style: Tipografia.subtitulo2,
-                                ),
-                                const Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 4.0),
-                                  child: Icon(
-                                    Icons.circle,
-                                    size: 4.0,
-                                    color: Cores.verde4,
-                                  ),
-                                ),
-                                Text(
-                                  _estabelecimentoLocal
-                                          .tiposDeDietas?[0].nome ??
-                                      '',
-                                  style: Tipografia.subtitulo2,
-                                ),
-                                const Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 4.0),
-                                  child: Icon(
-                                    Icons.circle,
-                                    size: 4.0,
-                                    color: Cores.verde4,
-                                  ),
-                                ),
-                                Text(
-                                  _estabelecimentoLocal
-                                          .tiposDeDietas?[0].nome ??
-                                      '',
-                                  style: Tipografia.subtitulo2,
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ],
+                    const SizedBox(height: 64.0),
+                    Text(
+                      _estabelecimentoLocal.nome ?? '',
+                      style: Tipografia.titulo3
+                          .copyWith(color: Cores.verde4),
                     ),
                     const SizedBox(height: 16.0),
                     SizedBox(
@@ -249,6 +150,52 @@ class VisualizarEstabelecimento extends StatelessWidget {
                 ),
               ),
             ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+              top: MediaQuery.of(context).size.height * 0.11,
+            ),
+            child: ImagemPerfilEstabelecimento(
+              url: Constantes.imagensTeste[0],
+              radius: 64.0,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _BotoesDeAcaoTopo extends StatelessWidget {
+  const _BotoesDeAcaoTopo({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16.0,
+        vertical: 32.0,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          BotaoDeCirculo(
+            onPressed: () => Navigator.pop(context),
+            icone: Icons.arrow_back,
+          ),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              BotaoDeCirculo(
+                onPressed: () {},
+                icone: Icons.favorite,
+              ),
+              const SizedBox(width: 8.0),
+              BotaoDeCirculo(
+                onPressed: () {},
+                icone: Icons.share_rounded,
+              ),
+            ],
           ),
         ],
       ),
