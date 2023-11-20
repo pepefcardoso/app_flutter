@@ -1,53 +1,51 @@
 import 'package:flutter/cupertino.dart';
 
+class TipoTipografia {
+  static const FontWeight regular = FontWeight.w200;
+
+  static const FontWeight medium = FontWeight.w400;
+
+  static const FontWeight bold = FontWeight.w600;
+
+  static const FontWeight ultra = FontWeight.w800;
+}
+
 class Tipografia {
-  static const String fontName = 'Montserrat';
+  static const String fontName = 'TripSans';
 
   static const TextStyle titulo1 = TextStyle(
     fontFamily: fontName,
-    fontSize: 36.0,
-    fontWeight: FontWeight.w800,
+    fontSize: 40.0,
+    fontWeight: TipoTipografia.ultra,
   );
 
   static const TextStyle titulo2 = TextStyle(
     fontFamily: fontName,
-    fontSize: 24.0,
-    fontWeight: FontWeight.w900,
+    fontSize: 20.0,
+    fontWeight: TipoTipografia.bold,
   );
 
   static const TextStyle titulo3 = TextStyle(
     fontFamily: fontName,
-    fontSize: 14.0,
+    fontSize: 16.0,
     fontWeight: FontWeight.w900,
   );
 
   static const TextStyle corpo1 = TextStyle(
     fontFamily: fontName,
-    fontSize: 14.0,
-    fontWeight: FontWeight.w700,
+    fontSize: 18.0,
+    fontWeight: TipoTipografia.medium,
   );
 
   static const TextStyle corpo2 = TextStyle(
     fontFamily: fontName,
-    fontSize: 16,
-    fontWeight: FontWeight.w500,
+    fontSize: 16.0,
+    fontWeight: TipoTipografia.regular,
   );
 
-  static const TextStyle subtitulo1 = TextStyle(
+  static const TextStyle corpo3 = TextStyle(
     fontFamily: fontName,
-    fontSize: 12.0,
-    fontWeight: FontWeight.w500,
-  );
-
-  static const TextStyle subtitulo2 = TextStyle(
-    fontFamily: fontName,
-    fontSize: 14,
-    fontWeight: FontWeight.w400,
-  );
-
-  static const TextStyle subtitulo3 = TextStyle(
-    fontFamily: fontName,
-    fontSize: 12.0,
+    fontSize: 16.0,
     fontWeight: FontWeight.w500,
   );
 }

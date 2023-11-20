@@ -10,8 +10,10 @@ class Rotas {
         builder: (context, state) => const PaginaInicial(),
         routes: [
           GoRoute(
-            path: 'estabelecimento',
-            builder: (context, state) => VisualizarEstabelecimento(),
+            path: 'estabelecimento/:index',
+            builder: (context, state) => VisualizarEstabelecimento(
+              index: state.pathParameters['index']!,
+            ),
           ),
         ],
       ),

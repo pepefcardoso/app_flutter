@@ -2,49 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:my_app/utils/cores.dart';
 import 'package:my_app/utils/tipografia.dart';
 
-class NotaComAvaliacoes extends StatelessWidget {
+class NotaComIcone extends StatelessWidget {
   final String? nota;
   final int? quantidadeDeAvaliacoes;
-  final Color? corEstrela;
-  final double? tamanhoEstrela;
-  final double? espacamento;
-  final TextStyle? estiloTexto;
 
-  const NotaComAvaliacoes({
+  const NotaComIcone({
     super.key,
-    this.nota,
-    this.quantidadeDeAvaliacoes,
-    this.corEstrela,
-    this.tamanhoEstrela,
-    this.espacamento,
-    this.estiloTexto,
+    required this.nota,
+    required this.quantidadeDeAvaliacoes,
   });
 
   @override
   Widget build(BuildContext context) {
+    const TextStyle estiloTexto1 = Tipografia.corpo1;
+    const TextStyle estiloTexto2 = Tipografia.corpo2;
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         Icon(
           Icons.star,
-          color: corEstrela ?? Cores.verde3,
-          size: tamanhoEstrela ?? 16.0,
+          color: Cores.verde3,
+          size: estiloTexto1.fontSize! + 2,
         ),
-        SizedBox(width: espacamento ?? 4.0),
-        if (nota != null) ...[
-          SizedBox(width: espacamento ?? 4.0),
-          Text(
-            nota ?? '',
-            style: estiloTexto ?? Tipografia.subtitulo1,
-          ),
-        ],
-        if (quantidadeDeAvaliacoes != null) ...[
-          SizedBox(width: espacamento ?? 4.0),
-          Text(
-            '(${quantidadeDeAvaliacoes?.toString() ?? ''})',
-            style: estiloTexto ?? Tipografia.subtitulo1,
-          ),
-        ],
+        const SizedBox(width: 4.0),
+        Text(
+          nota ?? '',
+          style: estiloTexto1,
+        ),
+        const SizedBox(width: 4.0),
+        Text(
+          '(${quantidadeDeAvaliacoes?.toString() ?? ''})',
+          style: estiloTexto2,
+        ),
       ],
     );
   }

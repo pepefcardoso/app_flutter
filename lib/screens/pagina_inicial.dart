@@ -2,7 +2,7 @@ import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:my_app/components/card_pagina_inicial.dart';
+import 'package:my_app/components/item_lista_estabelecimentos.dart';
 import 'package:my_app/components/input_pesquisa.dart';
 import 'package:my_app/models/estabelecimento.dart';
 import 'package:my_app/models/estilo_culinario.dart';
@@ -29,8 +29,8 @@ class _PaginaInicialState extends State<PaginaInicial> {
         child: Padding(
           padding: const EdgeInsets.only(
             top: 16.0,
-            right: 12.0,
-            left: 12.0,
+            right: 16.0,
+            left: 16.0,
           ),
           child: Column(
             children: [
@@ -56,9 +56,9 @@ class _PaginaInicialState extends State<PaginaInicial> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16.0),
+                  const SizedBox(height: 24.0),
                   const InputPesquisa(),
-                  const SizedBox(height: 16.0),
+                  const SizedBox(height: 24.0),
                 ],
               ),
               Expanded(
@@ -82,9 +82,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
                       imagens: [
                         ImagemDoEstabelecimento(
                           id: 0,
-                          fotosUrl: [
-                            Constantes.logosTeste[index],
-                          ],
+                          url: Constantes.logosTeste[index],
                         ),
                       ],
                     );
@@ -92,13 +90,13 @@ class _PaginaInicialState extends State<PaginaInicial> {
                     return Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        CardEstabelecimento(
+                        ItemListaEstabelecimentos(
                           estabelecimento: estabelecimento,
-                          onTap: () => context.push('/estabelecimento'),
+                          onTap: () => context.push('/estabelecimento/$index'),
                         ),
                         if (index < Constantes.logosTeste.length - 1)
                           const Divider(
-                            height: 16.0,
+                            height: 32.0,
                             thickness: 1.0,
                             color: Cores.cinza1,
                           ),

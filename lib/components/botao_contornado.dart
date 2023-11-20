@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/utils/cores.dart';
-import 'package:my_app/utils/sombras.dart';
 
 class BotaoContornado extends StatelessWidget {
   final Widget child;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/components/logo_estilizado.dart';
+import 'package:my_app/components/card_de_imagem.dart';
 import 'package:my_app/utils/cores.dart';
 import 'package:my_app/utils/sombras.dart';
 import 'package:my_app/utils/tipografia.dart';
@@ -24,7 +24,6 @@ class CardPratoListaPrincipais extends StatelessWidget {
         CardDeImagem(
           url: url,
           largura: 250,
-          sombra: const [],
         ),
         Positioned.fill(
           child: Align(
@@ -54,7 +53,7 @@ class CardPratoListaPrincipais extends StatelessWidget {
                               children: [
                                 Text(
                                   descricao,
-                                  style: Tipografia.subtitulo3.copyWith(
+                                  style: Tipografia.corpo3.copyWith(
                                     color: Cores.escuro.withOpacity(0.9),
                                   ),
                                 ),

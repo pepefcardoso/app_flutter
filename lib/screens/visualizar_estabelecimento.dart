@@ -1,36 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/components/botao_de_circulo.dart';
-import 'package:my_app/components/card_prato_lista_principais.dart';
-import 'package:my_app/components/imagem_perfil_estabelecimento.dart';
 import 'package:my_app/components/botao_contornado.dart';
 import 'package:my_app/models/estabelecimento.dart';
 import 'package:my_app/models/estilo_culinario.dart';
+import 'package:my_app/models/imagens_estabelecimento.dart';
 import 'package:my_app/models/tipo_de_dieta.dart';
 import 'package:my_app/utils/constantes.dart';
 import 'package:my_app/utils/cores.dart';
-import 'package:my_app/utils/sombras.dart';
+import 'package:my_app/utils/estabelecimentos_fake.dart';
 import 'package:my_app/utils/tipografia.dart';
 
-class VisualizarEstabelecimento extends StatelessWidget {
+class VisualizarEstabelecimento extends StatefulWidget {
   // final Estabelecimento estabelecimento;
+  final String index;
 
-  VisualizarEstabelecimento({super.key});
+  const VisualizarEstabelecimento({
+    super.key,
+    required this.index,
+  });
 
-  final _estabelecimentoLocal = Estabelecimento(
-    id: 0,
-    aberto: 0 % 2 == 0,
-    favorito: 0 % 2 == 0,
-    nome: Constantes.nomesRestaurantesTeste[0],
-    tiposDeDietas: [
-      TipoDeDieta(id: 0, nome: Constantes.dietasTeste[0]),
-    ],
-    estiloCulinario: EstiloCulinario(id: 0, nome: Constantes.estilosTeste[0]),
-    nota: '${0 + 1}.0',
-    quantidadeDeAvaliacoes: ((0 + 1) * 110),
-    distancia: '${(0 + 1) * 100} m',
-    contatos: Constantes.contatosTeste,
-    endereco: Constantes.enderecoTeste,
-  );
+  @override
+  State<VisualizarEstabelecimento> createState() => _VisualizarEstabelecimentoState();
+}
+
+class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
+  late final int _id;
+  late final Estabelecimento _estabelecimento;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _id = int.parse(widget.index);
+
+    _estabelecimento = EstabelecimentosFake.estabelecimentosFake.firstWhere((id) => _id == id.id);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +50,7 @@ class VisualizarEstabelecimento extends StatelessWidget {
             height: 250,
             width: MediaQuery.of(context).size.width,
             child: Image.network(
-              Constantes.imagensPratosTeste[1],
+              _estabelecimento.imagens![0].url!,
               fit: BoxFit.cover,
             ),
           ),
@@ -62,7 +65,7 @@ class VisualizarEstabelecimento extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      _estabelecimentoLocal.nome ?? '',
+                      _estabelecimento.nome ?? '',
                       style: Tipografia.titulo2.copyWith(color: Cores.verde4),
                     ),
                     BotaoContornado(
@@ -80,8 +83,8 @@ class VisualizarEstabelecimento extends StatelessWidget {
                           ),
                           const SizedBox(width: 4.0),
                           Text(
-                            _estabelecimentoLocal.nota ?? '',
-                            style: Tipografia.subtitulo2,
+                            _estabelecimento.nota ?? '',
+                            style: Tipografia.corpo3,
                           ),
                         ],
                       ),
@@ -91,7 +94,7 @@ class VisualizarEstabelecimento extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: Text(
-                    _estabelecimentoLocal.tiposDeDietas![0]!.nome ?? '',
+                    _estabelecimento.tiposDeDietas![0].nome ?? '',
                   ),
                 ),
               ],

@@ -20,23 +20,26 @@ class _InputPesquisaState extends State<InputPesquisa> {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.0),
           borderSide: const BorderSide(
-            color: Cores.verde3,
+            width: 1.8,
+            color: Cores.cinza1,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.0),
           borderSide: const BorderSide(
-            color: Cores.verde1,
+            width: 1.8,
+            color: Cores.cinza1,
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.0),
           borderSide: const BorderSide(
-            color: Cores.verde3,
+            width: 1.8,
+            color: Cores.cinza1,
           ),
         ),
         hintText: 'Encontre sua proxima refeição',
-        hintStyle: Tipografia.subtitulo1.copyWith(color: Colors.grey),
+        hintStyle: Tipografia.corpo3.copyWith(color: Cores.cinza1),
       ),
     );
   }
