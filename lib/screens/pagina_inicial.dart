@@ -75,7 +75,10 @@ class _PaginaInicialState extends State<PaginaInicial> {
                         TipoDeDieta(id: 0, nome: Constantes.dietasTeste[index]),
                       ],
                       endereco: Constantes.enderecoTeste,
-                      estiloCulinario: EstiloCulinario(id: 0, nome: Constantes.estilosTeste[index]),
+                      estilosCulinarios: [
+                        EstiloCulinario(
+                            id: 0, nome: Constantes.estilosTeste[index]),
+                      ],
                       nota: '${index + 1}.0',
                       quantidadeDeAvaliacoes: ((index + 1) * 110),
                       distancia: '${(index + 1) * 100} m',

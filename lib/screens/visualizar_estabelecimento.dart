@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/components/botao_contornado.dart';
 import 'package:my_app/models/estabelecimento.dart';
-import 'package:my_app/models/estilo_culinario.dart';
-import 'package:my_app/models/imagens_estabelecimento.dart';
-import 'package:my_app/models/tipo_de_dieta.dart';
-import 'package:my_app/utils/constantes.dart';
 import 'package:my_app/utils/cores.dart';
 import 'package:my_app/utils/estabelecimentos_fake.dart';
 import 'package:my_app/utils/tipografia.dart';
@@ -84,7 +80,7 @@ class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
                           const SizedBox(width: 4.0),
                           Text(
                             _estabelecimento.nota ?? '',
-                            style: Tipografia.corpo3,
+                            style: Tipografia.corpo2,
                           ),
                         ],
                       ),

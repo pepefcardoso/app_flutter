@@ -21,14 +21,8 @@ class Tipografia {
 
   static const TextStyle titulo2 = TextStyle(
     fontFamily: fontName,
-    fontSize: 20.0,
+    fontSize: 18.0,
     fontWeight: TipoTipografia.bold,
-  );
-
-  static const TextStyle titulo3 = TextStyle(
-    fontFamily: fontName,
-    fontSize: 16.0,
-    fontWeight: FontWeight.w900,
   );
 
   static const TextStyle corpo1 = TextStyle(
@@ -41,11 +35,5 @@ class Tipografia {
     fontFamily: fontName,
     fontSize: 16.0,
     fontWeight: TipoTipografia.regular,
-  );
-
-  static const TextStyle corpo3 = TextStyle(
-    fontFamily: fontName,
-    fontSize: 16.0,
-    fontWeight: FontWeight.w500,
   );
 }

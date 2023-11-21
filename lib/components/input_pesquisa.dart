@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/components/botao_de_icone_formatado.dart';
 import 'package:my_app/utils/cores.dart';
 import 'package:my_app/utils/tipografia.dart';
 
@@ -14,6 +15,12 @@ class _InputPesquisaState extends State<InputPesquisa> {
   Widget build(BuildContext context) {
     return TextField(
       decoration: InputDecoration(
+        suffixIcon: BotaoDeIconeFormatado(
+          icone: Icons.filter_list_outlined,
+          cor: Cores.escuro,
+          onPressed: () => debugPrint('Filtrar'),
+          tamanho: 24.0,
+        ),
         isDense: true,
         filled: true,
         fillColor: Colors.white,
@@ -39,7 +46,7 @@ class _InputPesquisaState extends State<InputPesquisa> {
           ),
         ),
         hintText: 'Encontre sua proxima refeição',
-        hintStyle: Tipografia.corpo3.copyWith(color: Cores.cinza1),
+        hintStyle: Tipografia.corpo1.copyWith(color: Cores.cinza1),
       ),
     );
   }

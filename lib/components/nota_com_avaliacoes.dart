@@ -14,8 +14,7 @@ class NotaComIcone extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const TextStyle estiloTexto1 = Tipografia.corpo1;
-    const TextStyle estiloTexto2 = Tipografia.corpo2;
+    const TextStyle estiloTexto = Tipografia.corpo2;
 
     return Row(
       mainAxisSize: MainAxisSize.min,
@@ -23,17 +22,17 @@ class NotaComIcone extends StatelessWidget {
         Icon(
           Icons.star,
           color: Cores.verde3,
-          size: estiloTexto1.fontSize! + 2,
+          size: estiloTexto.fontSize! + 2,
         ),
         const SizedBox(width: 4.0),
         Text(
           nota ?? '',
-          style: estiloTexto1,
+          style: estiloTexto,
         ),
         const SizedBox(width: 4.0),
         Text(
           '(${quantidadeDeAvaliacoes?.toString() ?? ''})',
-          style: estiloTexto2,
+          style: estiloTexto,
         ),
       ],
     );

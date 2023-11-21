@@ -19,9 +19,9 @@ class Estabelecimento {
   final List<HorarioFuncionamento>? horarioFuncionamento;
   final TipoDeEntrega? tipoDeEntrega;
   final String? descricao;
-  final EstiloCulinario? estiloCulinario;
+  final List<EstiloCulinario>? estilosCulinarios;
   final List<ImagemDoEstabelecimento>? imagens;
-  final List<Produto?>? produtos;
+  final List<Produto>? produtos;
   final bool? aberto;
   final bool? favorito;
   final String? nota;
@@ -39,7 +39,7 @@ class Estabelecimento {
     this.horarioFuncionamento,
     this.tipoDeEntrega,
     this.descricao,
-    this.estiloCulinario,
+    this.estilosCulinarios,
     this.imagens,
     this.produtos,
     this.aberto,
@@ -76,9 +76,15 @@ class Estabelecimento {
             ? TipoDeEntrega.fromJson(json['tipoDeEntrega'])
             : null,
         descricao = json['descricao'],
-        estiloCulinario = json['estilo_culinario'],
+        estilosCulinarios = json['estilosCulinarios'] != null
+            ? (json['estilosCulinarios'] as List<dynamic>)
+                .map((e) => EstiloCulinario.fromJson(e))
+                .toList()
+            : null,
         imagens = json['imagens'] != null
-            ? (json['imagens'] as List).map((json) => ImagemDoEstabelecimento.fromJson(json)).toList()
+            ? (json['imagens'] as List)
+                .map((json) => ImagemDoEstabelecimento.fromJson(json))
+                .toList()
             : null,
         produtos = json['produtos'] != null
             ? (json['produtos'] as List<dynamic>)
