@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/components/texto_formatado.dart';
 import 'package:my_app/utils/cores.dart';
 import 'package:my_app/utils/tipografia.dart';
 

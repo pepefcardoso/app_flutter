@@ -96,4 +96,16 @@ class Estabelecimento {
         quantidadeDeAvaliacoes = json['quantidade_de_avaliacoes'],
         distancia = json['distancia'],
         nota = json['nota'];
+
+  List<TipoDeDieta>? get tiposDeDietasPrincipais {
+    return tiposDeDietas
+        ?.where((tipoDeDieta) => tipoDeDieta.principal == true)
+        .toList();
+  }
+
+  List<EstiloCulinario>? get estilosCulinariosPrincipais {
+    return estilosCulinarios
+        ?.where((estiloCulinario) => estiloCulinario.principal == true)
+        .toList();
+  }
 }

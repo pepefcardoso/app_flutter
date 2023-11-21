@@ -18,6 +18,7 @@ class EstabelecimentosFake {
           return TipoDeDieta(
             id: e.key,
             nome: e.value,
+            principal: e.key == 0,
           );
         }).toList(),
         endereco: Constantes.enderecoTeste,
@@ -25,6 +26,7 @@ class EstabelecimentosFake {
           return EstiloCulinario(
             id: e.key,
             nome: e.value,
+            principal: e.key == 0,
           );
         }).toList(),
         nota: '${index + 1}.0',

@@ -55,7 +55,8 @@ class ItemListaEstabelecimentos extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      for (final dieta in estabelecimento.tiposDeDietas ?? [])
+                      for (final dieta
+                          in estabelecimento.tiposDeDietasPrincipais ?? [])
                         TextoFormatado(
                           texto: dieta.nome,
                         ),
@@ -63,10 +64,10 @@ class ItemListaEstabelecimentos extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      for (final dieta
-                          in estabelecimento.estilosCulinarios ?? [])
+                      for (final estilo
+                          in estabelecimento.estilosCulinariosPrincipais ?? [])
                         TextoFormatado(
-                          texto: dieta.nome,
+                          texto: estilo.nome,
                         ),
                     ],
                   ),
