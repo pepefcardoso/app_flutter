@@ -1,8 +1,8 @@
 class HorarioFuncionamento {
-  final String id;
+  final int id;
   final int? diaSemana;
-  final DateTime? horaAbertura;
-  final DateTime? horaFechamento;
+  final String? horaAbertura;
+  final String? horaFechamento;
   final DateTime? diaEspecifico;
 
   const HorarioFuncionamento({
@@ -19,4 +19,6 @@ class HorarioFuncionamento {
         horaAbertura = json['horaAbertura'],
         horaFechamento = json['horaFechamento'],
         diaEspecifico = json['diaEspecifico'];
+
+  String? get horarioFormatado => '$horaAbertura - $horaFechamento';
 }

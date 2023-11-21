@@ -1,5 +1,6 @@
 import 'package:my_app/models/estabelecimento.dart';
 import 'package:my_app/models/estilo_culinario.dart';
+import 'package:my_app/models/horario_funcionamento.dart';
 import 'package:my_app/models/imagens_estabelecimento.dart';
 import 'package:my_app/models/tipo_de_dieta.dart';
 import 'package:my_app/utils/constantes.dart';
@@ -29,6 +30,13 @@ class EstabelecimentosFake {
             principal: e.key == 0,
           );
         }).toList(),
+        horarioFuncionamento: [
+          const HorarioFuncionamento(
+            id: 1,
+            horaAbertura: '08:00',
+            horaFechamento: '18:00',
+          ),
+        ],
         nota: '${index + 1}.0',
         quantidadeDeAvaliacoes: ((index + 1) * 110),
         distancia: '${(index + 1) * 100} m',

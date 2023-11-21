@@ -63,8 +63,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
                   physics: const BouncingScrollPhysics(),
                   itemCount: Constantes.logosTeste.length,
                   itemBuilder: (context, index) {
-                    final estabelecimento =
-                        EstabelecimentosFake.estabelecimentosFake[index];
+                    final estabelecimento = EstabelecimentosFake.estabelecimentosFake[index];
 
                     return Column(
                       mainAxisSize: MainAxisSize.min,
@@ -73,12 +72,11 @@ class _PaginaInicialState extends State<PaginaInicial> {
                           estabelecimento: estabelecimento,
                           onTap: () => context.push('/estabelecimento/$index'),
                         ),
-                        if (index < Constantes.logosTeste.length - 1)
-                          const Divider(
-                            height: 32.0,
-                            thickness: 1.0,
-                            color: Cores.cinza1,
-                          ),
+                        const Divider(
+                          height: 32.0,
+                          thickness: 1.0,
+                          color: Cores.cinza1,
+                        ),
                       ],
                     );
                   },

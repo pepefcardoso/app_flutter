@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/components/botao_contornado.dart';
+import 'package:my_app/components/circulo_com_icone.dart';
 import 'package:my_app/components/botao_de_icone_formatado.dart';
 import 'package:my_app/components/item_lista_tipos.dart';
 import 'package:my_app/components/texto_formatado.dart';
@@ -18,8 +19,7 @@ class VisualizarEstabelecimento extends StatefulWidget {
   });
 
   @override
-  State<VisualizarEstabelecimento> createState() =>
-      _VisualizarEstabelecimentoState();
+  State<VisualizarEstabelecimento> createState() => _VisualizarEstabelecimentoState();
 }
 
 class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
@@ -32,8 +32,7 @@ class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
 
     _id = int.parse(widget.index);
 
-    _estabelecimento = EstabelecimentosFake.estabelecimentosFake
-        .firstWhere((id) => _id == id.id);
+    _estabelecimento = EstabelecimentosFake.estabelecimentosFake.firstWhere((id) => _id == id.id);
   }
 
   @override
@@ -108,7 +107,7 @@ class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 8.0),
+                const SizedBox(height: 24.0),
                 SizedBox(
                   height: 32.0,
                   child: ListView.builder(
@@ -125,15 +124,13 @@ class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
                           ItemListaTipos(
                             tipo: dieta?.nome,
                           ),
-                          if (index <
-                              _estabelecimento.tiposDeDietas!.length - 1)
-                            const SizedBox(width: 8.0),
+                          if (index < _estabelecimento.tiposDeDietas!.length - 1) const SizedBox(width: 8.0),
                         ],
                       );
                     },
                   ),
                 ),
-                const SizedBox(height: 8.0),
+                const SizedBox(height: 16.0),
                 SizedBox(
                   height: 32.0,
                   child: ListView.builder(
@@ -150,17 +147,94 @@ class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
                           ItemListaTipos(
                             tipo: dieta?.nome,
                           ),
-                          if (index <
-                              _estabelecimento.estilosCulinarios!.length - 1)
-                            const SizedBox(width: 8.0),
+                          if (index < _estabelecimento.estilosCulinarios!.length - 1) const SizedBox(width: 8.0),
                         ],
                       );
                     },
                   ),
                 ),
+                const SizedBox(height: 24.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    _IconeComDescricao(
+                      icone: Icons.watch_later_outlined,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            _estabelecimento.aberto ?? false ? 'Aberto' : 'Fechado',
+                            style: Tipografia.titulo2,
+                          ),
+                          Text(
+                            _estabelecimento.horarioFuncionamento![0].horarioFormatado ?? 'Não Informado',
+                            style: Tipografia.corpo2,
+                          ),
+                        ],
+                      ),
+                      onTap: () => debugPrint('Ver horários'),
+                    ),
+                    const SizedBox(
+                      height: 40.0,
+                      child: VerticalDivider(
+                        width: 32.0,
+                        thickness: 1.6,
+                        color: Cores.cinza1,
+                      ),
+                    ),
+                    _IconeComDescricao(
+                      icone: Icons.pin_drop_rounded,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Localização',
+                            style: Tipografia.titulo2,
+                          ),
+                          Text(
+                            _estabelecimento.endereco!.cidade ?? 'Não Informado',
+                            style: Tipografia.corpo2,
+                          ),
+                        ],
+                      ),
+                      onTap: () => debugPrint('Ver localização'),
+                    ),
+                  ],
+                )
               ],
             ),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class _IconeComDescricao extends StatelessWidget {
+  final IconData icone;
+  final Widget child;
+  final VoidCallback? onTap;
+
+  const _IconeComDescricao({
+    required this.icone,
+    required this.child,
+    this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          CirculoComIcone(
+            icone: icone,
+          ),
+          const SizedBox(width: 16.0),
+          child,
         ],
       ),
     );
