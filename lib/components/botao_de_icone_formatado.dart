@@ -6,6 +6,7 @@ class BotaoDeIconeFormatado extends StatelessWidget {
   final IconData icone;
   final Color? cor;
   final VoidCallback? onPressed;
+  final EdgeInsets? padding;
 
   const BotaoDeIconeFormatado({
     super.key,
@@ -13,11 +14,13 @@ class BotaoDeIconeFormatado extends StatelessWidget {
     this.icone = Icons.construction,
     this.cor,
     this.onPressed,
+    this.padding,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: padding ?? const EdgeInsets.all(0.0),
       width: tamanho,
       height: tamanho,
       padding: const EdgeInsets.all(0.0),

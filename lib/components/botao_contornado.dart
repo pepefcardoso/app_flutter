@@ -28,8 +28,8 @@ class BotaoContornado extends StatelessWidget {
           borderRadius: borderRadius ?? BorderRadius.circular(8.0),
           border: boxBorder ??
               Border.all(
-                width: 1.0,
-                color: Cores.escuro,
+                width: 1.5,
+                color: Cores.cinza1,
               ),
         ),
         child: child,

@@ -10,17 +10,23 @@ class EstabelecimentosFake {
     (index) {
       return Estabelecimento(
         id: index,
+        descricao: Constantes.descricoesTeste[index],
         aberto: index % 2 == 0,
         favorito: index % 2 == 0,
         nome: Constantes.nomesRestaurantesTeste[index],
-        tiposDeDietas: [
-          TipoDeDieta(id: 0, nome: Constantes.dietasTeste[index]),
-        ],
+        tiposDeDietas: Constantes.dietasTeste.asMap().entries.map((e) {
+          return TipoDeDieta(
+            id: e.key,
+            nome: e.value,
+          );
+        }).toList(),
         endereco: Constantes.enderecoTeste,
-        estilosCulinarios: [
-          EstiloCulinario(
-              id: 0, nome: Constantes.estilosTeste[index]),
-        ],
+        estilosCulinarios: Constantes.estilosTeste.asMap().entries.map((e) {
+          return EstiloCulinario(
+            id: e.key,
+            nome: e.value,
+          );
+        }).toList(),
         nota: '${index + 1}.0',
         quantidadeDeAvaliacoes: ((index + 1) * 110),
         distancia: '${(index + 1) * 100} m',

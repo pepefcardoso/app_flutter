@@ -1,16 +1,16 @@
 class ImagemDoEstabelecimento {
   final int id;
   final String? url;
-  final String? nome;
+  final bool? logo;
 
   const ImagemDoEstabelecimento({
     required this.id,
     this.url,
-    this.nome,
+    this.logo,
   });
 
   ImagemDoEstabelecimento.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         url = json['url'],
-        nome = json['nome'];
+        logo = json['logo'];
 }

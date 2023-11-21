@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/utils/cores.dart';
 
 class CardDeImagem extends StatelessWidget {
   final String url;
@@ -22,6 +23,19 @@ class CardDeImagem extends StatelessWidget {
         child: Image.network(
           url,
           fit: BoxFit.cover,
+          loadingBuilder: (context, child, loadingProgress) {
+            if (loadingProgress == null) return child;
+
+            return Center(
+              child: CircularProgressIndicator(
+                color: Cores.verde3,
+                value: loadingProgress.expectedTotalBytes != null
+                    ? loadingProgress.cumulativeBytesLoaded /
+                        loadingProgress.expectedTotalBytes!
+                    : null,
+              ),
+            );
+          },
         ),
       ),
     );

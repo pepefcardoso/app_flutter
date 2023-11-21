@@ -10,6 +10,7 @@ import 'package:my_app/models/imagens_estabelecimento.dart';
 import 'package:my_app/models/tipo_de_dieta.dart';
 import 'package:my_app/utils/constantes.dart';
 import 'package:my_app/utils/cores.dart';
+import 'package:my_app/utils/estabelecimentos_fake.dart';
 import 'package:my_app/utils/tipografia.dart';
 
 class PaginaInicial extends StatefulWidget {
@@ -66,29 +67,8 @@ class _PaginaInicialState extends State<PaginaInicial> {
                   physics: const BouncingScrollPhysics(),
                   itemCount: Constantes.logosTeste.length,
                   itemBuilder: (context, index) {
-                    final estabelecimento = Estabelecimento(
-                      id: index,
-                      aberto: index % 2 == 0,
-                      favorito: index % 2 == 0,
-                      nome: Constantes.nomesRestaurantesTeste[index],
-                      tiposDeDietas: [
-                        TipoDeDieta(id: 0, nome: Constantes.dietasTeste[index]),
-                      ],
-                      endereco: Constantes.enderecoTeste,
-                      estilosCulinarios: [
-                        EstiloCulinario(
-                            id: 0, nome: Constantes.estilosTeste[index]),
-                      ],
-                      nota: '${index + 1}.0',
-                      quantidadeDeAvaliacoes: ((index + 1) * 110),
-                      distancia: '${(index + 1) * 100} m',
-                      imagens: [
-                        ImagemDoEstabelecimento(
-                          id: 0,
-                          url: Constantes.logosTeste[index],
-                        ),
-                      ],
-                    );
+                    final estabelecimento =
+                        EstabelecimentosFake.estabelecimentosFake[index];
 
                     return Column(
                       mainAxisSize: MainAxisSize.min,
