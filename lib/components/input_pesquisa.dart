@@ -18,7 +18,7 @@ class _InputPesquisaState extends State<InputPesquisa> {
       children: [
         TextField(
           decoration: InputDecoration(
-            isDense: true,
+            contentPadding: EdgeInsets.only(left: 16.0, top: 12.0),
             filled: true,
             fillColor: Colors.white,
             border: _bordaPadrao(),
@@ -69,7 +69,7 @@ class _InputPesquisaState extends State<InputPesquisa> {
   }
 
   OutlineInputBorder _bordaPadrao() => OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12.0),
+        borderRadius: BorderRadius.circular(18.0),
         borderSide: const BorderSide(
           width: 1.8,
           color: Cores.cinza1,
