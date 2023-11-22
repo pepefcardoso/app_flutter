@@ -31,6 +31,12 @@ class Tipografia {
     fontWeight: TipoTipografia.bold,
   );
 
+  static const TextStyle titulo4 = TextStyle(
+    fontFamily: fontName,
+    fontSize: 24.0,
+    fontWeight: TipoTipografia.ultra,
+  );
+
   static const TextStyle corpo1 = TextStyle(
     fontFamily: fontName,
     fontSize: 18.0,

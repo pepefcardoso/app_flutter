@@ -1,5 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:my_app/screens/pagina_inicial.dart';
+import 'package:my_app/screens/listagem_estabelecimentos.dart';
 import 'package:my_app/screens/visualizar_estabelecimento.dart';
 
 class Rotas {
@@ -7,7 +7,7 @@ class Rotas {
     routes: [
       GoRoute(
         path: '/',
-        builder: (context, state) => const PaginaInicial(),
+        builder: (context, state) => const ListagemEstabelecimentos(),
         routes: [
           GoRoute(
             path: 'estabelecimento/:index',

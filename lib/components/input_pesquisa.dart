@@ -13,41 +13,66 @@ class InputPesquisa extends StatefulWidget {
 class _InputPesquisaState extends State<InputPesquisa> {
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      decoration: InputDecoration(
-        suffixIcon: BotaoDeIconeFormatado(
-          icone: Icons.filter_list_outlined,
-          cor: Cores.escuro,
-          onPressed: () => debugPrint('Filtrar'),
-          tamanho: 24.0,
-        ),
-        isDense: true,
-        filled: true,
-        fillColor: Colors.white,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.0),
-          borderSide: const BorderSide(
-            width: 1.8,
-            color: Cores.cinza1,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        TextField(
+          decoration: InputDecoration(
+            isDense: true,
+            filled: true,
+            fillColor: Colors.white,
+            border: _bordaPadrao(),
+            focusedBorder: _bordaPadrao(),
+            enabledBorder: _bordaPadrao(),
+            hintText: 'Encontre sua proxima refeição',
+            hintStyle: Tipografia.corpo1.copyWith(color: Cores.cinza1),
           ),
         ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.0),
-          borderSide: const BorderSide(
-            width: 1.8,
-            color: Cores.cinza1,
+        const SizedBox(height: 12.0),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Wrap(
+                alignment: WrapAlignment.center,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                spacing: 8.0,
+                children: [
+                  BotaoDeIconeFormatado(
+                    icone: Icons.compare_arrows_sharp,
+                    cor: Cores.verde3,
+                    tamanho: 32.0,
+                  ),
+                  Text('Ordenar', style: Tipografia.corpo2Bold),
+                ],
+              ),
+              Wrap(
+                alignment: WrapAlignment.center,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                spacing: 8.0,
+                children: [
+                  BotaoDeIconeFormatado(
+                    icone: Icons.filter_list,
+                    cor: Cores.verde3,
+                    tamanho: 32.0,
+                  ),
+                  Text('Filtrar', style: Tipografia.corpo2Bold),
+                ],
+              ),
+            ],
           ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.0),
-          borderSide: const BorderSide(
-            width: 1.8,
-            color: Cores.cinza1,
-          ),
-        ),
-        hintText: 'Encontre sua proxima refeição',
-        hintStyle: Tipografia.corpo1.copyWith(color: Cores.cinza1),
-      ),
+        )
+      ],
     );
   }
+
+  OutlineInputBorder _bordaPadrao() => OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12.0),
+        borderSide: const BorderSide(
+          width: 1.8,
+          color: Cores.cinza1,
+        ),
+      );
 }
