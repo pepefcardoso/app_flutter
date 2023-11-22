@@ -19,7 +19,8 @@ class VisualizarEstabelecimento extends StatefulWidget {
   });
 
   @override
-  State<VisualizarEstabelecimento> createState() => _VisualizarEstabelecimentoState();
+  State<VisualizarEstabelecimento> createState() =>
+      _VisualizarEstabelecimentoState();
 }
 
 class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
@@ -32,7 +33,8 @@ class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
 
     _id = int.parse(widget.index);
 
-    _estabelecimento = EstabelecimentosFake.estabelecimentosFake.firstWhere((id) => _id == id.id);
+    _estabelecimento = EstabelecimentosFake.estabelecimentosFake
+        .firstWhere((id) => _id == id.id);
   }
 
   @override
@@ -124,7 +126,9 @@ class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
                           ItemListaTipos(
                             tipo: dieta?.nome,
                           ),
-                          if (index < _estabelecimento.tiposDeDietas!.length - 1) const SizedBox(width: 8.0),
+                          if (index <
+                              _estabelecimento.tiposDeDietas!.length - 1)
+                            const SizedBox(width: 8.0),
                         ],
                       );
                     },
@@ -147,7 +151,9 @@ class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
                           ItemListaTipos(
                             tipo: dieta?.nome,
                           ),
-                          if (index < _estabelecimento.estilosCulinarios!.length - 1) const SizedBox(width: 8.0),
+                          if (index <
+                              _estabelecimento.estilosCulinarios!.length - 1)
+                            const SizedBox(width: 8.0),
                         ],
                       );
                     },
@@ -164,11 +170,15 @@ class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            _estabelecimento.aberto ?? false ? 'Aberto' : 'Fechado',
+                            _estabelecimento.aberto ?? false
+                                ? 'Aberto'
+                                : 'Fechado',
                             style: Tipografia.titulo2,
                           ),
                           Text(
-                            _estabelecimento.horarioFuncionamento![0].horarioFormatado ?? 'Não Informado',
+                            _estabelecimento.horarioFuncionamento![0]
+                                    .horarioFormatado ??
+                                'Não Informado',
                             style: Tipografia.corpo2,
                           ),
                         ],
@@ -194,7 +204,8 @@ class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
                             style: Tipografia.titulo2,
                           ),
                           Text(
-                            _estabelecimento.endereco!.cidade ?? 'Não Informado',
+                            _estabelecimento.endereco!.cidade ??
+                                'Não Informado',
                             style: Tipografia.corpo2,
                           ),
                         ],
@@ -202,6 +213,53 @@ class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
                       onTap: () => debugPrint('Ver localização'),
                     ),
                   ],
+                ),
+                const SizedBox(height: 24.0),
+                InkWell(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 8.0),
+                    alignment: Alignment.centerLeft,
+                    decoration: BoxDecoration(
+                      color: Cores.verde2,
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Wrap(
+                          spacing: 8.0,
+                          children: [
+                            Icon(
+                              Icons.list_alt,
+                              color: Cores.verde3,
+                            ),
+                            TextoFormatado(
+                              texto: 'Ver todos os contatos',
+                              estilo: Tipografia.corpo2Bold,
+                            ),
+                          ],
+                        ),
+                        BotaoDeIconeFormatado(
+                          icone: Icons.arrow_forward_ios,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const Divider(
+                  height: 36.0,
+                  thickness: 1.6,
+                  color: Cores.cinza1,
+                ),
+                const Text(
+                  'Informações',
+                  style: Tipografia.titulo3,
+                ),
+                const SizedBox(height: 8.0),
+                Text(
+                  _estabelecimento.descricao ??
+                      'Não há informações disponíveis',
                 )
               ],
             ),
