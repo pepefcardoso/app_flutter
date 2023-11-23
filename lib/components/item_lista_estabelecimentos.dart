@@ -38,9 +38,10 @@ class ItemListaEstabelecimentos extends StatelessWidget {
                 ),
                 Container(
                   margin: const EdgeInsets.all(8.0),
-                  padding: const EdgeInsets.all(4.0),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 4.0, horizontal: 8.0),
                   decoration: BoxDecoration(
-                    color: Cores.verde2,
+                    color: Cores.verde2.withOpacity(0.9),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   child: Text(

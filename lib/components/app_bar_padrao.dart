@@ -5,10 +5,9 @@ import 'package:my_app/utils/tipografia.dart';
 AppBar appBarPadrao() {
   return AppBar(
     backgroundColor: Cores.verde2,
-    foregroundColor: Cores.verde3,
-    title: const Text(
+    title: Text(
       'LeveSabor',
-      style: Tipografia.titulo4,
+      style: Tipografia.titulo4.copyWith(color: Cores.verde3),
     ),
     centerTitle: true,
     actions: const [
