@@ -15,14 +15,11 @@ AppBar appBarPadrao() {
       Padding(
         padding: EdgeInsets.only(right: 12.0),
         child: CircleAvatar(
-          radius: 18.0,
-          backgroundColor: Cores.verde3,
-          child: CircleAvatar(
-            radius: 16.5,
-            child: Icon(
-              Icons.person,
-              color: Cores.verde3,
-            ),
+          backgroundColor: Colors.white,
+          radius: 16.5,
+          child: Icon(
+            Icons.person,
+            color: Cores.verde3,
           ),
         ),
       )

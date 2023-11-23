@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/components/botao_de_icone_formatado.dart';
 import 'package:my_app/components/card_de_imagem.dart';
+import 'package:my_app/components/item_lista_tipos.dart';
 import 'package:my_app/components/nota_com_avaliacoes.dart';
 import 'package:my_app/components/texto_formatado.dart';
 import 'package:my_app/models/estabelecimento.dart';
@@ -20,17 +21,34 @@ class ItemListaEstabelecimentos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 125.0,
+      height: 130.0,
       child: InkWell(
         onTap: onTap,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CardDeImagem(
-              largura: 125.0,
-              url: (estabelecimento.imagens?.isNotEmpty ?? false)
-                  ? estabelecimento.imagens![0].url!
-                  : '',
+            Stack(
+              alignment: Alignment.topLeft,
+              children: [
+                CardDeImagem(
+                  largura: 130.0,
+                  url: (estabelecimento.imagens?.isNotEmpty ?? false)
+                      ? estabelecimento.imagens![0].url!
+                      : '',
+                ),
+                Container(
+                  margin: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(4.0),
+                  decoration: BoxDecoration(
+                    color: Cores.verde2,
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  child: Text(
+                    estabelecimento.aberto ?? false ? 'Aberto' : 'Fechado',
+                    style: Tipografia.corpo2Bold,
+                  ),
+                )
+              ],
             ),
             const SizedBox(width: 12.0),
             Expanded(
@@ -71,26 +89,8 @@ class ItemListaEstabelecimentos extends StatelessWidget {
                         ),
                     ],
                   ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      TextoFormatado(
-                        texto: (estabelecimento.aberto ?? false)
-                            ? 'Aberto'
-                            : 'Fechado',
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 4.0),
-                        child: Icon(
-                          Icons.circle,
-                          size: 4.0,
-                          color: Cores.verde3,
-                        ),
-                      ),
-                      TextoFormatado(
-                        texto: estabelecimento.endereco?.cidade ?? '',
-                      ),
-                    ],
+                  TextoFormatado(
+                    texto: estabelecimento.endereco?.cidade ?? '',
                   ),
                   NotaComIcone(
                     nota: estabelecimento.nota?.toString(),
