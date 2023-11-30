@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:my_app/screens/listagem_estabelecimentos.dart';
+import 'package:my_app/screens/login_page.dart';
 import 'package:my_app/screens/visualizar_estabelecimento.dart';
 
 class Rotas {
@@ -7,16 +8,20 @@ class Rotas {
     routes: [
       GoRoute(
         path: '/',
-        builder: (context, state) => const ListagemEstabelecimentos(),
-        routes: [
-          GoRoute(
-            path: 'estabelecimento/:index',
-            builder: (context, state) => VisualizarEstabelecimento(
-              index: state.pathParameters['index']!,
-            ),
-          ),
-        ],
+        builder: (context, state) => const LoginPage(),
       ),
+      // GoRoute(
+      //   path: '/',
+      //   builder: (context, state) => const ListagemEstabelecimentos(),
+      //   routes: [
+      //     GoRoute(
+      //       path: 'estabelecimento/:index',
+      //       builder: (context, state) => VisualizarEstabelecimento(
+      //         index: state.pathParameters['index']!,
+      //       ),
+      //     ),
+      //   ],
+      // ),
     ],
   );
 }

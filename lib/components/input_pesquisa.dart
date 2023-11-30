@@ -18,7 +18,7 @@ class _InputPesquisaState extends State<InputPesquisa> {
       children: [
         TextField(
           decoration: InputDecoration(
-            contentPadding: EdgeInsets.only(left: 16.0, top: 12.0),
+            contentPadding: const EdgeInsets.only(left: 16.0, top: 12.0),
             filled: true,
             fillColor: Colors.white,
             border: _bordaPadrao(),

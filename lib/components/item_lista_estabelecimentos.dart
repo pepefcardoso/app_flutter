@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/components/botao_de_icone_formatado.dart';
 import 'package:my_app/components/card_de_imagem.dart';
-import 'package:my_app/components/item_lista_tipos.dart';
 import 'package:my_app/components/nota_com_avaliacoes.dart';
 import 'package:my_app/components/texto_formatado.dart';
 import 'package:my_app/models/estabelecimento.dart';
