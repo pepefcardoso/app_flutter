@@ -58,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/listagem-estabelecimentos');
+                  Navigator.of(context).pushNamed('/lista-estabelecimentos');
                 },
                 child: const Text('Entrar'),
               ),

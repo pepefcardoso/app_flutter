@@ -10,18 +10,16 @@ class Rotas {
         path: '/',
         builder: (context, state) => const LoginPage(),
       ),
-      // GoRoute(
-      //   path: '/',
-      //   builder: (context, state) => const ListagemEstabelecimentos(),
-      //   routes: [
-      //     GoRoute(
-      //       path: 'estabelecimento/:index',
-      //       builder: (context, state) => VisualizarEstabelecimento(
-      //         index: state.pathParameters['index']!,
-      //       ),
-      //     ),
-      //   ],
-      // ),
+      GoRoute(
+        path: '/lista-estabelecimentos',
+        builder: (context, state) => const ListagemEstabelecimentos(),
+      ),
+      GoRoute(
+        path: '/visualizar/:index',
+        builder: (context, state) => VisualizarEstabelecimento(
+          index: state.pathParameters['index']!,
+        ),
+      ),
     ],
   );
 }
