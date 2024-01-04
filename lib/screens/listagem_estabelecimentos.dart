@@ -46,7 +46,7 @@ class _ListagemEstabelecimentosState extends State<ListagemEstabelecimentos> {
                     children: [
                       ItemListaEstabelecimentos(
                         estabelecimento: estabelecimento,
-                        onTap: () => context.push('/estabelecimento/$index'),
+                        onTap: () => context.push('/visualizar/$index'),
                       ),
                       const Divider(
                         height: 32.0,

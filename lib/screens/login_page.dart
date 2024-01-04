@@ -1,6 +1,4 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:my_app/utils/http.dart';
 import 'package:my_app/utils/tipografia.dart';
 
 class LoginPage extends StatefulWidget {
@@ -59,9 +57,8 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 16.0),
               ElevatedButton(
-                onPressed: () async {
-                  final resposta = await teste();
-                  print(resposta);
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/lista-estabelecimentos');
                 },
                 child: const Text('Entrar'),
               ),
@@ -70,19 +67,5 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
-  }
-
-  Future teste() async {
-    final Dio dio = Dio();
-    final Http http = Http(dio: dio);
-    final resposta = await http.post(
-      'http://10.0.2.2:8000/login',
-      dados: {
-        'email': _emailController.text,
-        'password': _senhaController.text,
-      },
-    );
-
-    return resposta;
   }
 }
