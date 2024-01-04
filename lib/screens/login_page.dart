@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/utils/rotas.dart';
 import 'package:my_app/utils/tipografia.dart';
 
 class LoginPage extends StatefulWidget {
@@ -58,7 +59,8 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/lista-estabelecimentos');
+                  // Use the GoRouter's navigation method to navigate to the desired route
+                  Rotas.router.go('/lista-estabelecimentos');
                 },
                 child: const Text('Entrar'),
               ),
