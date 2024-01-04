@@ -56,16 +56,22 @@ class Http {
         onReceiveProgress: progressoDeRecebimento,
       );
     } catch (e) {
+      print(e);
       throw HttpException(e);
     }
   }
 
   Future<Response> postJson(String url, {dynamic dados}) async {
-    return post(
-      url,
-      dados: dados,
-      opcoes: defaultOptions(),
-    );
+    try {
+      return await dio.post(
+        url,
+        data: dados,
+        options: defaultOptions(),
+      );
+    } catch (e) {
+      print(e);
+      throw HttpException(e);
+    }
   }
 
   Future<Response> put(String url, {dynamic dados, Options? opcoes}) async {
