@@ -1,6 +1,6 @@
-import 'package:my_app/models/contatos.dart';
-import 'package:my_app/models/endereco.dart';
-import 'package:my_app/models/telefone.dart';
+import 'package:my_app/models/address.dart';
+import 'package:my_app/models/contact.dart';
+import 'package:my_app/models/phone.dart';
 
 class Constantes {
   static const List<String> descricoesTeste = [
@@ -15,7 +15,6 @@ class Constantes {
     'Um café urbano, com uma variedade de brunchs saudáveis e opções de café artesanal.',
     'Um restaurante de frutos do mar à beira-mar, oferecendo pratos frescos e uma vista panorâmica do oceano.'
   ];
-
 
   static const List<String> imagensPratosTeste = [
     'https://plus.unsplash.com/premium_photo-1663852297267-827c73e7529e?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
@@ -88,37 +87,37 @@ class Constantes {
     // 'Sorveteria'
   ];
 
-  static final Endereco enderecoTeste = Endereco(
-    id: '1',
-    logradouro: 'Rua dos Bobos',
-    complemento: 'Salas 101',
-    numero: '0',
-    bairro: 'Centro',
-    cidade: 'São Paulo',
-    estado: 'SP',
-    cep: '00000-000',
+  static final Address enderecoTeste = Address(
+    id: 1,
+    street: 'Rua dos Bobos',
+    complement: 'Salas 101',
+    number: '0',
+    district: 'Centro',
+    city: 'São Paulo',
+    state: 'SP',
+    zipCode: '00000-000',
     latitude: -23.550520,
     longitude: -46.633308,
   );
 
-  static final Contatos contatosTeste = Contatos(
-    id: '1',
+  static const Contact contatosTeste = Contact(
+    id: 1,
     email: 'teste@teste.com',
     facebook: 'francisbelsemgluten',
     ifood: 'https://www.ifood.com.br/delivery/florianopolis-sc/padaria--cafe-franchis-cachoeira-do-bom-jesus',
     instagram: 'francisbelcozinhainclusiva',
-    site: 'francisbel.com.br',
-    telefoneFixo: const Telefone(
-      id: '1',
-      numero: '4832661111',
-      principal: true,
-      whatsapp: false,
-    ),
-    telefoneCelular: const Telefone(
-      id: '2',
-      numero: '48999999999',
-      principal: false,
-      whatsapp: true,
-    ),
+    website: 'francisbel.com.br',
+    phones: [
+      Phone(
+        id: 1,
+        number: '48999999999',
+        whatsapp: true,
+      ),
+      Phone(
+        id: 2,
+        number: '48999999999',
+        whatsapp: false,
+      ),
+    ],
   );
 }

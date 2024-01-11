@@ -1,54 +1,72 @@
-import 'package:my_app/models/estabelecimento.dart';
-import 'package:my_app/models/estilo_culinario.dart';
-import 'package:my_app/models/horario_funcionamento.dart';
-import 'package:my_app/models/imagem.dart';
-import 'package:my_app/models/tipo_de_dieta.dart';
+import 'package:my_app/models/business.dart';
+import 'package:my_app/models/category.dart';
+import 'package:my_app/models/contact.dart';
+import 'package:my_app/models/cooking_style.dart';
+import 'package:my_app/models/diet.dart';
+import 'package:my_app/models/image.dart';
+import 'package:my_app/models/opening_hours.dart';
+import 'package:my_app/models/phone.dart';
+import 'package:my_app/models/ratings_info.dart';
 import 'package:my_app/utils/constantes.dart';
 
 class EstabelecimentosFake {
-  static List<Estabelecimento> estabelecimentosFake = List.generate(
+  static List<Business> estabelecimentosFake = List.generate(
     Constantes.logosTeste.length,
     (index) {
-      return Estabelecimento(
+      return Business(
         id: index,
-        descricao: Constantes.descricoesTeste[index],
-        aberto: index % 2 == 0,
-        favorito: index % 2 == 0,
-        nome: Constantes.nomesRestaurantesTeste[index],
-        tiposDeDietas: Constantes.dietasTeste.asMap().entries.map((e) {
-          return TipoDeDieta(
+        description: Constantes.descricoesTeste[index],
+        openNow: index % 2 == 0,
+        favorite: index % 2 == 0,
+        name: Constantes.nomesRestaurantesTeste[index],
+        diets: Constantes.dietasTeste.asMap().entries.map((e) {
+          return Diet(
             id: e.key,
-            nome: e.value,
-            principal: e.key == 0,
+            name: e.value,
           );
         }).toList(),
-        endereco: Constantes.enderecoTeste,
-        estilosCulinarios: Constantes.estilosTeste.asMap().entries.map((e) {
-          return EstiloCulinario(
+        address: Constantes.enderecoTeste,
+        cookingStyles: Constantes.estilosTeste.asMap().entries.map((e) {
+          return CookingStyle(
             id: e.key,
-            nome: e.value,
-            principal: e.key == 0,
+            name: e.value,
           );
         }).toList(),
-        horarioFuncionamento: [
-          const HorarioFuncionamento(
+        openingHours: [
+          OpeningHours(
             id: 1,
-            horaAbertura: '08:00',
-            horaFechamento: '18:00',
+            openingTime: DateTime(2021, 10, 10, 12, 0),
+            closingTime: DateTime(2021, 10, 10, 22, 0),
           ),
         ],
-        nota: '${index + 1}.0',
-        quantidadeDeAvaliacoes: ((index + 1) * 110),
-        imagens: [
-          Imagem(
-            id: 0,
-            url: Constantes.logosTeste[index],
-          ),
-        ],
-        logo: Imagem(
-          id: 0,
-          url: Constantes.logosTeste[index],
+        ratingsInfo: const RatingsInfo(
+          average: 4,
+          count: 110,
         ),
+        images: [
+          Image(id: 0, url: Constantes.logosTeste[index], type: 'LOGO'),
+          Image(id: 1, url: Constantes.imagensPratosTeste[index], type: 'COVER'),
+        ],
+        category: const Category(
+          id: 0,
+          name: 'Restaurante',
+        ),
+        contact: const Contact(
+          id: 0,
+          email: '',
+          facebook: '',
+          ifood: '',
+          instagram: '',
+          website: '',
+          phones: [
+            Phone(
+              id: 0,
+              number: '',
+              whatsapp: false,
+            ),
+          ],
+        ),
+        logoUrl: Constantes.logosTeste[index],
       );
     },
   );

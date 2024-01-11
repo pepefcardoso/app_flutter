@@ -4,7 +4,7 @@ import 'package:my_app/components/circulo_com_icone.dart';
 import 'package:my_app/components/botao_de_icone_formatado.dart';
 import 'package:my_app/components/item_lista_tipos.dart';
 import 'package:my_app/components/texto_formatado.dart';
-import 'package:my_app/models/estabelecimento.dart';
+import 'package:my_app/models/business.dart';
 import 'package:my_app/utils/cores.dart';
 import 'package:my_app/utils/estabelecimentos_fake.dart';
 import 'package:my_app/utils/tipografia.dart';
@@ -19,13 +19,12 @@ class VisualizarEstabelecimento extends StatefulWidget {
   });
 
   @override
-  State<VisualizarEstabelecimento> createState() =>
-      _VisualizarEstabelecimentoState();
+  State<VisualizarEstabelecimento> createState() => _VisualizarEstabelecimentoState();
 }
 
 class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
   late final int _id;
-  late final Estabelecimento _estabelecimento;
+  late final Business _estabelecimento;
 
   @override
   void initState() {
@@ -33,8 +32,7 @@ class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
 
     _id = int.parse(widget.index);
 
-    _estabelecimento = EstabelecimentosFake.estabelecimentosFake
-        .firstWhere((id) => _id == id.id);
+    _estabelecimento = EstabelecimentosFake.estabelecimentosFake.firstWhere((business) => _id == business.id);
   }
 
   @override
@@ -68,7 +66,7 @@ class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
             height: 250,
             width: MediaQuery.of(context).size.width,
             child: Image.network(
-              _estabelecimento.imagens![0].url!,
+              _estabelecimento.images![0].url!,
               fit: BoxFit.cover,
             ),
           ),
@@ -83,7 +81,7 @@ class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TextoFormatado(
-                      texto: _estabelecimento.nome ?? '',
+                      texto: _estabelecimento.name ?? '',
                       estilo: Tipografia.titulo3,
                     ),
                     BotaoContornado(
@@ -102,7 +100,7 @@ class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
                           ),
                           const SizedBox(width: 4.0),
                           TextoFormatado(
-                            texto: _estabelecimento.nota ?? '',
+                            texto: _estabelecimento.ratingsInfo?.average?.toString() ?? '',
                           ),
                         ],
                       ),
@@ -113,22 +111,20 @@ class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
                 SizedBox(
                   height: 32.0,
                   child: ListView.builder(
-                    itemCount: _estabelecimento.tiposDeDietas?.length ?? 0,
+                    itemCount: _estabelecimento.diets?.length ?? 0,
                     physics: const BouncingScrollPhysics(),
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
-                      final dieta = _estabelecimento.tiposDeDietas?[index];
+                      final dieta = _estabelecimento.diets?[index];
 
                       return Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           ItemListaTipos(
-                            tipo: dieta?.nome,
+                            tipo: dieta?.name,
                           ),
-                          if (index <
-                              _estabelecimento.tiposDeDietas!.length - 1)
-                            const SizedBox(width: 8.0),
+                          if (index < _estabelecimento.diets!.length - 1) const SizedBox(width: 8.0),
                         ],
                       );
                     },
@@ -138,22 +134,20 @@ class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
                 SizedBox(
                   height: 32.0,
                   child: ListView.builder(
-                    itemCount: _estabelecimento.estilosCulinarios?.length ?? 0,
+                    itemCount: _estabelecimento.cookingStyles?.length ?? 0,
                     physics: const BouncingScrollPhysics(),
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
-                      final dieta = _estabelecimento.estilosCulinarios?[index];
+                      final dieta = _estabelecimento.cookingStyles?[index];
 
                       return Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           ItemListaTipos(
-                            tipo: dieta?.nome,
+                            tipo: dieta?.name,
                           ),
-                          if (index <
-                              _estabelecimento.estilosCulinarios!.length - 1)
-                            const SizedBox(width: 8.0),
+                          if (index < _estabelecimento.cookingStyles!.length - 1) const SizedBox(width: 8.0),
                         ],
                       );
                     },
@@ -170,15 +164,11 @@ class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            _estabelecimento.aberto ?? false
-                                ? 'Aberto'
-                                : 'Fechado',
+                            _estabelecimento.openNow ?? false ? 'Aberto' : 'Fechado',
                             style: Tipografia.titulo2,
                           ),
                           Text(
-                            _estabelecimento.horarioFuncionamento![0]
-                                    .horarioFormatado ??
-                                'Não Informado',
+                            _estabelecimento.openingHours?[0].toString() ?? 'Não Informado',
                             style: Tipografia.corpo2,
                           ),
                         ],
@@ -204,8 +194,7 @@ class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
                             style: Tipografia.titulo2,
                           ),
                           Text(
-                            _estabelecimento.endereco!.cidade ??
-                                'Não Informado',
+                            _estabelecimento.address!.city ?? 'Não Informado',
                             style: Tipografia.corpo2,
                           ),
                         ],
@@ -217,8 +206,7 @@ class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
                 const SizedBox(height: 24.0),
                 InkWell(
                   child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 8.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                     alignment: Alignment.centerLeft,
                     decoration: BoxDecoration(
                       color: Cores.verde2,
@@ -258,8 +246,7 @@ class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
                 ),
                 const SizedBox(height: 8.0),
                 Text(
-                  _estabelecimento.descricao ??
-                      'Não há informações disponíveis',
+                  _estabelecimento.description ?? 'Não há informações disponíveis',
                 )
               ],
             ),

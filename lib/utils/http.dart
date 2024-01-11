@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:my_app/errors_&_exceptions/http_exception.dart';
 
 class Http {
@@ -56,7 +57,7 @@ class Http {
         onReceiveProgress: progressoDeRecebimento,
       );
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       throw HttpException(e);
     }
   }
@@ -69,7 +70,7 @@ class Http {
         options: defaultOptions(),
       );
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       throw HttpException(e);
     }
   }
