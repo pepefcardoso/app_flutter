@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/bloc/login_bloc.dart';
+import 'package:my_app/bloc/login/login_bloc.dart';
 import 'package:my_app/utils/tipografia.dart';
 import 'package:provider/provider.dart';
 

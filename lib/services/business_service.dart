@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:my_app/models/business.dart';
 import 'package:my_app/utils/http.dart';
 
@@ -6,14 +7,23 @@ class BusinessService {
 
   BusinessService({required this.http});
 
-  Future<List<Business>> getBusinesses(Map<String, dynamic> filters) async {
+  Future<Map<String, dynamic>> getBusinesses(Map<String, dynamic>? filters) async {
     final response = await http.getJson(
-      '/api/estabelecimentos',
+      '/api/businesses',
       queryParameters: filters,
     );
 
-    final List<Business> businesses = response.data;
+    final Map<String, dynamic> data = response.data;
 
-    return businesses;
+    debugPrint(response.data.toString());
+
+    final List<Business> businesses = (data['items'] as List).map<Business>((item) => Business.fromJson(item)).toList();
+
+    final int count = data['count'];
+
+    return {
+      'businesses': businesses,
+      'count': count,
+    };
   }
 }

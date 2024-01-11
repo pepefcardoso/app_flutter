@@ -1,13 +1,13 @@
 import 'package:go_router/go_router.dart';
 import 'package:my_app/screens/home_page.dart';
-import 'package:my_app/screens/listagem_estabelecimentos.dart';
+import 'package:my_app/screens/businesses_index.dart';
 import 'package:my_app/screens/login_page.dart';
 import 'package:my_app/screens/visualizar_estabelecimento.dart';
 
-class Rotas {
+class Routes {
   bool isLogged;
 
-  Rotas(this.isLogged);
+  Routes(this.isLogged);
 
   GoRouter get router => GoRouter(
         routes: [
@@ -27,10 +27,10 @@ class Rotas {
               ),
               GoRoute(
                 path: 'businesses',
-                builder: (context, state) => const ListagemEstabelecimentos(),
+                builder: (context, state) => const BusinessesIndex(),
                 routes: [
                   GoRoute(
-                    path: 'show/:index',
+                    path: ':index',
                     builder: (context, state) => VisualizarEstabelecimento(
                       index: state.pathParameters['index']!,
                     ),

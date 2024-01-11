@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_app/bloc/login_bloc.dart';
+import 'package:my_app/bloc/login/login_bloc.dart';
 import 'package:my_app/services/user_service.dart';
 import 'package:my_app/utils/http.dart';
-import 'package:my_app/utils/rotas.dart';
+import 'package:my_app/utils/routes.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -23,12 +23,13 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final UserService userService = UserService(
     http: Http(
-        dio: Dio(
-      BaseOptions(baseUrl: 'http://10.0.2.2:8000'),
-    )),
+      dio: Dio(
+        BaseOptions(baseUrl: 'http://10.0.2.2:8000'),
+      ),
+    ),
   );
 
-  final Rotas routes = Rotas(false);
+  final Routes routes = Routes(false);
 
   late final LoginBloc loginBloc;
 
