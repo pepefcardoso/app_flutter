@@ -46,7 +46,7 @@ class _MyAppState extends State<MyApp> {
       value: loginBloc,
       child: BlocListener<LoginBloc, LoginState>(
         listener: (context, state) {
-          if (state.status == LoginStatus.logging) {
+          if (state.status == LoginStatus.logging || state.status == LoginStatus.error) {
             return;
           }
 

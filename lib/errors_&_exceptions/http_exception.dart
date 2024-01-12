@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -19,8 +21,6 @@ class HttpException implements Exception {
       final response = (error as DioException).response;
 
       if (response != null) {
-        debugPrint(response.data);
-
         if (response.data is Map<String, dynamic> && response.data['message'] != null && response.data['message'] is String) {
           return response.data['message'];
         }
