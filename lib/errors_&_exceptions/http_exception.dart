@@ -1,7 +1,4 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 
 class HttpException implements Exception {
   final dynamic error;
