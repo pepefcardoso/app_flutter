@@ -6,11 +6,9 @@ import 'package:my_app/components/item_lista_tipos.dart';
 import 'package:my_app/components/texto_formatado.dart';
 import 'package:my_app/models/business.dart';
 import 'package:my_app/utils/cores.dart';
-import 'package:my_app/utils/estabelecimentos_fake.dart';
 import 'package:my_app/utils/tipografia.dart';
 
 class VisualizarEstabelecimento extends StatefulWidget {
-  // final Estabelecimento estabelecimento;
   final String index;
 
   const VisualizarEstabelecimento({
@@ -23,16 +21,13 @@ class VisualizarEstabelecimento extends StatefulWidget {
 }
 
 class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
-  late final int _id;
   late final Business _estabelecimento;
 
   @override
   void initState() {
     super.initState();
 
-    _id = int.parse(widget.index);
-
-    _estabelecimento = EstabelecimentosFake.estabelecimentosFake.firstWhere((business) => _id == business.id);
+    _estabelecimento = const Business();
   }
 
   @override

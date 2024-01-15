@@ -1,43 +1,40 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kiwi/kiwi.dart';
+import 'package:my_app/app_initialization.dart';
 import 'package:my_app/bloc/login/login_bloc.dart';
 import 'package:my_app/services/user_service.dart';
-import 'package:my_app/utils/http.dart';
 import 'package:my_app/utils/routes.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  await AppInitialization().initialize();
+
   runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  static final navigatorKey = GlobalKey<NavigatorState>();
-
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  final UserService userService = UserService(
-    http: Http(
-      dio: Dio(
-        BaseOptions(baseUrl: 'http://10.0.2.2:8000'),
-      ),
-    ),
-  );
-
   final Routes routes = Routes(false);
 
+  late final UserService userService;
   late final LoginBloc loginBloc;
 
   @override
   void initState() {
     super.initState();
 
-    loginBloc = LoginBloc(userService);
+    final globalKiwi = KiwiContainer();
+
+    userService = globalKiwi.resolve<UserService>();
+
+    loginBloc = globalKiwi.resolve<LoginBloc>();
   }
 
   @override
