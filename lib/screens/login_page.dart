@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kiwi/kiwi.dart';
 import 'package:my_app/bloc/login/login_bloc.dart';
 import 'package:my_app/utils/tipografia.dart';
-import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -14,12 +14,14 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   late final TextEditingController _emailController;
   late final TextEditingController _senhaController;
+  final KiwiContainer _kiwiContainer = KiwiContainer();
   late final LoginBloc _loginBloc;
-  bool _loadedLoginBloc = false;
 
   @override
   void initState() {
     super.initState();
+
+    _loginBloc = _kiwiContainer.resolve<LoginBloc>();
 
     _emailController = TextEditingController();
     _senhaController = TextEditingController();
@@ -34,26 +36,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   @override
-  void didChangeDependencies() {
-    _loginBloc = Provider.of<LoginBloc>(context, listen: true);
-
-    setState(() {
-      _loadedLoginBloc = true;
-    });
-
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    if (!_loadedLoginBloc) {
-      return const Scaffold(
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
-    }
-
     return Scaffold(
       body: SafeArea(
         child: Padding(

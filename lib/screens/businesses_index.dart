@@ -1,7 +1,7 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kiwi/kiwi.dart';
 import 'package:my_app/bloc/business_index/business_index_bloc.dart';
 import 'package:my_app/components/app_bar_padrao.dart';
 import 'package:my_app/components/item_lista_estabelecimentos.dart';
@@ -9,7 +9,6 @@ import 'package:my_app/components/input_pesquisa.dart';
 import 'package:my_app/models/business.dart';
 import 'package:my_app/services/business_service.dart';
 import 'package:my_app/utils/cores.dart';
-import 'package:my_app/utils/http.dart';
 import 'package:my_app/utils/tipografia.dart';
 
 class BusinessesIndex extends StatefulWidget {
@@ -21,17 +20,15 @@ class BusinessesIndex extends StatefulWidget {
 
 class _BusinessesIndexState extends State<BusinessesIndex> {
   late final BusinessIndexBloc _bloc;
+  final KiwiContainer container = KiwiContainer();
+
   late final BusinessService _businessService;
-  final Http _http = Http(
-      dio: Dio(
-    BaseOptions(baseUrl: 'http://10.0.2.2:8000'),
-  ));
 
   @override
   void initState() {
     super.initState();
 
-    _businessService = BusinessService(http: _http);
+    _businessService = container.resolve<BusinessService>();
 
     _bloc = BusinessIndexBloc(_businessService);
 

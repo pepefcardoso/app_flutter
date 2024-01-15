@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:my_app/bloc/login/login_bloc.dart';
 import 'package:my_app/errors_&_exceptions/http_exception.dart';
+import 'package:my_app/services/business_service.dart';
 import 'package:my_app/services/user_service.dart';
 import 'package:my_app/utils/api_config.dart';
 import 'package:my_app/utils/http.dart';
@@ -32,6 +33,8 @@ class AppInitialization {
       userService = globalKiwiContainer.resolve<UserService>();
 
       globalKiwiContainer.registerFactory<LoginBloc>((container) => LoginBloc(userService));
+      
+      globalKiwiContainer.registerFactory<BusinessService>((container) => BusinessService(http: http));
     } on HttpException catch (httpException) {
       if (kDebugMode) {
         print('[AppInitialization.initialize]: [HttpException] error in app initialization: "${httpException.mensagem}"');
