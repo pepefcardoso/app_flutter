@@ -32,8 +32,8 @@ class AppInitialization {
 
       userService = globalKiwiContainer.resolve<UserService>();
 
-      globalKiwiContainer.registerFactory<LoginBloc>((container) => LoginBloc(userService));
-      
+      globalKiwiContainer.registerSingleton((container) => LoginBloc(userService));
+
       globalKiwiContainer.registerFactory<BusinessService>((container) => BusinessService(http: http));
     } on HttpException catch (httpException) {
       if (kDebugMode) {

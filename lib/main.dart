@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kiwi/kiwi.dart';
@@ -22,6 +24,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final Routes routes = Routes(false);
+  final KiwiContainer globalKiwi = KiwiContainer();
 
   late final UserService userService;
   late final LoginBloc loginBloc;
@@ -29,8 +32,6 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-
-    final globalKiwi = KiwiContainer();
 
     userService = globalKiwi.resolve<UserService>();
 
@@ -43,6 +44,8 @@ class _MyAppState extends State<MyApp> {
       value: loginBloc,
       child: BlocListener<LoginBloc, LoginState>(
         listener: (context, state) {
+          log(state.status.toString());
+
           if (state.status == LoginStatus.logging || state.status == LoginStatus.error) {
             return;
           }
@@ -56,13 +59,10 @@ class _MyAppState extends State<MyApp> {
             routes.router.go('/');
           });
         },
-        child: Provider.value(
-          value: loginBloc,
-          child: MaterialApp.router(
-            debugShowCheckedModeBanner: false,
-            title: 'Healthy Food App',
-            routerConfig: routes.router,
-          ),
+        child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          title: 'Healthy Food App',
+          routerConfig: routes.router,
         ),
       ),
     );
