@@ -5,9 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:my_app/app_initialization.dart';
 import 'package:my_app/bloc/login/login_bloc.dart';
-import 'package:my_app/services/user_service.dart';
+import 'package:my_app/services/login_service.dart';
 import 'package:my_app/utils/routes.dart';
-import 'package:provider/provider.dart';
 
 void main() async {
   await AppInitialization().initialize();
@@ -26,14 +25,14 @@ class _MyAppState extends State<MyApp> {
   final Routes routes = Routes(false);
   final KiwiContainer globalKiwi = KiwiContainer();
 
-  late final UserService userService;
+  late final LoginService userService;
   late final LoginBloc loginBloc;
 
   @override
   void initState() {
     super.initState();
 
-    userService = globalKiwi.resolve<UserService>();
+    userService = globalKiwi.resolve<LoginService>();
 
     loginBloc = globalKiwi.resolve<LoginBloc>();
   }

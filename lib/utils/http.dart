@@ -1,16 +1,28 @@
 import 'package:dio/dio.dart';
+import 'package:my_app/bloc/login/login_bloc.dart';
 import 'package:my_app/errors_&_exceptions/http_exception.dart';
 
 class Http {
   final Dio dio;
+  final LoginBloc loginBloc;
 
-  Http({required this.dio});
+  Http({
+    required this.dio,
+    required this.loginBloc,
+  });
 
   Options defaultOptions() {
     final Map<String, String> headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
     };
+
+    final String? token = loginBloc.state.token;
+
+    if (token != null) {
+      headers['Authorization'] = 'Bearer $token';
+    }
+
     return Options(
       headers: headers,
     );
