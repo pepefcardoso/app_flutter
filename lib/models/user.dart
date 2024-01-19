@@ -35,4 +35,6 @@ class User {
         'cpf': cpf,
         'profile_pic_url': profilePicUrl,
       };
+
+  String? get firstName => name?.split(' ')[0];
 }

@@ -1,5 +1,4 @@
 import 'package:email_validator/email_validator.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_app/bloc/login/login_bloc.dart';
@@ -69,15 +68,14 @@ class _LoginPageState extends State<LoginPage> {
         },
         builder: (context, state) {
           return SafeArea(
-            child: Center(
-              child: Form(
-                key: _formKey,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
+            child: Form(
+              key: _formKey,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              child: Center(
                 child: SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Column(
-                      mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
@@ -95,39 +93,33 @@ class _LoginPageState extends State<LoginPage> {
                           child: Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Column(
-                              mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 if (state.status == LoginStatus.loggingIn) ...[
                                   const Center(child: CircularProgressIndicator()),
                                 ] else ...[
-                                  SizedBox(
-                                    height: 123.0,
-                                    child: CustomTextField(
-                                      controller: _emailController,
-                                      labelText: 'E-mail',
-                                      hintText: 'Digite seu e-mail',
-                                      icon: Icons.email,
-                                      validator: (value) => EmailValidator.validate(value ?? '') ? null : "Email inválido",
-                                    ),
+                                  CustomTextField(
+                                    controller: _emailController,
+                                    labelText: 'E-mail',
+                                    hintText: 'Digite seu e-mail',
+                                    icon: Icons.email,
+                                    validator: (value) => EmailValidator.validate(value ?? '') ? null : "Email inválido",
                                   ),
-                                  SizedBox(
-                                    height: 123.0,
-                                    child: CustomTextField(
-                                      controller: _senhaController,
-                                      labelText: 'Senha',
-                                      obscureText: true,
-                                      hintText: 'Digite sua senha',
-                                      icon: Icons.lock,
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty || value.length < 8) {
-                                          return 'Campo obrigatório';
-                                        }
+                                  const SizedBox(height: 16.0),
+                                  CustomTextField(
+                                    controller: _senhaController,
+                                    labelText: 'Senha',
+                                    obscureText: true,
+                                    hintText: 'Digite sua senha',
+                                    icon: Icons.lock,
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty || value.length < 8) {
+                                        return 'Campo obrigatório';
+                                      }
 
-                                        return null;
-                                      },
-                                      onSubmitted: (_) => _onSubmit(),
-                                    ),
+                                      return null;
+                                    },
+                                    onSubmitted: (_) => _onSubmit(),
                                   ),
                                   TextButton(
                                     onPressed: () {},
@@ -141,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                                       style: Tipografia.corpo2.copyWith(color: Cores.verde1),
                                     ),
                                   ),
-                                  const SizedBox(height: 16.0),
+                                  const SizedBox(height: 24.0),
                                   SizedBox(
                                     height: 48.0,
                                     width: double.infinity,
@@ -156,6 +148,30 @@ class _LoginPageState extends State<LoginPage> {
                                         'Entrar',
                                         style: Tipografia.titulo2.copyWith(color: Colors.white),
                                       ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8.0),
+                                  Center(
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          'Não possui uma conta? ',
+                                          style: Tipografia.corpo2.copyWith(color: Colors.grey[700]),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {},
+                                          style: TextButton.styleFrom(
+                                            padding: EdgeInsets.zero,
+                                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                            alignment: Alignment.centerLeft,
+                                          ),
+                                          child: Text(
+                                            'Cadastre-se',
+                                            style: Tipografia.corpo2Bold.copyWith(color: Cores.verde1),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ],

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:my_app/bloc/business_index/business_index_bloc.dart';
-import 'package:my_app/components/app_bar_padrao.dart';
+import 'package:my_app/components/standard_app_bar.dart';
 import 'package:my_app/components/item_lista_estabelecimentos.dart';
 import 'package:my_app/components/input_pesquisa.dart';
 import 'package:my_app/models/business.dart';
@@ -39,7 +39,7 @@ class _BusinessesIndexState extends State<BusinessesIndex> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: appBarPadrao(),
+      appBar: const StandardAppBar(),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(20.0, 12.0, 20.0, 8.0),
         child: BlocProvider.value(
