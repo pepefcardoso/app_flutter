@@ -1,13 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:my_app/bloc/login/login_bloc.dart';
+import 'package:my_app/components/login_store.dart';
 import 'package:my_app/errors_&_exceptions/http_exception.dart';
 
 class Http {
   final Dio dio;
+  final LoginStore loginStore;
   final LoginBloc loginBloc;
 
   Http({
     required this.dio,
+    required this.loginStore,
     required this.loginBloc,
   });
 
@@ -17,10 +20,10 @@ class Http {
       'Accept': 'application/json',
     };
 
-    final String? token = loginBloc.state.token;
+    if (loginStore.isLogged()) {
+      final String authorization = loginStore.getAccessToken();
 
-    if (token != null) {
-      headers['Authorization'] = 'Bearer $token';
+      headers['Authorization'] = authorization;
     }
 
     return Options(

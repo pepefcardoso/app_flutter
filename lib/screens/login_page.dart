@@ -1,7 +1,10 @@
+import 'package:email_validator/email_validator.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kiwi/kiwi.dart';
 import 'package:my_app/bloc/login/login_bloc.dart';
+import 'package:my_app/components/custom_text_formfield.dart';
+import 'package:my_app/utils/cores.dart';
 import 'package:my_app/utils/tipografia.dart';
 
 class LoginPage extends StatefulWidget {
@@ -12,18 +15,32 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   late final TextEditingController _emailController;
   late final TextEditingController _senhaController;
-  final KiwiContainer _kiwiContainer = KiwiContainer();
+  late final String? _lastEmail;
   late final LoginBloc _loginBloc;
+
+  String? _onSubmit() {
+    if (_formKey.currentState!.validate()) {
+      _loginBloc.add(RequestLogin(
+        email: _emailController.text,
+        password: _senhaController.text,
+      ));
+    }
+
+    return null;
+  }
 
   @override
   void initState() {
     super.initState();
 
-    _loginBloc = _kiwiContainer.resolve<LoginBloc>();
+    _loginBloc = BlocProvider.of<LoginBloc>(context);
 
-    _emailController = TextEditingController();
+    _lastEmail = _loginBloc.loginStore.getLastEmail();
+
+    _emailController = TextEditingController(text: _lastEmail);
     _senhaController = TextEditingController();
   }
 
@@ -38,67 +55,122 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(32.0),
-          child: BlocProvider.value(
-            value: _loginBloc,
-            child: BlocConsumer<LoginBloc, LoginState>(
-              listener: (context, state) {
-                if (state.status == LoginStatus.error) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(state.error!),
-                      backgroundColor: Colors.red,
-                    ),
-                  );
-                }
-              },
-              builder: (context, state) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Login',
-                      style: Tipografia.titulo1,
-                    ),
-                    const SizedBox(height: 24.0),
-                    if (state.status == LoginStatus.logging) ...[
-                      const Center(child: CircularProgressIndicator()),
-                      const SizedBox(height: 12.0),
-                    ] else ...[
-                      TextFormField(
-                        controller: _emailController,
-                        decoration: const InputDecoration(
-                          labelText: 'E-mail',
+      backgroundColor: Cores.verde1,
+      body: BlocConsumer<LoginBloc, LoginState>(
+        listener: (context, state) {
+          if (state.status == LoginStatus.error) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.error!),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
+        },
+        builder: (context, state) {
+          return SafeArea(
+            child: Center(
+              child: Form(
+                key: _formKey,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: Text(
+                            'Olá! Seja bem vindo!',
+                            style: Tipografia.titulo4.copyWith(color: Colors.white),
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 8.0),
-                      TextFormField(
-                        controller: _senhaController,
-                        decoration: const InputDecoration(
-                          labelText: 'Senha',
-                        ),
-                      ),
-                      const SizedBox(height: 16.0),
-                      ElevatedButton(
-                        onPressed: () {
-                          _loginBloc.add(
-                            RequestLogin(
-                              email: _emailController.text,
-                              password: _senhaController.text,
+                        const SizedBox(height: 16.0),
+                        Card(
+                          surfaceTintColor: Colors.grey[100],
+                          elevation: 8.0,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                if (state.status == LoginStatus.loggingIn) ...[
+                                  const Center(child: CircularProgressIndicator()),
+                                ] else ...[
+                                  SizedBox(
+                                    height: 123.0,
+                                    child: CustomTextField(
+                                      controller: _emailController,
+                                      labelText: 'E-mail',
+                                      hintText: 'Digite seu e-mail',
+                                      icon: Icons.email,
+                                      validator: (value) => EmailValidator.validate(value ?? '') ? null : "Email inválido",
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 123.0,
+                                    child: CustomTextField(
+                                      controller: _senhaController,
+                                      labelText: 'Senha',
+                                      obscureText: true,
+                                      hintText: 'Digite sua senha',
+                                      icon: Icons.lock,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty || value.length < 8) {
+                                          return 'Campo obrigatório';
+                                        }
+
+                                        return null;
+                                      },
+                                      onSubmitted: (_) => _onSubmit(),
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {},
+                                    style: TextButton.styleFrom(
+                                      padding: EdgeInsets.zero,
+                                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                      alignment: Alignment.centerLeft,
+                                    ),
+                                    child: Text(
+                                      'Esqueceu sua senha?',
+                                      style: Tipografia.corpo2.copyWith(color: Cores.verde1),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 16.0),
+                                  SizedBox(
+                                    height: 48.0,
+                                    width: double.infinity,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        elevation: 4.0,
+                                        backgroundColor: Cores.verde1,
+                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
+                                      ),
+                                      onPressed: _onSubmit,
+                                      child: Text(
+                                        'Entrar',
+                                        style: Tipografia.titulo2.copyWith(color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ],
                             ),
-                          );
-                        },
-                        child: const Text('Entrar'),
-                      ),
-                    ],
-                  ],
-                );
-              },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

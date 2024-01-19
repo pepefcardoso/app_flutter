@@ -1,11 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:my_app/app_initialization.dart';
 import 'package:my_app/bloc/login/login_bloc.dart';
-import 'package:my_app/services/login_service.dart';
 import 'package:my_app/utils/routes.dart';
 
 void main() async {
@@ -23,18 +20,18 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final Routes routes = Routes(false);
-  final KiwiContainer globalKiwi = KiwiContainer();
-
-  late final LoginService userService;
+  final kiwi = KiwiContainer();
   late final LoginBloc loginBloc;
 
   @override
   void initState() {
     super.initState();
 
-    userService = globalKiwi.resolve<LoginService>();
+    loginBloc = kiwi.resolve<LoginBloc>();
 
-    loginBloc = globalKiwi.resolve<LoginBloc>();
+    if (loginBloc.state.isLoggedIn) {
+      routes.isLogged = true;
+    }
   }
 
   @override
@@ -43,16 +40,12 @@ class _MyAppState extends State<MyApp> {
       value: loginBloc,
       child: BlocListener<LoginBloc, LoginState>(
         listener: (context, state) {
-          log(state.status.toString());
-
-          if (state.status == LoginStatus.logging || state.status == LoginStatus.error) {
-            return;
-          }
-
-          if (state.status == LoginStatus.notLogged) {
+          if (state.status == LoginStatus.loggedOut) {
             routes.isLogged = false;
-          } else if (state.status == LoginStatus.logged) {
+          } else if (state.status == LoginStatus.loggedIn) {
             routes.isLogged = true;
+          } else {
+            return;
           }
           setState(() {
             routes.router.go('/');
