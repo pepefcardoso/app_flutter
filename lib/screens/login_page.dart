@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:my_app/bloc/login/login_bloc.dart';
 import 'package:my_app/components/custom_text_formfield.dart';
 import 'package:my_app/utils/cores.dart';
@@ -16,7 +17,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   late final TextEditingController _emailController;
-  late final TextEditingController _senhaController;
+  late final TextEditingController _passwordController;
   late final String? _lastEmail;
   late final LoginBloc _loginBloc;
 
@@ -24,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
     if (_formKey.currentState!.validate()) {
       _loginBloc.add(RequestLogin(
         email: _emailController.text,
-        password: _senhaController.text,
+        password: _passwordController.text,
       ));
     }
 
@@ -40,13 +41,13 @@ class _LoginPageState extends State<LoginPage> {
     _lastEmail = _loginBloc.loginStore.getLastEmail();
 
     _emailController = TextEditingController(text: _lastEmail);
-    _senhaController = TextEditingController();
+    _passwordController = TextEditingController();
   }
 
   @override
   void dispose() {
     _emailController.dispose();
-    _senhaController.dispose();
+    _passwordController.dispose();
 
     super.dispose();
   }
@@ -107,14 +108,14 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                   const SizedBox(height: 16.0),
                                   CustomTextField(
-                                    controller: _senhaController,
+                                    controller: _passwordController,
                                     labelText: 'Senha',
                                     obscureText: true,
                                     hintText: 'Digite sua senha',
                                     icon: Icons.lock,
                                     validator: (value) {
                                       if (value == null || value.isEmpty || value.length < 8) {
-                                        return 'Campo obrigatório';
+                                        return 'Senha inválida';
                                       }
 
                                       return null;
@@ -160,7 +161,7 @@ class _LoginPageState extends State<LoginPage> {
                                           style: Tipografia.corpo2.copyWith(color: Colors.grey[700]),
                                         ),
                                         TextButton(
-                                          onPressed: () {},
+                                          onPressed: () => GoRouter.of(context).go('/signup'),
                                           style: TextButton.styleFrom(
                                             padding: EdgeInsets.zero,
                                             tapTargetSize: MaterialTapTargetSize.shrinkWrap,

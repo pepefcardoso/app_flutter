@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:my_app/screens/home_page.dart';
 import 'package:my_app/screens/businesses_index.dart';
 import 'package:my_app/screens/login_page.dart';
+import 'package:my_app/screens/signup_page.dart';
 import 'package:my_app/screens/visualizar_estabelecimento.dart';
 
 class Routes {
@@ -24,6 +25,16 @@ class Routes {
                   return null;
                 },
                 builder: (context, state) => const LoginPage(),
+              ),
+              GoRoute(
+                path: 'signup',
+                redirect: (_, __) {
+                  if (isLogged) {
+                    return '/';
+                  }
+                  return null;
+                },
+                builder: (context, state) => const SignupPage(),
               ),
               GoRoute(
                 path: 'businesses',

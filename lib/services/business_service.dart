@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:my_app/models/business.dart';
 import 'package:my_app/utils/http.dart';
 
@@ -14,8 +13,6 @@ class BusinessService {
     );
 
     final Map<String, dynamic> data = response.data;
-
-    debugPrint(response.data.toString());
 
     final List<Business> businesses = (data['items'] as List).map<Business>((item) => Business.fromJson(item)).toList();
 
