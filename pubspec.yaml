@@ -45,6 +45,7 @@ dependencies:
   kiwi: ^4.1.0
   shared_preferences: ^2.2.2
   email_validator: ^2.1.17
+  brasil_fields: ^1.14.2
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,7 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kiwi/kiwi.dart';
@@ -141,6 +143,7 @@ class _SignupPageState extends State<SignupPage> {
                                       labelText: 'E-mail',
                                       hintText: 'Insira seu e-mail',
                                       icon: Icons.email,
+                                      keyboardType: TextInputType.emailAddress,
                                       validator: (value) => EmailValidator.validate(value ?? '') ? null : "Email inválido",
                                     ),
                                     const SizedBox(height: 16.0),
@@ -149,6 +152,11 @@ class _SignupPageState extends State<SignupPage> {
                                       labelText: 'Telefone',
                                       hintText: 'Insira seu telefone',
                                       icon: Icons.phone,
+                                      keyboardType: TextInputType.phone,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.digitsOnly,
+                                        TelefoneInputFormatter(),
+                                      ],
                                       validator: (value) {
                                         if (value == null || value.isEmpty) {
                                           return 'Telefone inválido';
