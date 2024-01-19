@@ -57,7 +57,7 @@ class StandardAppBar extends StatelessWidget implements PreferredSizeWidget {
           onPressed: () => BlocProvider.of<LoginBloc>(context).add(const RequestLogout()),
         ),
       ];
-    } else if (state.status == LoginStatus.loggedOut || state.status == LoginStatus.initial) {
+    } else {
       return [
         TextButton(
           onPressed: () => GoRouter.of(context).go('/login'),
@@ -81,7 +81,5 @@ class StandardAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ];
     }
-
-    return [];
   }
 }
