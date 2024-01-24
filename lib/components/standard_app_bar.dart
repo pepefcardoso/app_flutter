@@ -29,7 +29,7 @@ class StandardAppBar extends StatelessWidget implements PreferredSizeWidget {
                     backgroundColor: Colors.white,
                     child: CircleAvatar(
                       radius: 15.0,
-                      backgroundImage: NetworkImage(state.user!.profilePicUrl ?? ''),
+                      // backgroundImage: NetworkImage(state.user!.profilePicUrl ?? ''), //TODO FIX THIS
                       backgroundColor: Colors.white,
                       child: state.user!.profilePicUrl == null ? const Icon(Icons.person, color: Cores.verde1) : null,
                     ),

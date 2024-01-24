@@ -8,6 +8,7 @@ import 'package:my_app/bloc/login/login_bloc.dart';
 import 'package:my_app/components/login_store.dart';
 import 'package:my_app/errors_&_exceptions/http_exception.dart';
 import 'package:my_app/models/user.dart';
+import 'package:my_app/services/blog_posts_service.dart';
 import 'package:my_app/services/business_service.dart';
 import 'package:my_app/services/login_service.dart';
 import 'package:my_app/services/user_service.dart';
@@ -73,6 +74,8 @@ class AppInitialization {
       kiwi.registerFactory<BusinessService>((c) => BusinessService(http: kiwiHttp));
 
       kiwi.registerFactory<UserService>((c) => UserService(http: kiwiHttp));
+
+      kiwi.registerFactory<BlogPostsService>((c) => BlogPostsService(http: kiwiHttp));
     } on HttpException catch (httpException) {
       if (kDebugMode) {
         print('[AppInitialization.initialize]: [HttpException] error in app initialization: "${httpException.mensagem}"');
