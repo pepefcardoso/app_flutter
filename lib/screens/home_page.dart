@@ -55,18 +55,7 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      BotaoDeIconeFormatado(
-                        icone: Icons.restaurant,
-                        cor: Cores.verde1,
-                        onPressed: () => GoRouter.of(context).go('/businesses'),
-                      ),
-                      const SizedBox(height: 32.0),
                       if (state.lastBlogPost != null) ...[
-                        const Text(
-                          'Confira o nosso blog',
-                          style: Tipografia.titulo3,
-                        ),
-                        const SizedBox(height: 12.0),
                         _BlogPostCard(blogPost: state.lastBlogPost!),
                       ],
                     ],
@@ -89,39 +78,74 @@ class _BlogPostCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => GoRouter.of(context).go(
-        '/blog-posts/${blogPost.id}',
-      ),
+      onTap: () => GoRouter.of(context).go('/blog-posts'),
       child: SizedBox(
-        height: 120.0,
-        width: double.infinity,
+        height: 150.0,
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.0),
           ),
-          surfaceTintColor: Cores.verde1,
           elevation: 4.0,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Stack(
             children: [
-              Expanded(
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(16.0),
-                    bottomLeft: Radius.circular(16.0),
+              Row(
+                children: [
+                  Expanded(
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(12.0),
+                        bottomLeft: Radius.circular(12.0),
+                      ),
+                      child: Image.asset(
+                        'assets/images/blog_card_1.jpg',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
-                  child: Image.network(
-                    blogPost.image!.url!,
-                    fit: BoxFit.cover,
+                  Expanded(
+                    child: Image.asset(
+                      'assets/images/blog_card_2.jpg',
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                ),
+                  Expanded(
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                        topRight: Radius.circular(12.0),
+                        bottomRight: Radius.circular(12.0),
+                      ),
+                      child: Image.asset(
+                        'assets/images/blog_card_3.jpg',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Text(
-                    blogPost.title ?? '',
-                    style: Tipografia.titulo2,
+              Positioned.fill(
+                child: Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Container(
+                    color: Cores.verde2.withOpacity(0.8),
+                    width: double.infinity,
+                    child: const Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Confira o nosso blog',
+                            style: Tipografia.titulo2,
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            color: Cores.escuro,
+                            size: 20.0,
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ),

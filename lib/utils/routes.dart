@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:my_app/screens/blog/home_blog_page.dart';
+import 'package:my_app/screens/business/visualizar_estabelecimento.dart';
 import 'package:my_app/screens/home_page.dart';
-import 'package:my_app/screens/businesses_index.dart';
+import 'package:my_app/screens/business/businesses_index.dart';
 import 'package:my_app/screens/login_page.dart';
 import 'package:my_app/screens/signup_page.dart';
-import 'package:my_app/screens/view_blog_post_page.dart';
-import 'package:my_app/screens/visualizar_estabelecimento.dart';
+import 'package:my_app/screens/blog/view_post_page.dart';
 
 class Routes {
   bool isLogged;
@@ -40,11 +41,11 @@ class Routes {
               ),
               GoRoute(
                 path: 'blog-posts',
-                builder: (context, state) => const SizedBox.shrink(),
+                builder: (context, state) => const HomeBlogPage(),
                 routes: [
                   GoRoute(
                     path: ':index',
-                    builder: (context, state) => ViewBlogPostPage(
+                    builder: (context, state) => ViewPostPage(
                       id: int.parse(state.pathParameters['index']!),
                     ),
                   ),
