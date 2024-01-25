@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/components/botao_de_icone_formatado.dart';
-import 'package:my_app/utils/cores.dart';
+import 'package:my_app/components/custom_icon_card_button.dart';
+import 'package:my_app/utils/custom_colors.dart';
 import 'package:my_app/utils/tipografia.dart';
 
 class InputPesquisa extends StatefulWidget {
@@ -25,7 +25,7 @@ class _InputPesquisaState extends State<InputPesquisa> {
             focusedBorder: _bordaPadrao(),
             enabledBorder: _bordaPadrao(),
             hintText: 'Encontre sua proxima refeição',
-            hintStyle: Tipografia.corpo1.copyWith(color: Cores.cinza1),
+            hintStyle: Tipografia.corpo1.copyWith(color: CustomColors.cinza1),
           ),
         ),
         const SizedBox(height: 12.0),
@@ -40,10 +40,10 @@ class _InputPesquisaState extends State<InputPesquisa> {
                 crossAxisAlignment: WrapCrossAlignment.center,
                 spacing: 8.0,
                 children: [
-                  BotaoDeIconeFormatado(
-                    icone: Icons.compare_arrows_sharp,
-                    cor: Cores.verde3,
-                    tamanho: 32.0,
+                  CustomIconCardButton(
+                    icon: Icons.compare_arrows_sharp,
+                    iconColor: CustomColors.verde3,
+                    iconSize: 32.0,
                   ),
                   Text('Ordenar', style: Tipografia.corpo2Bold),
                 ],
@@ -53,10 +53,10 @@ class _InputPesquisaState extends State<InputPesquisa> {
                 crossAxisAlignment: WrapCrossAlignment.center,
                 spacing: 8.0,
                 children: [
-                  BotaoDeIconeFormatado(
-                    icone: Icons.filter_list,
-                    cor: Cores.verde3,
-                    tamanho: 32.0,
+                  CustomIconCardButton(
+                    icon: Icons.filter_list,
+                    iconColor: CustomColors.verde3,
+                    iconSize: 32.0,
                   ),
                   Text('Filtrar', style: Tipografia.corpo2Bold),
                 ],
@@ -72,7 +72,7 @@ class _InputPesquisaState extends State<InputPesquisa> {
         borderRadius: BorderRadius.circular(18.0),
         borderSide: const BorderSide(
           width: 1.8,
-          color: Cores.cinza1,
+          color: CustomColors.cinza1,
         ),
       );
 }

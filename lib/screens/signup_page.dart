@@ -10,7 +10,7 @@ import 'package:my_app/bloc/signup/signup_bloc.dart';
 import 'package:my_app/components/custom_text_formfield.dart';
 import 'package:my_app/enum/default_bloc_status_enum.dart';
 import 'package:my_app/services/user_service.dart';
-import 'package:my_app/utils/cores.dart';
+import 'package:my_app/utils/custom_colors.dart';
 import 'package:my_app/utils/tipografia.dart';
 
 class SignupPage extends StatefulWidget {
@@ -78,7 +78,7 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Cores.verde1,
+      backgroundColor: CustomColors.verde1,
       body: BlocProvider.value(
         value: _signupBloc,
         child: BlocConsumer<SignupBloc, SignupState>(
@@ -188,7 +188,7 @@ class _SignupPageState extends State<SignupPage> {
                                       child: ElevatedButton(
                                         style: ElevatedButton.styleFrom(
                                           elevation: 4.0,
-                                          backgroundColor: Cores.verde1,
+                                          backgroundColor: CustomColors.verde1,
                                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
                                         ),
                                         onPressed: _onSubmit,
@@ -216,7 +216,7 @@ class _SignupPageState extends State<SignupPage> {
                                             ),
                                             child: Text(
                                               'Entre aqui',
-                                              style: Tipografia.corpo2Bold.copyWith(color: Cores.verde1),
+                                              style: Tipografia.corpo2Bold.copyWith(color: CustomColors.verde1),
                                             ),
                                           ),
                                         ],

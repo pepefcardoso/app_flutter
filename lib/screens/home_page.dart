@@ -3,12 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:my_app/bloc/home/home_page_bloc.dart';
-import 'package:my_app/components/botao_de_icone_formatado.dart';
 import 'package:my_app/components/standard_app_bar.dart';
 import 'package:my_app/enum/default_bloc_status_enum.dart';
 import 'package:my_app/models/blog_post.dart';
 import 'package:my_app/services/blog_posts_service.dart';
-import 'package:my_app/utils/cores.dart';
+import 'package:my_app/utils/custom_colors.dart';
 import 'package:my_app/utils/tipografia.dart';
 
 class HomePage extends StatefulWidget {
@@ -126,11 +125,16 @@ class _BlogPostCard extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.bottomLeft,
                   child: Container(
-                    color: Cores.verde2.withOpacity(0.8),
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(12.0),
+                        bottomRight: Radius.circular(12.0),
+                      ),
+                      color: CustomColors.verde2.withOpacity(0.90),
+                    ),
                     width: double.infinity,
                     child: const Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -140,7 +144,7 @@ class _BlogPostCard extends StatelessWidget {
                           ),
                           Icon(
                             Icons.arrow_forward_ios_rounded,
-                            color: Cores.escuro,
+                            color: CustomColors.escuro,
                             size: 20.0,
                           ),
                         ],

@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/utils/cores.dart';
+import 'package:my_app/utils/custom_colors.dart';
 import 'package:my_app/utils/tipografia.dart';
 
-class ItemListaTipos extends StatelessWidget {
-  final String? tipo;
+class CustomListTag extends StatelessWidget {
+  final String? label;
   final EdgeInsets? padding;
-  final Color? cor;
+  final Color? color;
 
-  const ItemListaTipos({
+  const CustomListTag({
     super.key,
-    this.tipo,
+    this.label,
     this.padding,
-    this.cor,
+    this.color,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: padding ?? const EdgeInsets.symmetric(horizontal: 12.0),
+      padding: padding ?? const EdgeInsets.symmetric(horizontal: 8.0),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: cor ?? Cores.verde2,
-        borderRadius: BorderRadius.circular(8.0),
+        color: color ?? CustomColors.verde2,
+        borderRadius: BorderRadius.circular(4.0),
       ),
       child: Text(
-        tipo ?? '',
+        label ?? '',
         style: Tipografia.corpo2Bold,
       ),
     );

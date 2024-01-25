@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:my_app/utils/cores.dart';
+import 'package:my_app/utils/custom_colors.dart';
 import 'package:my_app/utils/tipografia.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -52,7 +52,7 @@ class CustomTextField extends StatelessWidget {
               errorStyle: Tipografia.corpo2Bold.copyWith(color: Colors.red),
               prefixIcon: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                child: Icon(icon, color: Cores.verde3),
+                child: Icon(icon, color: CustomColors.verde3),
               ),
               focusedBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.grey, width: 1.0),

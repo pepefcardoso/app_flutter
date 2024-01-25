@@ -8,7 +8,7 @@ import 'package:my_app/components/item_lista_estabelecimentos.dart';
 import 'package:my_app/components/input_pesquisa.dart';
 import 'package:my_app/models/business.dart';
 import 'package:my_app/services/business_service.dart';
-import 'package:my_app/utils/cores.dart';
+import 'package:my_app/utils/custom_colors.dart';
 import 'package:my_app/utils/tipografia.dart';
 
 class BusinessesIndex extends StatefulWidget {
@@ -80,7 +80,7 @@ class _BusinessesIndexState extends State<BusinessesIndex> {
                               const Divider(
                                 height: 32.0,
                                 thickness: 1.0,
-                                color: Cores.cinza1,
+                                color: CustomColors.cinza1,
                               ),
                             ],
                           );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/utils/cores.dart';
+import 'package:my_app/utils/custom_colors.dart';
 
 class BotaoContornado extends StatelessWidget {
   final Widget child;
@@ -29,7 +29,7 @@ class BotaoContornado extends StatelessWidget {
           border: boxBorder ??
               Border.all(
                 width: 1.5,
-                color: Cores.cinza1,
+                color: CustomColors.cinza1,
               ),
         ),
         child: child,

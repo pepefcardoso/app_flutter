@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/utils/cores.dart';
+import 'package:my_app/utils/custom_colors.dart';
 
 class CirculoComIcone extends StatelessWidget {
   final IconData icone;
@@ -14,7 +14,7 @@ class CirculoComIcone extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
-      backgroundColor: Cores.verde2,
+      backgroundColor: CustomColors.verde2,
       radius: tamanho,
       child: Container(
         margin: const EdgeInsets.all(0.0),
@@ -23,7 +23,7 @@ class CirculoComIcone extends StatelessWidget {
         padding: const EdgeInsets.all(0.0),
         child: Icon(
           icone,
-          color: Cores.verde1,
+          color: CustomColors.verde1,
           size: tamanho,
         ),
       ),

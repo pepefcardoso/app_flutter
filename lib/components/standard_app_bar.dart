@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:my_app/bloc/login/login_bloc.dart';
-import 'package:my_app/utils/cores.dart';
+import 'package:my_app/utils/custom_colors.dart';
 import 'package:my_app/utils/tipografia.dart';
 
 class StandardAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -18,7 +18,7 @@ class StandardAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: BlocBuilder<LoginBloc, LoginState>(
         builder: (context, state) {
           return AppBar(
-            backgroundColor: Cores.verde1,
+            backgroundColor: CustomColors.verde1,
             actionsIconTheme: const IconThemeData(color: Colors.white),
             title: Row(
               mainAxisSize: MainAxisSize.min,
@@ -31,7 +31,7 @@ class StandardAppBar extends StatelessWidget implements PreferredSizeWidget {
                       radius: 15.0,
                       // backgroundImage: NetworkImage(state.user!.profilePicUrl ?? ''), //TODO FIX THIS
                       backgroundColor: Colors.white,
-                      child: state.user!.profilePicUrl == null ? const Icon(Icons.person, color: Cores.verde1) : null,
+                      child: state.user!.profilePicUrl == null ? const Icon(Icons.person, color: CustomColors.verde1) : null,
                     ),
                   ),
                   const SizedBox(width: 8.0),

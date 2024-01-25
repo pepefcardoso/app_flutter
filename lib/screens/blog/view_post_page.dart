@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:my_app/bloc/view_blog_post/view_blog_post_bloc.dart';
+import 'package:my_app/components/custom_icon_card_button.dart';
 import 'package:my_app/components/standard_app_bar.dart';
 import 'package:my_app/enum/default_bloc_status_enum.dart';
 import 'package:my_app/services/blog_posts_service.dart';
-import 'package:my_app/utils/cores.dart';
+import 'package:my_app/utils/custom_colors.dart';
+import 'package:my_app/utils/tipografia.dart';
 
 class ViewPostPage extends StatefulWidget {
   final int id;
@@ -38,7 +40,29 @@ class _ViewPostPageState extends State<ViewPostPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const StandardAppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 6.0,
+        automaticallyImplyLeading: false,
+        surfaceTintColor: Colors.white,
+        actions: [
+          const SizedBox(width: 12.0),
+          CustomIconCardButton(
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+          const Spacer(),
+          const Text(
+            'Blog Leve Sabor',
+            style: Tipografia.titulo4,
+          ),
+          const Spacer(),
+          CustomIconCardButton(
+            onPressed: () {},
+            icon: Icons.bookmark_outline_rounded,
+          ),
+          const SizedBox(width: 12.0),
+        ],
+      ),
       body: BlocProvider.value(
         value: _viewBlogPostBloc,
         child: BlocBuilder<ViewBlogPostBloc, ViewBlogPostState>(
@@ -61,7 +85,7 @@ class _ViewPostPageState extends State<ViewPostPage> {
                     ),
                     Expanded(
                       child: Container(
-                        color: Cores.verde2,
+                        color: CustomColors.verde2,
                       ),
                     ),
                   ],

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/components/botao_contornado.dart';
 import 'package:my_app/components/circulo_com_icone.dart';
-import 'package:my_app/components/botao_de_icone_formatado.dart';
-import 'package:my_app/components/item_lista_tipos.dart';
-import 'package:my_app/components/texto_formatado.dart';
+import 'package:my_app/components/custom_icon_card_button.dart';
+import 'package:my_app/components/custom_list_tag.dart';
+import 'package:my_app/components/custom_text.dart';
 import 'package:my_app/models/business.dart';
-import 'package:my_app/utils/cores.dart';
+import 'package:my_app/utils/custom_colors.dart';
 import 'package:my_app/utils/tipografia.dart';
 
 class VisualizarEstabelecimento extends StatefulWidget {
@@ -35,20 +35,20 @@ class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        foregroundColor: Cores.verde3,
+        foregroundColor: CustomColors.verde3,
         actions: [
-          BotaoDeIconeFormatado(
-            icone: Icons.share,
-            cor: Cores.verde3,
+          CustomIconCardButton(
+            icon: Icons.share,
+            iconColor: CustomColors.verde3,
             onPressed: () => debugPrint('Compartilhar'),
-            tamanho: 24.0,
+            iconSize: 24.0,
             padding: const EdgeInsets.only(right: 12.0),
           ),
-          BotaoDeIconeFormatado(
-            icone: Icons.favorite_border_outlined,
-            cor: Cores.verde3,
+          CustomIconCardButton(
+            icon: Icons.favorite_border_outlined,
+            iconColor: CustomColors.verde3,
             onPressed: () => debugPrint('Favoritar'),
-            tamanho: 24.0,
+            iconSize: 24.0,
             padding: const EdgeInsets.only(right: 16.0),
           ),
         ],
@@ -75,9 +75,9 @@ class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TextoFormatado(
-                      texto: _estabelecimento.name ?? '',
-                      estilo: Tipografia.titulo3,
+                    CustomText(
+                      text: _estabelecimento.name ?? '',
+                      textStyle: Tipografia.titulo3,
                     ),
                     BotaoContornado(
                       padding: const EdgeInsets.symmetric(
@@ -91,11 +91,11 @@ class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
                           const Icon(
                             Icons.star,
                             size: 18.0,
-                            color: Cores.verde3,
+                            color: CustomColors.verde3,
                           ),
                           const SizedBox(width: 4.0),
-                          TextoFormatado(
-                            texto: _estabelecimento.ratingsInfo?.average?.toString() ?? '',
+                          CustomText(
+                            text: _estabelecimento.ratingsInfo?.average?.toString() ?? '',
                           ),
                         ],
                       ),
@@ -116,8 +116,8 @@ class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
                       return Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          ItemListaTipos(
-                            tipo: dieta?.name,
+                          CustomListTag(
+                            label: dieta?.name,
                           ),
                           if (index < _estabelecimento.diets!.length - 1) const SizedBox(width: 8.0),
                         ],
@@ -139,8 +139,8 @@ class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
                       return Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          ItemListaTipos(
-                            tipo: dieta?.name,
+                          CustomListTag(
+                            label: dieta?.name,
                           ),
                           if (index < _estabelecimento.cookingStyles!.length - 1) const SizedBox(width: 8.0),
                         ],
@@ -175,7 +175,7 @@ class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
                       child: VerticalDivider(
                         width: 32.0,
                         thickness: 1.6,
-                        color: Cores.cinza1,
+                        color: CustomColors.cinza1,
                       ),
                     ),
                     _IconeComDescricao(
@@ -204,7 +204,7 @@ class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
                     padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                     alignment: Alignment.centerLeft,
                     decoration: BoxDecoration(
-                      color: Cores.verde2,
+                      color: CustomColors.verde2,
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: const Row(
@@ -215,16 +215,16 @@ class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
                           children: [
                             Icon(
                               Icons.list_alt,
-                              color: Cores.verde3,
+                              color: CustomColors.verde3,
                             ),
-                            TextoFormatado(
-                              texto: 'Ver todos os contatos',
-                              estilo: Tipografia.corpo2Bold,
+                            CustomText(
+                              text: 'Ver todos os contatos',
+                              textStyle: Tipografia.corpo2Bold,
                             ),
                           ],
                         ),
-                        BotaoDeIconeFormatado(
-                          icone: Icons.arrow_forward_ios,
+                        CustomIconCardButton(
+                          icon: Icons.arrow_forward_ios,
                         ),
                       ],
                     ),
@@ -233,7 +233,7 @@ class _VisualizarEstabelecimentoState extends State<VisualizarEstabelecimento> {
                 const Divider(
                   height: 36.0,
                   thickness: 1.6,
-                  color: Cores.cinza1,
+                  color: CustomColors.cinza1,
                 ),
                 const Text(
                   'Informações',

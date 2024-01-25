@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/utils/cores.dart';
+import 'package:my_app/utils/custom_colors.dart';
 import 'package:my_app/utils/tipografia.dart';
 
 class NotaComIcone extends StatelessWidget {
@@ -21,7 +21,7 @@ class NotaComIcone extends StatelessWidget {
       children: [
         Icon(
           Icons.star,
-          color: Cores.verde3,
+          color: CustomColors.verde3,
           size: estiloTexto.fontSize! + 2,
         ),
         const SizedBox(width: 4.0),

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:my_app/bloc/login/login_bloc.dart';
 import 'package:my_app/components/custom_text_formfield.dart';
-import 'package:my_app/utils/cores.dart';
+import 'package:my_app/utils/custom_colors.dart';
 import 'package:my_app/utils/tipografia.dart';
 
 class LoginPage extends StatefulWidget {
@@ -55,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Cores.verde1,
+      backgroundColor: CustomColors.verde1,
       body: BlocConsumer<LoginBloc, LoginState>(
         listener: (context, state) {
           if (state.status == LoginStatus.error) {
@@ -131,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                                     ),
                                     child: Text(
                                       'Esqueceu sua senha?',
-                                      style: Tipografia.corpo2.copyWith(color: Cores.verde1),
+                                      style: Tipografia.corpo2.copyWith(color: CustomColors.verde1),
                                     ),
                                   ),
                                   const SizedBox(height: 24.0),
@@ -141,7 +141,7 @@ class _LoginPageState extends State<LoginPage> {
                                     child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
                                         elevation: 4.0,
-                                        backgroundColor: Cores.verde1,
+                                        backgroundColor: CustomColors.verde1,
                                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
                                       ),
                                       onPressed: _onSubmit,
@@ -169,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
                                           ),
                                           child: Text(
                                             'Cadastre-se',
-                                            style: Tipografia.corpo2Bold.copyWith(color: Cores.verde1),
+                                            style: Tipografia.corpo2Bold.copyWith(color: CustomColors.verde1),
                                           ),
                                         ),
                                       ],
