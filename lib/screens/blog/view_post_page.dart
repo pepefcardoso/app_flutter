@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:my_app/bloc/view_blog_post/view_blog_post_bloc.dart';
 import 'package:my_app/components/custom_icon_card_button.dart';
-import 'package:my_app/components/standard_app_bar.dart';
+import 'package:my_app/components/custom_network_image.dart';
+import 'package:my_app/components/custom_text.dart';
+import 'package:my_app/components/post_categories_list.dart';
 import 'package:my_app/enum/default_bloc_status_enum.dart';
 import 'package:my_app/services/blog_posts_service.dart';
 import 'package:my_app/utils/custom_colors.dart';
@@ -40,29 +42,6 @@ class _ViewPostPageState extends State<ViewPostPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 6.0,
-        automaticallyImplyLeading: false,
-        surfaceTintColor: Colors.white,
-        actions: [
-          const SizedBox(width: 12.0),
-          CustomIconCardButton(
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-          const Spacer(),
-          const Text(
-            'Blog Leve Sabor',
-            style: Tipografia.titulo4,
-          ),
-          const Spacer(),
-          CustomIconCardButton(
-            onPressed: () {},
-            icon: Icons.bookmark_outline_rounded,
-          ),
-          const SizedBox(width: 12.0),
-        ],
-      ),
       body: BlocProvider.value(
         value: _viewBlogPostBloc,
         child: BlocBuilder<ViewBlogPostBloc, ViewBlogPostState>(
@@ -77,18 +56,42 @@ class _ViewPostPageState extends State<ViewPostPage> {
               children: [
                 Column(
                   children: [
-                    Expanded(
-                      child: Image.network(
-                        state.blogPost!.image!.url!,
-                        fit: BoxFit.cover,
+                    Material(
+                      elevation: 4.0,
+                      child: CustomNetworkImage(
+                        url: state.blogPost!.image!.url!,
+                        size: MediaQuery.of(context).size.width,
                       ),
                     ),
-                    Expanded(
-                      child: Container(
-                        color: CustomColors.verde2,
-                      ),
+                    Container(
+                      color: CustomColors.verde2,
                     ),
                   ],
+                ),
+                Positioned.fill(
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0,
+                        vertical: 48.0,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CustomIconCardButton(
+                            iconSize: 24.0,
+                            onPressed: () => Navigator.of(context).pop(),
+                          ),
+                          CustomIconCardButton(
+                            onPressed: () {},
+                            iconSize: 24.0,
+                            icon: Icons.bookmark_outline_rounded,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
                 Positioned.fill(
                   child: Align(
@@ -99,18 +102,34 @@ class _ViewPostPageState extends State<ViewPostPage> {
                         elevation: 6.0,
                         shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(16),
-                            topRight: Radius.circular(16),
+                            topLeft: Radius.circular(16.0),
+                            topRight: Radius.circular(16.0),
                           ),
                         ),
                         child: Container(
-                          width: MediaQuery.of(context).size.width - 40,
-                          height: MediaQuery.of(context).size.height * 0.52,
+                          height: MediaQuery.of(context).size.height * 0.58,
+                          width: double.infinity,
                           decoration: const BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(16),
                               topRight: Radius.circular(16),
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                PostCategoriesList(
+                                  post: state.blogPost!,
+                                ),
+                                const SizedBox(height: 16.0),
+                                CustomText(
+                                  text: state.blogPost!.title!,
+                                  textStyle: Tipografia.titulo4,
+                                )
+                              ],
                             ),
                           ),
                         ),

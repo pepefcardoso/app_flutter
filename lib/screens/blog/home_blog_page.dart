@@ -7,6 +7,7 @@ import 'package:my_app/components/custom_icon_card_button.dart';
 import 'package:my_app/components/custom_image_card.dart';
 import 'package:my_app/components/custom_text.dart';
 import 'package:my_app/components/custom_list_tag.dart';
+import 'package:my_app/components/post_categories_list.dart';
 import 'package:my_app/enum/default_bloc_status_enum.dart';
 import 'package:my_app/models/blog_post.dart';
 import 'package:my_app/services/blog_posts_service.dart';
@@ -139,28 +140,8 @@ class _PostsItemList extends StatelessWidget {
                           CustomText(
                             text: post.title!,
                           ),
-                          SizedBox(
-                            height: 24.0,
-                            child: ListView.builder(
-                              itemCount: post.categories!.length,
-                              physics: const BouncingScrollPhysics(),
-                              shrinkWrap: true,
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                final category = post.categories![index];
-
-                                return Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    CustomListTag(
-                                      label: category.name,
-                                      color: CustomColors.randomColors[index % CustomColors.randomColors.length].withOpacity(0.3),
-                                    ),
-                                    if (index < post.categories!.length - 1) const SizedBox(width: 8.0),
-                                  ],
-                                );
-                              },
-                            ),
+                          PostCategoriesList(
+                            post: post,
                           ),
                         ],
                       ),
