@@ -2,6 +2,7 @@ import 'package:my_app/enum/blog_post_status_enum.dart';
 import 'package:my_app/models/blog_post_category.dart';
 import 'package:my_app/models/blog_post_image.dart';
 import 'package:my_app/models/user.dart';
+import 'package:intl/intl.dart';
 
 class BlogPost {
   final int? id;
@@ -42,4 +43,6 @@ class BlogPost {
         userId = json['user_id'],
         createdAt = json['created_at'] != null ? DateTime.parse(json['created_at']) : null,
         updatedAt = json['updated_at'] != null ? DateTime.parse(json['updated_at']) : null;
+
+  String? get formattedCreatedAt => createdAt != null ? DateFormat('dd/MM/yyyy').format(createdAt!) : null;
 }

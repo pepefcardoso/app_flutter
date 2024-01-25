@@ -116,20 +116,73 @@ class _ViewPostPageState extends State<ViewPostPage> {
                               topRight: Radius.circular(16),
                             ),
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                PostCategoriesList(
-                                  post: state.blogPost!,
-                                ),
-                                const SizedBox(height: 16.0),
-                                CustomText(
-                                  text: state.blogPost!.title!,
-                                  textStyle: Tipografia.titulo4,
-                                )
-                              ],
+                          child: SingleChildScrollView(
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  PostCategoriesList(
+                                    post: state.blogPost!,
+                                  ),
+                                  const SizedBox(height: 16.0),
+                                  CustomText(
+                                    text: state.blogPost!.title!,
+                                    textStyle: Tipografia.titulo4,
+                                  ),
+                                  const SizedBox(height: 24.0),
+                                  Row(
+                                    children: [
+                                      CircleAvatar(
+                                        backgroundColor: CustomColors.escuro,
+                                        radius: 20.0,
+                                        child: state.blogPost!.user?.image != null
+                                            ? CustomNetworkImage(
+                                                url: state.blogPost!.user!.image!.url!,
+                                                size: 20.0,
+                                              )
+                                            : const Icon(
+                                                Icons.person,
+                                                color: CustomColors.claro,
+                                                size: 32.0,
+                                              ),
+                                      ),
+                                      const SizedBox(width: 12.0),
+                                      Column(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            state.blogPost!.user?.name ?? '',
+                                            style: Tipografia.corpo2Bold,
+                                          ),
+                                          Text(
+                                            'Publicado em ${state.blogPost!.formattedCreatedAt}',
+                                            style: Tipografia.corpo2.copyWith(
+                                              color: Colors.grey[600],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  Divider(
+                                    color: Colors.grey[400],
+                                    height: 32.0,
+                                    thickness: 1.0,
+                                  ),
+                                  CustomText(
+                                    text: state.blogPost!.description!,
+                                    textStyle: Tipografia.titulo2,
+                                  ),
+                                  const SizedBox(width: 48.0),//TODO NAO TA FUNCIONANDO
+                                  CustomText(
+                                    text: state.blogPost!.content!,
+                                    textStyle: Tipografia.corpo2,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),

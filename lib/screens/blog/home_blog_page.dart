@@ -6,7 +6,6 @@ import 'package:my_app/bloc/home_blog/home_blog_page_bloc.dart';
 import 'package:my_app/components/custom_icon_card_button.dart';
 import 'package:my_app/components/custom_image_card.dart';
 import 'package:my_app/components/custom_text.dart';
-import 'package:my_app/components/custom_list_tag.dart';
 import 'package:my_app/components/post_categories_list.dart';
 import 'package:my_app/enum/default_bloc_status_enum.dart';
 import 'package:my_app/models/blog_post.dart';
