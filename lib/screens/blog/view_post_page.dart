@@ -42,6 +42,7 @@ class _ViewPostPageState extends State<ViewPostPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: CustomColors.verde2,
       body: BlocProvider.value(
         value: _viewBlogPostBloc,
         child: BlocBuilder<ViewBlogPostBloc, ViewBlogPostState>(
@@ -54,27 +55,25 @@ class _ViewPostPageState extends State<ViewPostPage> {
 
             return Stack(
               children: [
-                Column(
-                  children: [
-                    Material(
-                      elevation: 4.0,
-                      child: CustomNetworkImage(
-                        url: state.blogPost!.image!.url!,
-                        size: MediaQuery.of(context).size.width,
-                      ),
+                Positioned(
+                  top: 0,
+                  child: Material(
+                    elevation: 4.0,
+                    child: CustomNetworkImage(
+                      url: state.blogPost!.image!.url!,
+                      size: MediaQuery.of(context).size.width,
+                      fit: BoxFit.fitWidth,
                     ),
-                    Container(
-                      color: CustomColors.verde2,
-                    ),
-                  ],
+                  ),
                 ),
                 Positioned.fill(
                   child: Align(
                     alignment: Alignment.topCenter,
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0,
-                        vertical: 48.0,
+                      padding: const EdgeInsets.only(
+                        left: 16.0,
+                        right: 16.0,
+                        top: 48.0,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -83,108 +82,117 @@ class _ViewPostPageState extends State<ViewPostPage> {
                             iconSize: 24.0,
                             onPressed: () => Navigator.of(context).pop(),
                           ),
-                          CustomIconCardButton(
-                            onPressed: () {},
-                            iconSize: 24.0,
-                            icon: Icons.bookmark_outline_rounded,
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              CustomIconCardButton(
+                                onPressed: () {},
+                                iconSize: 24.0,
+                                icon: Icons.bookmark_outline_rounded,
+                              ),
+                              const SizedBox(width: 16.0),
+                              CustomIconCardButton(
+                                onPressed: () {},
+                                iconSize: 24.0,
+                                icon: Icons.share_outlined,
+                              ),
+                            ],
                           ),
                         ],
                       ),
                     ),
                   ),
                 ),
-                Positioned.fill(
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                      child: Material(
-                        elevation: 6.0,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(16.0),
-                            topRight: Radius.circular(16.0),
-                          ),
+                Positioned(
+                  top: MediaQuery.of(context).size.height * 0.38,
+                  left: 8.0,
+                  right: 8.0,
+                  bottom: 0.0,
+                  child: Material(
+                    elevation: 6.0,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(16.0),
+                        topRight: Radius.circular(16.0),
+                      ),
+                    ),
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.62,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(16),
+                          topRight: Radius.circular(16),
                         ),
-                        child: Container(
-                          height: MediaQuery.of(context).size.height * 0.58,
-                          width: double.infinity,
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(16),
-                              topRight: Radius.circular(16),
+                      ),
+                      padding: const EdgeInsets.all(16.0),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            PostCategoriesList(
+                              post: state.blogPost!,
                             ),
-                          ),
-                          child: SingleChildScrollView(
-                            child: Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  PostCategoriesList(
-                                    post: state.blogPost!,
-                                  ),
-                                  const SizedBox(height: 16.0),
-                                  CustomText(
-                                    text: state.blogPost!.title!,
-                                    textStyle: Tipografia.titulo4,
-                                  ),
-                                  const SizedBox(height: 24.0),
-                                  Row(
-                                    children: [
-                                      CircleAvatar(
-                                        backgroundColor: CustomColors.escuro,
-                                        radius: 20.0,
-                                        child: state.blogPost!.user?.image != null
-                                            ? CustomNetworkImage(
-                                                url: state.blogPost!.user!.image!.url!,
-                                                size: 20.0,
-                                              )
-                                            : const Icon(
-                                                Icons.person,
-                                                color: CustomColors.claro,
-                                                size: 32.0,
-                                              ),
+                            const SizedBox(height: 16.0),
+                            CustomText(
+                              text: state.blogPost!.title!,
+                              textStyle: Tipografia.titulo4,
+                            ),
+                            const SizedBox(height: 24.0),
+                            Row(
+                              children: [
+                                CircleAvatar(
+                                  backgroundColor: CustomColors.escuro,
+                                  radius: 20.0,
+                                  child: state.blogPost!.user?.image != null
+                                      ? CustomNetworkImage(
+                                          url: state.blogPost!.user!.image!.url!,
+                                          size: 20.0,
+                                        )
+                                      : const Icon(
+                                          Icons.person,
+                                          color: CustomColors.claro,
+                                          size: 32.0,
+                                        ),
+                                ),
+                                const SizedBox(width: 12.0),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      state.blogPost!.user?.name ?? '',
+                                      style: Tipografia.corpo2Bold,
+                                    ),
+                                    Text(
+                                      'Publicado em ${state.blogPost!.formattedCreatedAt}',
+                                      style: Tipografia.corpo2.copyWith(
+                                        color: Colors.grey[600],
                                       ),
-                                      const SizedBox(width: 12.0),
-                                      Column(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            state.blogPost!.user?.name ?? '',
-                                            style: Tipografia.corpo2Bold,
-                                          ),
-                                          Text(
-                                            'Publicado em ${state.blogPost!.formattedCreatedAt}',
-                                            style: Tipografia.corpo2.copyWith(
-                                              color: Colors.grey[600],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  Divider(
-                                    color: Colors.grey[400],
-                                    height: 32.0,
-                                    thickness: 1.0,
-                                  ),
-                                  CustomText(
-                                    text: state.blogPost!.description!,
-                                    textStyle: Tipografia.titulo2,
-                                  ),
-                                  const SizedBox(width: 48.0),//TODO NAO TA FUNCIONANDO
-                                  CustomText(
-                                    text: state.blogPost!.content!,
-                                    textStyle: Tipografia.corpo2,
-                                  ),
-                                ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            Divider(
+                              color: Colors.grey[400],
+                              height: 32.0,
+                              thickness: 1.0,
+                            ),
+                            CustomText(
+                              text: state.blogPost!.description!,
+                              textStyle: Tipografia.titulo2,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 32.0),
+                              child: CustomText(
+                                text: state.blogPost!.content!,
+                                textStyle: Tipografia.corpo2,
                               ),
                             ),
-                          ),
+                          ],
                         ),
                       ),
                     ),

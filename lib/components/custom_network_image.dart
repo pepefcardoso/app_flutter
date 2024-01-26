@@ -4,28 +4,27 @@ import 'package:my_app/utils/custom_colors.dart';
 class CustomNetworkImage extends StatelessWidget {
   final String url;
   final double size;
+  final BoxFit fit;
 
   const CustomNetworkImage({
     super.key,
     required this.url,
     required this.size,
+    this.fit = BoxFit.fill,
   });
 
   @override
   Widget build(BuildContext context) {
     return Image.network(
       url,
-      fit: BoxFit.fill,
+      fit: fit,
       errorBuilder: (context, exception, stackTrace) {
         return SizedBox(
           width: size,
           height: size,
-          child: const Center(
-            child: Icon(
-              Icons.error,
-              size: 32.0,
-              color: CustomColors.escuro,
-            ),
+          child: Image.asset(
+            'assets/images/blog_card_1.jpg',
+            fit: fit,
           ),
         );
       },
