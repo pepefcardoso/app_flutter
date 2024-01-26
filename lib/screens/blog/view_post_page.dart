@@ -85,10 +85,14 @@ class _ViewPostPageState extends State<ViewPostPage> {
                           Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              CustomIconCardButton(
-                                onPressed: () {},
-                                iconSize: 24.0,
-                                icon: Icons.bookmark_outline_rounded,
+                              _FavoriteButton(
+                                isFavorite: state.blogPost!.isFavorite ?? false,
+                                favoriteCallback: () => _viewBlogPostBloc.add(
+                                  RequestFavoriteBlogPost(id: state.blogPost!.id!),
+                                ),
+                                unfavoriteCallback: () => _viewBlogPostBloc.add(
+                                  RequestUnfavoriteBlogPost(id: state.blogPost!.id!),
+                                ),
                               ),
                               const SizedBox(width: 16.0),
                               CustomIconCardButton(
@@ -203,6 +207,27 @@ class _ViewPostPageState extends State<ViewPostPage> {
           },
         ),
       ),
+    );
+  }
+}
+
+class _FavoriteButton extends StatelessWidget {
+  final bool isFavorite;
+  final VoidCallback favoriteCallback;
+  final VoidCallback unfavoriteCallback;
+
+  const _FavoriteButton({
+    required this.isFavorite,
+    required this.favoriteCallback,
+    required this.unfavoriteCallback,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomIconCardButton(
+      onPressed: isFavorite ? unfavoriteCallback : favoriteCallback,
+      iconSize: 24.0,
+      icon: isFavorite ? Icons.bookmark_rounded : Icons.bookmark_outline_rounded,
     );
   }
 }

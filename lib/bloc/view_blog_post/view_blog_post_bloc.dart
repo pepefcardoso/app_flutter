@@ -23,6 +23,22 @@ class ViewBlogPostBloc extends Bloc<ViewBlogPostEvent, ViewBlogPostState> {
           final BlogPost blogPost = await blogPostsService.show(event.id);
 
           emit(state.copyWith(blogPost: blogPost, status: DefaultBlocStatusEnum.loaded));
+        } else if (event is RequestFavoriteBlogPost) {
+          emit(state.copyWith(status: DefaultBlocStatusEnum.loading));
+
+          log('11111');
+
+          await blogPostsService.favorite(event.id);
+
+          emit(state.copyWith(status: DefaultBlocStatusEnum.loaded));
+        } else if (event is RequestUnfavoriteBlogPost) {
+          emit(state.copyWith(status: DefaultBlocStatusEnum.loading));
+
+          log('222222');
+
+          await blogPostsService.unfavorite(event.id);
+
+          emit(state.copyWith(status: DefaultBlocStatusEnum.loaded));
         }
       } on HttpException catch (httpException) {
         log(httpException.mensagem);

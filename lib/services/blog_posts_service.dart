@@ -48,4 +48,12 @@ class BlogPostsService {
       throw const HttpException('Erro desconhecido');
     }
   }
+
+  Future<void> favorite(int id) async {
+    await http.postJson('/api/users/blog-posts/favorites/$id');
+  }
+
+  Future<void> unfavorite(int id) async {
+    await http.deleteJson('/api/users/blog-posts/favorites/$id');
+  }
 }

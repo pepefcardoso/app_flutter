@@ -16,6 +16,7 @@ class BlogPost {
   final DateTime? updatedAt;
   final List<BlogPostCategory>? categories;
   final BlogPostImage? image;
+  final bool? isFavorite;
 
   BlogPost({
     this.id,
@@ -29,6 +30,7 @@ class BlogPost {
     this.userId,
     this.createdAt,
     this.updatedAt,
+    this.isFavorite,
   });
 
   BlogPost.fromJson(Map<String, dynamic> json)
@@ -42,7 +44,8 @@ class BlogPost {
         user = json['user'] != null ? User.fromJson(json['user']) : null,
         userId = json['user_id'],
         createdAt = json['created_at'] != null ? DateTime.parse(json['created_at']) : null,
-        updatedAt = json['updated_at'] != null ? DateTime.parse(json['updated_at']) : null;
+        updatedAt = json['updated_at'] != null ? DateTime.parse(json['updated_at']) : null,
+        isFavorite = json['favorite'];
 
   String? get formattedCreatedAt => createdAt != null ? DateFormat('dd/MM/yyyy').format(createdAt!) : null;
 }
