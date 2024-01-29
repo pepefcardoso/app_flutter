@@ -37,8 +37,8 @@ class BlogPostsService {
     }
   }
 
-  Future<BlogPost> lastPost() async {
-    final response = await http.getJson('/api/last-blog-post');
+  Future<BlogPost> favorite(int id) async {
+    final response = await http.postJson('/api/blog-posts/favorites/$id');
 
     final dynamic data = response.data;
 
@@ -49,11 +49,15 @@ class BlogPostsService {
     }
   }
 
-  Future<void> favorite(int id) async {
-    await http.postJson('/api/users/blog-posts/favorites/$id');
-  }
+  Future<BlogPost> unfavorite(int id) async {
+    final response = await http.deleteJson('/api/blog-posts/favorites/$id');
 
-  Future<void> unfavorite(int id) async {
-    await http.deleteJson('/api/users/blog-posts/favorites/$id');
+    final dynamic data = response.data;
+
+    if (data != null) {
+      return BlogPost.fromJson(data);
+    } else {
+      throw const HttpException('Erro desconhecido');
+    }
   }
 }
