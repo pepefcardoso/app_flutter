@@ -109,7 +109,7 @@ class _HomeBlogPageState extends State<HomeBlogPage> {
                         icon: Icons.bookmark,
                       ),
                       CustomIconCardButton(
-                        onPressed: () {},
+                        onPressed: () => GoRouter.of(context).go('/blog-posts/search'),
                         icon: Icons.search,
                       ),
                     ],

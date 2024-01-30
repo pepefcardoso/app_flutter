@@ -5,7 +5,7 @@ import 'package:my_app/utils/tipografia.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
-  final String labelText;
+  final String? labelText;
   final String hintText;
   final IconData icon;
   final bool obscureText;
@@ -17,7 +17,7 @@ class CustomTextField extends StatelessWidget {
   const CustomTextField({
     super.key,
     required this.controller,
-    required this.labelText,
+    this.labelText,
     required this.hintText,
     required this.icon,
     this.obscureText = false,
@@ -33,8 +33,10 @@ class CustomTextField extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(labelText, style: Tipografia.titulo2),
-        const SizedBox(height: 4.0),
+        if (labelText != null) ...[
+          Text(labelText!, style: Tipografia.titulo2),
+          const SizedBox(height: 4.0),
+        ],
         Material(
           elevation: 4.0,
           borderRadius: BorderRadius.circular(4.0),

@@ -52,7 +52,13 @@ class _FavoritePostsIndexPageState extends State<FavoritePostsIndexPage> {
             if (state.status == DefaultBlocStatusEnum.loading) {
               return const Center(child: CircularProgressIndicator());
             } else if (state.posts.isEmpty) {
-              return const Center(child: Text('You don\'t have any favorite posts yet'));
+              return const Center(
+                child: Text(
+                  'Você ainda não favoritou nenhum post.',
+                  style: Tipografia.titulo4,
+                  textAlign: TextAlign.center,
+                ),
+              );
             }
 
             return Padding(

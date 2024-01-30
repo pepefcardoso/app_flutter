@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:go_router/go_router.dart';
 import 'package:my_app/screens/blog/favorites_index_page.dart';
 import 'package:my_app/screens/blog/home_blog_page.dart';
+import 'package:my_app/screens/blog/search_posts_page.dart';
 import 'package:my_app/screens/business/visualizar_estabelecimento.dart';
 import 'package:my_app/screens/home_page.dart';
 import 'package:my_app/screens/business/businesses_index.dart';
@@ -45,6 +46,18 @@ class Routes {
                 path: 'blog-posts',
                 builder: (context, state) => const HomeBlogPage(),
                 routes: [
+                  GoRoute(
+                    path: 'search',
+                    builder: (context, state) => const SearchPostsPage(),
+                    routes: [
+                      GoRoute(
+                        path: ':index',
+                        builder: (context, state) => ViewPostPage(
+                          id: int.parse(state.pathParameters['index']!),
+                        ),
+                      ),
+                    ],
+                  ),
                   GoRoute(
                     path: 'favorites',
                     builder: (context, state) => const FavoritePostsIndexPage(),
