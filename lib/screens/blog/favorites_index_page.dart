@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kiwi/kiwi.dart';
-import 'package:my_app/bloc/home_blog/home_blog_page_bloc.dart';
+import 'package:my_app/bloc/favorite_posts_index_page/favorite_posts_index_page_bloc.dart';
 import 'package:my_app/components/custom_icon_card_button.dart';
 import 'package:my_app/enum/default_bloc_status_enum.dart';
 import 'package:my_app/models/blog_post.dart';
@@ -11,16 +11,16 @@ import 'package:my_app/services/blog_posts_service.dart';
 import 'package:my_app/utils/custom_colors.dart';
 import 'package:my_app/utils/tipografia.dart';
 
-class HomeBlogPage extends StatefulWidget {
-  const HomeBlogPage({super.key});
+class FavoritePostsIndexPage extends StatefulWidget {
+  const FavoritePostsIndexPage({super.key});
 
   @override
-  State<HomeBlogPage> createState() => _HomeBlogPageState();
+  State<FavoritePostsIndexPage> createState() => _FavoritePostsIndexPageState();
 }
 
-class _HomeBlogPageState extends State<HomeBlogPage> {
+class _FavoritePostsIndexPageState extends State<FavoritePostsIndexPage> {
   final KiwiContainer _kiwi = KiwiContainer();
-  late final HomeBlogPageBloc _bloc;
+  late final FavoritePostsIndexPageBloc _bloc;
   late final BlogPostsService _service;
 
   @override
@@ -29,9 +29,9 @@ class _HomeBlogPageState extends State<HomeBlogPage> {
 
     _service = _kiwi.resolve<BlogPostsService>();
 
-    _bloc = HomeBlogPageBloc(_service);
+    _bloc = FavoritePostsIndexPageBloc(_service);
 
-    _bloc.add(const RequestPosts());
+    _bloc.add(const RequestFavoritePosts());
   }
 
   @override
@@ -47,10 +47,12 @@ class _HomeBlogPageState extends State<HomeBlogPage> {
       ),
       body: BlocProvider.value(
         value: _bloc,
-        child: BlocBuilder<HomeBlogPageBloc, HomeBlogPageState>(
+        child: BlocBuilder<FavoritePostsIndexPageBloc, FavoritePostsIndexPageState>(
           builder: (context, state) {
-            if (state.status == DefaultBlocStatusEnum.loading || state.posts.isEmpty) {
+            if (state.status == DefaultBlocStatusEnum.loading) {
               return const Center(child: CircularProgressIndicator());
+            } else if (state.posts.isEmpty) {
+              return const Center(child: Text('You don\'t have any favorite posts yet'));
             }
 
             return Padding(
@@ -64,6 +66,10 @@ class _HomeBlogPageState extends State<HomeBlogPage> {
                   return PostsItemList(
                     post: post,
                     color: CustomColors.randomColors[index % CustomColors.randomColors.length],
+                    router: () => GoRouter.of(context).go(
+                      '/blog-posts/favorites/${post.id}',
+                      extra: () => _bloc.add(const RequestFavoritePosts()),
+                    ),
                   );
                 },
               ),
@@ -92,29 +98,8 @@ class _HomeBlogPageState extends State<HomeBlogPage> {
             ),
             const Center(
               child: Text(
-                'Blog Leve Sabor',
+                'Favoritos',
                 style: Tipografia.titulo4,
-              ),
-            ),
-            Positioned.fill(
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 12.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      CustomIconCardButton(
-                        onPressed: () => GoRouter.of(context).go('/blog-posts/favorites'),
-                        icon: Icons.bookmark,
-                      ),
-                      CustomIconCardButton(
-                        onPressed: () {},
-                        icon: Icons.search,
-                      ),
-                    ],
-                  ),
-                ),
               ),
             ),
           ],

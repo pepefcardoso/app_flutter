@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:my_app/bloc/view_blog_post/view_blog_post_bloc.dart';
+import 'package:my_app/components/blog_posts/favorite_post_button.dart';
+import 'package:my_app/components/blog_posts/favorite_post_button_controller.dart';
 import 'package:my_app/components/custom_icon_card_button.dart';
 import 'package:my_app/components/custom_network_image.dart';
 import 'package:my_app/components/custom_text.dart';
-import 'package:my_app/components/post_categories_list.dart';
+import 'package:my_app/components/blog_posts/post_categories_list.dart';
 import 'package:my_app/enum/default_bloc_status_enum.dart';
 import 'package:my_app/services/blog_posts_service.dart';
 import 'package:my_app/utils/custom_colors.dart';
@@ -13,10 +16,12 @@ import 'package:my_app/utils/tipografia.dart';
 
 class ViewPostPage extends StatefulWidget {
   final int id;
+  final VoidCallback? onReturn;
 
   const ViewPostPage({
     super.key,
     required this.id,
+    this.onReturn,
   });
 
   @override
@@ -27,6 +32,7 @@ class _ViewPostPageState extends State<ViewPostPage> {
   final KiwiContainer _kiwiContainer = KiwiContainer();
   late final BlogPostsService _blogPostsService;
   late final ViewBlogPostBloc _viewBlogPostBloc;
+  final FavoritePostButtonController _favoritePostButtonController = FavoritePostButtonController();
 
   @override
   void initState() {
@@ -61,7 +67,10 @@ class _ViewPostPageState extends State<ViewPostPage> {
                     elevation: 4.0,
                     child: CustomNetworkImage(
                       url: state.blogPost!.image!.url!,
-                      size: MediaQuery.of(context).size.width,
+                      size: MediaQuery
+                          .of(context)
+                          .size
+                          .width,
                       fit: BoxFit.fitWidth,
                     ),
                   ),
@@ -80,20 +89,17 @@ class _ViewPostPageState extends State<ViewPostPage> {
                         children: [
                           CustomIconCardButton(
                             iconSize: 24.0,
-                            onPressed: () => Navigator.of(context).pop(),
+                            onPressed: () {
+                              GoRouter.of(context).pop();
+                              if (!_favoritePostButtonController.isFavorite) {
+                                widget.onReturn?.call();
+                              }
+                            },
                           ),
                           Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              _FavoriteButton(
-                                isFavorite: state.blogPost!.isFavorite ?? false,
-                                favoriteCallback: () => _viewBlogPostBloc.add(
-                                  RequestFavoriteBlogPost(id: state.blogPost!.id!),
-                                ),
-                                unfavoriteCallback: () => _viewBlogPostBloc.add(
-                                  RequestUnfavoriteBlogPost(id: state.blogPost!.id!),
-                                ),
-                              ),
+                              FavoritePostButton(post: state.blogPost!, controller: _favoritePostButtonController,),
                               const SizedBox(width: 16.0),
                               CustomIconCardButton(
                                 onPressed: () {},
@@ -108,7 +114,10 @@ class _ViewPostPageState extends State<ViewPostPage> {
                   ),
                 ),
                 Positioned(
-                  top: MediaQuery.of(context).size.height * 0.38,
+                  top: MediaQuery
+                      .of(context)
+                      .size
+                      .height * 0.38,
                   left: 8.0,
                   right: 8.0,
                   bottom: 0.0,
@@ -121,8 +130,14 @@ class _ViewPostPageState extends State<ViewPostPage> {
                       ),
                     ),
                     child: Container(
-                      height: MediaQuery.of(context).size.height * 0.62,
-                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery
+                          .of(context)
+                          .size
+                          .height * 0.62,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width,
                       decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
@@ -150,16 +165,14 @@ class _ViewPostPageState extends State<ViewPostPage> {
                                 CircleAvatar(
                                   backgroundColor: CustomColors.escuro,
                                   radius: 20.0,
+                                  backgroundImage: NetworkImage(state.blogPost!.user!.image!.url!),
                                   child: state.blogPost!.user?.image != null
-                                      ? CustomNetworkImage(
-                                          url: state.blogPost!.user!.image!.url!,
-                                          size: 20.0,
-                                        )
+                                      ? null
                                       : const Icon(
-                                          Icons.person,
-                                          color: CustomColors.claro,
-                                          size: 32.0,
-                                        ),
+                                    Icons.person,
+                                    color: CustomColors.claro,
+                                    size: 32.0,
+                                  ),
                                 ),
                                 const SizedBox(width: 12.0),
                                 Column(
@@ -207,27 +220,6 @@ class _ViewPostPageState extends State<ViewPostPage> {
           },
         ),
       ),
-    );
-  }
-}
-
-class _FavoriteButton extends StatelessWidget {
-  final bool isFavorite;
-  final VoidCallback favoriteCallback;
-  final VoidCallback unfavoriteCallback;
-
-  const _FavoriteButton({
-    required this.isFavorite,
-    required this.favoriteCallback,
-    required this.unfavoriteCallback,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomIconCardButton(
-      onPressed: isFavorite ? unfavoriteCallback : favoriteCallback,
-      iconSize: 24.0,
-      icon: isFavorite ? Icons.bookmark_rounded : Icons.bookmark_outline_rounded,
     );
   }
 }

@@ -11,19 +11,3 @@ class RequestBlogPost extends ViewBlogPostEvent {
     required this.id,
   });
 }
-
-class RequestFavoriteBlogPost extends ViewBlogPostEvent {
-  final int id;
-
-  const RequestFavoriteBlogPost({
-    required this.id,
-  });
-}
-
-class RequestUnfavoriteBlogPost extends ViewBlogPostEvent {
-  final int id;
-
-  const RequestUnfavoriteBlogPost({
-    required this.id,
-  });
-}

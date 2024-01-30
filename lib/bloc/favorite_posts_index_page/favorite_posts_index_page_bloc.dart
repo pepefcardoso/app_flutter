@@ -7,22 +7,22 @@ import 'package:my_app/errors_&_exceptions/http_exception.dart';
 import 'package:my_app/models/blog_post.dart';
 import 'package:my_app/services/blog_posts_service.dart';
 
-part 'view_blog_post_event.dart';
+part 'favorite_posts_index_page_event.dart';
 
-part 'view_blog_post_state.dart';
+part 'favorite_posts_index_page_state.dart';
 
-class ViewBlogPostBloc extends Bloc<ViewBlogPostEvent, ViewBlogPostState> {
-  final BlogPostsService blogPostsService;
+class FavoritePostsIndexPageBloc extends Bloc<FavoritePostsIndexPageEvent, FavoritePostsIndexPageState> {
+  final BlogPostsService service;
 
-  ViewBlogPostBloc({required this.blogPostsService}) : super(const ViewBlogPostState()) {
-    on<ViewBlogPostEvent>((event, emit) async {
+  FavoritePostsIndexPageBloc(this.service) : super(const FavoritePostsIndexPageState()) {
+    on<FavoritePostsIndexPageEvent>((event, emit) async {
       try {
-        if (event is RequestBlogPost) {
+        if (event is RequestFavoritePosts) {
           emit(state.copyWith(status: DefaultBlocStatusEnum.loading));
 
-          final BlogPost blogPost = await blogPostsService.show(event.id);
+          final List<BlogPost> posts = await service.favoritesIndex();
 
-          emit(state.copyWith(blogPost: blogPost, status: DefaultBlocStatusEnum.loaded));
+          emit(state.copyWith(posts: posts, status: DefaultBlocStatusEnum.loaded));
         }
       } on HttpException catch (httpException) {
         log(httpException.mensagem);

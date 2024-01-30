@@ -26,7 +26,7 @@ class User {
         birthday = json['birthday'] != null ? DateTime.parse(json['birthday']) : null,
         phone = json['phone'],
         cpf = json['cpf'],
-        image = json['image'] != null ? UserImage.fromJson(json['image']) : null;
+        image = json['user_image'] != null ? UserImage.fromJson(json['user_image']) : null;
 
   Map<String, dynamic> toJson() => {
         'id': id,
