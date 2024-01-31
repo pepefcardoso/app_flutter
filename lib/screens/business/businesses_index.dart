@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -5,7 +6,7 @@ import 'package:kiwi/kiwi.dart';
 import 'package:my_app/bloc/business_index/business_index_bloc.dart';
 import 'package:my_app/components/standard_app_bar.dart';
 import 'package:my_app/components/item_lista_estabelecimentos.dart';
-import 'package:my_app/components/input_pesquisa.dart';
+import 'package:my_app/components/search_field_and_button.dart';
 import 'package:my_app/models/business.dart';
 import 'package:my_app/services/business_service.dart';
 import 'package:my_app/utils/custom_colors.dart';
@@ -55,7 +56,9 @@ class _BusinessesIndexState extends State<BusinessesIndex> {
                 children: [
                   const Text('Buscar', style: Tipografia.titulo1),
                   const SizedBox(height: 12.0),
-                  const InputPesquisa(),
+                  SearchFieldAndButton(
+                    controller: TextEditingController(),
+                  ),
                   const SizedBox(height: 16.0),
                   if (state.count == 0) ...[
                     const Text('Nenhum estabelecimento encontrado', style: Tipografia.corpo2),

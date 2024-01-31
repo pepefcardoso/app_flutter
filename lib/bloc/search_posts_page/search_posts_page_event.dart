@@ -4,8 +4,16 @@ abstract class SearchPostsPageEvent {
   const SearchPostsPageEvent();
 }
 
-class SearchPosts extends SearchPostsPageEvent {
+class SearchPostsEvent extends SearchPostsPageEvent {
   final Map<String, dynamic>? queryParameters;
 
-  const SearchPosts({this.queryParameters});
+  const SearchPostsEvent({this.queryParameters});
+}
+
+class ShowFiltersEvent extends SearchPostsPageEvent {
+  const ShowFiltersEvent();
+}
+
+class HideFiltersEvent extends SearchPostsPageEvent {
+  const HideFiltersEvent();
 }

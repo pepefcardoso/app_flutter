@@ -17,12 +17,18 @@ class SearchPostsPageBloc extends Bloc<SearchPostsPageEvent, SearchPostsPageStat
   SearchPostsPageBloc(this.service) : super(const SearchPostsPageState()) {
     on<SearchPostsPageEvent>((event, emit) async {
       try {
-        if (event is SearchPosts) {
+        if (event is SearchPostsEvent) {
           emit(state.copyWith(status: DefaultBlocStatusEnum.loading));
+
+          log(event.queryParameters.toString());
 
           final List<BlogPost> posts = await service.index(parameters: event.queryParameters);
 
           emit(state.copyWith(posts: posts, status: DefaultBlocStatusEnum.loaded));
+        } else if (event is ShowFiltersEvent) {
+          emit(state.copyWith(showFilters: true));
+        } else if (event is HideFiltersEvent) {
+          emit(state.copyWith(showFilters: false));
         }
       } on HttpException catch (httpException) {
         log(httpException.mensagem);

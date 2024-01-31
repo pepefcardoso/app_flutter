@@ -4,9 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:my_app/bloc/search_posts_page/search_posts_page_bloc.dart';
 import 'package:my_app/components/custom_icon_card_button.dart';
-import 'package:my_app/components/custom_text_formfield.dart';
+import 'package:my_app/components/search_field_and_button.dart';
+import 'package:my_app/enum/default_bloc_status_enum.dart';
 import 'package:my_app/models/blog_post.dart';
-import 'package:my_app/screens/blog/posts_list_item.dart';
+import 'package:my_app/components/blog_posts/posts_list_item.dart';
 import 'package:my_app/services/blog_posts_service.dart';
 import 'package:my_app/utils/custom_colors.dart';
 import 'package:my_app/utils/tipografia.dart';
@@ -31,13 +32,7 @@ class _SearchPostsPageState extends State<SearchPostsPage> {
     _service = _kiwi.resolve<BlogPostsService>();
 
     _bloc = SearchPostsPageBloc(_service);
-    _bloc.add(const SearchPosts());
-
-    _wordController.addListener(() {
-      _bloc.add(SearchPosts(
-        queryParameters: {'title': _wordController.text},
-      ));
-    });
+    _bloc.add(const SearchPostsEvent());
   }
 
   @override
@@ -49,56 +44,74 @@ class _SearchPostsPageState extends State<SearchPostsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[100],
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 6.0,
-        automaticallyImplyLeading: false,
-        surfaceTintColor: Colors.white,
-        actions: _buildActions(),
-      ),
-      body: BlocProvider.value(
-        value: _bloc,
-        child: BlocBuilder<SearchPostsPageBloc, SearchPostsPageState>(
-          builder: (context, state) {
-            return Padding(
+    return BlocProvider.value(
+      value: _bloc,
+      child: BlocBuilder<SearchPostsPageBloc, SearchPostsPageState>(
+        builder: (context, state) {
+          return Scaffold(
+            backgroundColor: Colors.grey[100],
+            appBar: AppBar(
+              backgroundColor: Colors.white,
+              elevation: 6.0,
+              automaticallyImplyLeading: false,
+              surfaceTintColor: Colors.white,
+              actions: _buildActions(state.showFilters),
+            ),
+            body: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  CustomTextField(
+                  SearchFieldAndButton(
                     controller: _wordController,
-                    hintText: 'Digite o que deseja pesquisar',
-                    icon: Icons.search,
-                  ),
-                  const SizedBox(height: 16.0),
-                  Expanded(
-                    child: ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: state.posts.length,
-                      itemBuilder: (context, index) {
-                        final BlogPost post = state.posts[index];
-
-                        return PostsItemList(
-                          post: post,
-                          color: CustomColors.randomColors[index % CustomColors.randomColors.length],
-                          router: () => GoRouter.of(context).go(
-                            '/blog-posts/search/${post.id}',
-                          ),
-                        );
-                      },
+                    hintText: 'Pesquise entre seus posts favoritos',
+                    onPressed: () => _bloc.add(
+                      SearchPostsEvent(queryParameters: _buildQueryParams()),
                     ),
                   ),
+                  const SizedBox(height: 16.0),
+                  if (state.status == DefaultBlocStatusEnum.loading)
+                    const Center(child: CircularProgressIndicator())
+                  else if (state.posts.isEmpty)
+                    const Center(
+                      child: Text(
+                        'Nenhum post encontrado',
+                        style: Tipografia.titulo4,
+                      ),
+                    )
+                  else
+                    Expanded(
+                      child: ListView.builder(
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: state.posts.length,
+                        itemBuilder: (context, index) {
+                          final BlogPost post = state.posts[index];
+
+                          return PostsItemList(
+                            post: post,
+                            color: CustomColors.randomColors[index % CustomColors.randomColors.length],
+                            router: () => GoRouter.of(context).go(
+                              '/blog-posts/search/${post.id}',
+                            ),
+                          );
+                        },
+                      ),
+                    ),
                 ],
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }
 
-  List<Widget> _buildActions() {
+  Map<String, String> _buildQueryParams() {
+    return {
+      'title': _wordController.text,
+    };
+  }
+
+  List<Widget> _buildActions(bool isFiltering) {
     return [
       Expanded(
         child: Row(
@@ -117,7 +130,7 @@ class _SearchPostsPageState extends State<SearchPostsPage> {
             Padding(
               padding: const EdgeInsets.only(right: 12.0),
               child: CustomIconCardButton(
-                onPressed: () {},
+                onPressed: () => isFiltering ? _bloc.add(const HideFiltersEvent()) : _bloc.add(const ShowFiltersEvent()),
                 icon: Icons.filter_list,
               ),
             ),
