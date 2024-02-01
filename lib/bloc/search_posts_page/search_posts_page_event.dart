@@ -9,11 +9,3 @@ class SearchPostsEvent extends SearchPostsPageEvent {
 
   const SearchPostsEvent({this.queryParameters});
 }
-
-class ShowFiltersEvent extends SearchPostsPageEvent {
-  const ShowFiltersEvent();
-}
-
-class HideFiltersEvent extends SearchPostsPageEvent {
-  const HideFiltersEvent();
-}

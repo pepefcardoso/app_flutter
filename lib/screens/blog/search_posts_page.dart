@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:my_app/bloc/search_posts_page/search_posts_page_bloc.dart';
+import 'package:my_app/components/blog_posts/posts_filters.dart';
 import 'package:my_app/components/custom_icon_card_button.dart';
 import 'package:my_app/components/search_field_and_button.dart';
 import 'package:my_app/enum/default_bloc_status_enum.dart';
@@ -55,7 +56,7 @@ class _SearchPostsPageState extends State<SearchPostsPage> {
               elevation: 6.0,
               automaticallyImplyLeading: false,
               surfaceTintColor: Colors.white,
-              actions: _buildActions(state.showFilters),
+              actions: _buildActions(),
             ),
             body: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -111,7 +112,7 @@ class _SearchPostsPageState extends State<SearchPostsPage> {
     };
   }
 
-  List<Widget> _buildActions(bool isFiltering) {
+  List<Widget> _buildActions() {
     return [
       Expanded(
         child: Row(
@@ -130,7 +131,12 @@ class _SearchPostsPageState extends State<SearchPostsPage> {
             Padding(
               padding: const EdgeInsets.only(right: 12.0),
               child: CustomIconCardButton(
-                onPressed: () => isFiltering ? _bloc.add(const HideFiltersEvent()) : _bloc.add(const ShowFiltersEvent()),
+                onPressed: () => showModalBottomSheet(
+                  context: context,
+                  elevation: 6.0,
+                  enableDrag: true,
+                  builder: (context) => const PostsFilters(),
+                ),
                 icon: Icons.filter_list,
               ),
             ),
